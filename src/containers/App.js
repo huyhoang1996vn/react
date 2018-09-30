@@ -5,7 +5,8 @@ import AdminApp from "containers/admin/App";
 import Owners from "containers/owners/App"; 
 
 import {
-    Home
+    Home,
+    Account
 } from "./index";
 
 function NotFound() {
@@ -28,7 +29,10 @@ class App extends Component {
                 <Switch>
                     <Route path="/admin" component={AdminApp} />
                     <Route path="/owners" component={Owners} />
+                    
+                    <Route exact path="/my-account" component={Account} />
                     <Route exact path="/" component={Home} />
+
                     <Route component={NotFound} />
                 </Switch>
             </div>

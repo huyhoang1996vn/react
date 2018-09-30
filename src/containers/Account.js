@@ -16,20 +16,21 @@ import {
     SliderProducts
 } from "components/slider"
 
-class Home extends React.Component {
+import {
+    AccountComponent
+} from "components/account";
+
+class Account extends React.Component {
     constructor(props) {
         super(props);
     }
 
     render() {
         return (
-            <div className="Home">
+            <div className="Account">
                 <Header />
 
-                <SliderMain />
-                <SliderMini />
-                <SliderProducts />
-
+                <AccountComponent />
 
                 <Delivery />
                 <Footer />
@@ -38,4 +39,4 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+export default Account;
