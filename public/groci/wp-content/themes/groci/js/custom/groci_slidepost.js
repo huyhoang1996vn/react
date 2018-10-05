@@ -1,7 +1,7 @@
 jQuery(document).ready(function( $ ) {
  "use strict";
 
-    $(".post-slider").owlCarousel({
+    $("body .post-slider").owlCarousel({
         navigation: true,
         slideSpeed: 300,
         paginationSpeed: 400,
