@@ -48,6 +48,18 @@ module.exports = {
     require.resolve('react-dev-utils/webpackHotDevClient'),
     // Finally, this is your app's code:
     paths.appIndexJs,
+    // '../public/groci/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=5.0.3',
+    // '../public/groci/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.70',
+    // '../public/groci/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.4',
+    // '../public/groci/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=3.4.4',
+    // '../public/groci/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=3.4.4',
+    // '../public/groci/wp-includes/js/comment-reply.min.js?ver=4.9.8',
+    // '../public/groci/wp-content/themes/groci/vendor/bootstrap/js/bootstrap.bundle.min.js?ver=1.0',
+    // '../public/groci/wp-content/plugins/woocommerce/assets/js/select2/select2.full.min.js?ver=4.0.3',
+    // '../public/groci/wp-content/themes/groci/vendor/owl-carousel/owl.carousel.js?ver=1.0',
+    // '../public/groci/wp-content/themes/groci/js/custom.js?ver=1.0',
+    // '../public/groci/wp-includes/js/wp-embed.min.js?ver=4.9.8',
+    // '../public/groci/wp-content/plugins/js_composer/assets/js/dist/js_composer_front.min.js?ver=5.5.2',
     // We include the app code last so that if there is a runtime error during
     // initialization, it doesn't blow up the WebpackDevServer client, and
     // changing JS code would still trigger a refresh.

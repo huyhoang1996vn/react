@@ -1,6 +1,6 @@
 import React from "react";
 
-import { _url } from "config/utils";
+import { _staticUrl } from "config/utils";
 
 
 // Components
@@ -21,73 +21,73 @@ class SliderMini extends React.Component {
                                     <div className="top-category klb-product-cat">
                                         <div className="owl-carousel owl-carousel-category">
                                             <div className="item">
-                                                <div className="category-item"><a href="/product-category/beverages/"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/3-3.jpg" alt />
+                                                <div className="category-item"><a href="/product-category/beverages/"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/3-3.jpg")} alt />
                                                     <h6>Beverages</h6>
                                                     <p>1 Items</p>
                                                 </a></div>
                                             </div>
                                             <div className="item">
-                                                <div className="category-item"><a href="/product-category/biscuits-snacks-chocolates/"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/9-2.jpg" alt />
+                                                <div className="category-item"><a href="/product-category/biscuits-snacks-chocolates/"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/9-2.jpg")} alt />
                                                     <h6>Biscuits, Snacks &amp; Chocolates</h6>
                                                     <p>1 Items</p>
                                                 </a></div>
                                             </div>
                                             <div className="item">
-                                                <div className="category-item"><a href="/product-category/breakfast-dairy/"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/8-2.jpg" alt />
+                                                <div className="category-item"><a href="/product-category/breakfast-dairy/"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/8-2.jpg")} alt />
                                                     <h6>Breakfast &amp; Dairy</h6>
                                                     <p>1 Items</p>
                                                 </a></div>
                                             </div>
                                             <div className="item">
-                                                <div className="category-item"><a href="/product-category/fruits-vegetables/"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/1-4.jpg" alt />
+                                                <div className="category-item"><a href="/product-category/fruits-vegetables/"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/8-2.jpg")} alt />
                                                     <h6>Fruits &amp; Vegetables</h6>
                                                     <p>12 Items</p>
                                                 </a></div>
                                             </div>
                                             <div className="item">
-                                                <div className="category-item"><a href="/product-category/furnishing-home-needs/"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/5-2.jpg" alt />
+                                                <div className="category-item"><a href="/product-category/furnishing-home-needs/"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/8-2.jpg")} alt />
                                                     <h6>Furnishing &amp; Home Needs</h6>
                                                     <p>1 Items</p>
                                                 </a></div>
                                             </div>
                                             <div className="item">
-                                                <div className="category-item"><a href="/product-category/grocery-staples/"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/2-4.jpg" alt />
+                                                <div className="category-item"><a href="/product-category/grocery-staples/"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/8-2.jpg")} alt />
                                                     <h6>Grocery &amp; Staples</h6>
                                                     <p>1 Items</p>
                                                 </a></div>
                                             </div>
                                             <div className="item">
-                                                <div className="category-item"><a href="/product-category/home-kitchen/"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/4-2.jpg" alt />
+                                                <div className="category-item"><a href="/product-category/home-kitchen/"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/8-2.jpg")} alt />
                                                     <h6>Home &amp; Kitchen</h6>
                                                     <p>1 Items</p>
                                                 </a></div>
                                             </div>
                                             <div className="item">
-                                                <div className="category-item"><a href="/product-category/household-needs/"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/6-2.jpg" alt />
+                                                <div className="category-item"><a href="/product-category/household-needs/"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/8-2.jpg")} alt />
                                                     <h6>Household Needs</h6>
                                                     <p>1 Items</p>
                                                 </a></div>
                                             </div>
                                             <div className="item">
-                                                <div className="category-item"><a href="/product-category/meats-frozen-seafood/"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/12-2.jpg" alt />
+                                                <div className="category-item"><a href="/product-category/meats-frozen-seafood/"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/8-2.jpg")} alt />
                                                     <h6>Meats, Frozen &amp; Seafood</h6>
                                                     <p>2 Items</p>
                                                 </a></div>
                                             </div>
                                             <div className="item">
-                                                <div className="category-item"><a href="/product-category/noodles-sauces-instant-food/"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/10-2.jpg" alt />
+                                                <div className="category-item"><a href="/product-category/noodles-sauces-instant-food/"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/8-2.jpg")} alt />
                                                     <h6>Noodles, Sauces &amp; Instant Food</h6>
                                                     <p>1 Items</p>
                                                 </a></div>
                                             </div>
                                             <div className="item">
-                                                <div className="category-item"><a href="/product-category/personal-care/"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/7-2.jpg" alt />
+                                                <div className="category-item"><a href="/product-category/personal-care/"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/8-2.jpg")} alt />
                                                     <h6>Personal Care</h6>
                                                     <p>1 Items</p>
                                                 </a></div>
                                             </div>
                                             <div className="item">
-                                                <div className="category-item"><a href="/product-category/pet-care/"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/11-2.jpg" alt />
+                                                <div className="category-item"><a href="/product-category/pet-care/"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/8-2.jpg")} alt />
                                                     <h6>Pet Care</h6>
                                                     <p>1 Items</p>
                                                 </a></div>

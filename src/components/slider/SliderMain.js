@@ -1,6 +1,6 @@
 import React from "react";
 
-import { _url } from "config/utils";
+import { _staticUrl } from "config/utils";
 
 
 // Components
@@ -19,8 +19,8 @@ class SliderMain extends React.Component {
                             <div className="wpb_wrapper">
                                 <section className="carousel-slider-main text-center">
                                     <div className="owl-carousel owl-carousel-slider">
-                                        <div className="item"><a href="/shop/" target=" _blank" title="slider1"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/slider1.jpg" alt="slide" /></a></div>
-                                        <div className="item"><a href="/product/green-seedless-grapes/" target=" _blank" title="slider2"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/slider2.jpg" alt="slide" /></a></div>
+                                        <div className="item"><a href="/shop/" target=" _blank" title="slider1"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/slider1.jpg")} alt="slide" /></a></div>
+                                        <div className="item"><a href="/product/green-seedless-grapes/" target=" _blank" title="slider2"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/slider2.jpg")} alt="slide" /></a></div>
                                     </div>
                                 </section>
                             </div>

@@ -2,7 +2,7 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-import { _url } from "config/utils";
+import { _staticUrl } from "config/utils";
 
 class Header extends React.Component {
     constructor(props) {
@@ -37,7 +37,7 @@ class Header extends React.Component {
                         <div className="row">
                             <div className="col-xs-6 col-md-3 klb-clear order-xs-first">
                                 <Link className="navbar-brand" to="/" title="Groci – Organic Food and Grocery Theme">
-                                    <img src="/groci/wp-content/uploads/2018/08/logo-1.png" alt="Groci – Organic Food and Grocery Theme" />
+                                    <img src={_staticUrl("/groci/wp-content/uploads/2018/08/logo-1.png")} alt="Groci – Organic Food and Grocery Theme" />
                                 </Link>
                             </div>
                             <div className="col-xs-12 col-md-6">

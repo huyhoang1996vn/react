@@ -1,6 +1,6 @@
 import React from "react";
 
-import { _url } from "config/utils";
+import { _staticUrl } from "config/utils";
 
 
 // Components
@@ -26,7 +26,7 @@ class SliderProducts extends React.Component {
                                         <div className="owl-carousel owl-carousel-featured">
                                             <div className="item">
                                                 <div className="product">
-                                                    <div className="product-header"><span className="badge badge-success">30%</span><a href="/product/organic-broccoli/"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/1-1.jpg" alt="Organic Broccoli" /></a><span className="veg text-success mdi mdi-circle" /></div>
+                                                    <div className="product-header"><span className="badge badge-success">30%</span><a href="/product/organic-broccoli/"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/2-1.jpg")} alt="Organic Broccoli" /></a><span className="veg text-success mdi mdi-circle" /></div>
                                                     <div className="product-body"><a href="/product/organic-broccoli/">
                                                         <h5>Organic Broccoli</h5>
                                                     </a>
@@ -40,7 +40,7 @@ class SliderProducts extends React.Component {
                                             </div>
                                             <div className="item">
                                                 <div className="product">
-                                                    <div className="product-header"><span className="badge badge-success">30%</span><span className="badge badge-success">20%</span><a href="/product/washed-sugar-snap-peas/"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/2-1.jpg" alt="Washed Sugar Snap Peas" /></a><span className="veg text-success mdi mdi-circle" /></div>
+                                                    <div className="product-header"><span className="badge badge-success">30%</span><span className="badge badge-success">20%</span><a href="/product/washed-sugar-snap-peas/"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/2-1.jpg")} alt="Washed Sugar Snap Peas" /></a><span className="veg text-success mdi mdi-circle" /></div>
                                                     <div className="product-body"><a href="/product/washed-sugar-snap-peas/">
                                                         <h5>Washed Sugar Snap Peas</h5>
                                                     </a>
@@ -54,7 +54,7 @@ class SliderProducts extends React.Component {
                                             </div>
                                             <div className="item">
                                                 <div className="product">
-                                                    <div className="product-header"><span className="badge badge-success">30%</span><span className="badge badge-success">20%</span><span className="badge badge-success">70%</span><a href="/product/organic-italian-parsley/"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/3-1.jpg" alt="Organic Italian Parsley" /></a><span className="non-veg text-danger mdi mdi-circle" /></div>
+                                                    <div className="product-header"><span className="badge badge-success">30%</span><span className="badge badge-success">20%</span><span className="badge badge-success">70%</span><a href="/product/organic-italian-parsley/"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/2-1.jpg")} alt="Organic Italian Parsley" /></a><span className="non-veg text-danger mdi mdi-circle" /></div>
                                                     <div className="product-body"><a href="/product/organic-italian-parsley/">
                                                         <h5>Organic Italian Parsley</h5>
                                                     </a>
@@ -68,7 +68,7 @@ class SliderProducts extends React.Component {
                                             </div>
                                             <div className="item">
                                                 <div className="product">
-                                                    <div className="product-header"><span className="badge badge-success">30%</span><span className="badge badge-success">20%</span><span className="badge badge-success">70%</span><span className="badge badge-success">42%</span><a href="/product/organic-strawberry/"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/4-1.jpg" alt="Organic Strawberry" /></a><span className="veg text-success mdi mdi-circle" /></div>
+                                                    <div className="product-header"><span className="badge badge-success">30%</span><span className="badge badge-success">20%</span><span className="badge badge-success">70%</span><span className="badge badge-success">42%</span><a href="/product/organic-strawberry/"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/2-1.jpg")} alt="Organic Strawberry" /></a><span className="veg text-success mdi mdi-circle" /></div>
                                                     <div className="product-body"><a href="/product/organic-strawberry/">
                                                         <h5>Organic Strawberry</h5>
                                                     </a>
@@ -82,7 +82,7 @@ class SliderProducts extends React.Component {
                                             </div>
                                             <div className="item">
                                                 <div className="product">
-                                                    <div className="product-header"><span className="badge badge-success">30%</span><span className="badge badge-success">20%</span><span className="badge badge-success">70%</span><span className="badge badge-success">42%</span><span className="badge badge-success">50%</span><a href="/product/organic-vegetable/"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/5-1.jpg" alt="Organic Vegetable" /></a><span className="non-veg text-danger mdi mdi-circle" /></div>
+                                                    <div className="product-header"><span className="badge badge-success">30%</span><span className="badge badge-success">20%</span><span className="badge badge-success">70%</span><span className="badge badge-success">42%</span><span className="badge badge-success">50%</span><a href="/product/organic-vegetable/"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/2-1.jpg")} alt="Organic Vegetable" /></a><span className="non-veg text-danger mdi mdi-circle" /></div>
                                                     <div className="product-body"><a href="/product/organic-vegetable/">
                                                         <h5>Organic Vegetable</h5>
                                                     </a>
@@ -96,7 +96,7 @@ class SliderProducts extends React.Component {
                                             </div>
                                             <div className="item">
                                                 <div className="product">
-                                                    <div className="product-header"><span className="badge badge-success">30%</span><span className="badge badge-success">20%</span><span className="badge badge-success">70%</span><span className="badge badge-success">42%</span><span className="badge badge-success">50%</span><span className="badge badge-success">38%</span><a href="/product/jumbo-rainier-cherries/"><img className="img-fluid" src="/groci/wp-content/uploads/2018/08/6-1.jpg" alt="Jumbo Rainier Cherries" /></a><span className="veg text-success mdi mdi-circle" /></div>
+                                                    <div className="product-header"><span className="badge badge-success">30%</span><span className="badge badge-success">20%</span><span className="badge badge-success">70%</span><span className="badge badge-success">42%</span><span className="badge badge-success">50%</span><span className="badge badge-success">38%</span><a href="/product/jumbo-rainier-cherries/"><img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/2-1.jpg")} alt="Jumbo Rainier Cherries" /></a><span className="veg text-success mdi mdi-circle" /></div>
                                                     <div className="product-body"><a href="/product/jumbo-rainier-cherries/">
                                                         <h5>Jumbo Rainier Cherries</h5>
                                                     </a>
