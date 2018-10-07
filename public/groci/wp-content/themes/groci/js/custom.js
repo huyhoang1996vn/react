@@ -42,7 +42,7 @@ jQuery.noConflict();
             }
 
             // ===========Right Sidebar============
-            $('body').on('click', '[data-toggle="offcanvas"]', function () {
+            $('body').off('click', '[data-toggle="offcanvas"]').on('click', '[data-toggle="offcanvas"]', function () {
                 $('body').toggleClass('toggled');
             });
 
@@ -148,6 +148,7 @@ jQuery.noConflict();
         runSlider();
 
         $("body").on("click", "#btn-run-slider", function () {
+            console.log("CLICK");
             init_klbclass();
             runSlider();
         })

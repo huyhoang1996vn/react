@@ -1,4 +1,5 @@
 import React from "react";
+import Script from "react-load-script";
 
 import { _staticUrl } from "config/utils";
 
@@ -16,7 +17,7 @@ class Footer extends React.Component {
                             <div className="col-lg-3 col-md-3">
                                 <div className="klbfooterwidget widget_text">
                                     <div className="textwidget">
-                                        <p><img className="mb-4 mt-0 alignnone size-full wp-image-127" src={_staticUrl("/groci/wp-content/uploads/2018/08/logo-footer-1.png")} alt width={127} height={38} /></p>
+                                        <p><img className="mb-4 mt-0 alignnone size-full wp-image-127" src={_staticUrl("/groci/wp-content/uploads/2018/08/logo-footer-1.png")} width={127} height={38} /></p>
                                         <p className="mb-0"><a className="text-dark" href="#"><i className="mdi mdi-phone" /> +61 525 240 310</a></p>
                                         <p className="mb-0"><a className="text-dark" href="#"><i className="mdi mdi-cellphone-iphone" /> 12345 67890, 56847-98562</a></p>
                                         <p className="mb-0"><a className="text-success" href="#"><i className="mdi mdi-email" /> yourmail@gmail.com</a></p>
@@ -78,7 +79,7 @@ class Footer extends React.Component {
                                 <div className="klbfooterwidget widget_text">
                                     <h6 className="mb-4">Download App</h6>
                                     <div className="textwidget">
-                                        <div className="app"><a href="#"><img src={_staticUrl("/groci/wp-content/uploads/2018/08/google.png")} alt /></a><a href="#"><img src={_staticUrl("/groci/wp-content/uploads/2018/08/apple.png")} alt /></a></div>
+                                        <div className="app"><a href="#"><img src={_staticUrl("/groci/wp-content/uploads/2018/08/google.png")} /></a><a href="#"><img src={_staticUrl("/groci/wp-content/uploads/2018/08/apple.png")} /></a></div>
                                     </div>
                                 </div>
                             </div>
@@ -101,23 +102,6 @@ class Footer extends React.Component {
                         </div>
                     </div>
                 </section>
-
-
-
-
-                <div className="cart-sidebar">
-                    <div className="cart-sidebar-header">
-                        <h5>
-                            My Cart <span className="text-success">(0 items)</span> <a data-toggle="offcanvas" className="float-right" href="#"><i className="mdi mdi-close" />
-                            </a>
-                        </h5>
-                    </div>
-                    <div className="cart-sidebar-body cart_list product_list_widget">
-                        <div className="cart-list-product">
-                            No products in the cart. </div>
-                    </div>
-                </div>
-
             </div>
         )
     }

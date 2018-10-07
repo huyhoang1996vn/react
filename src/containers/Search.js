@@ -4,18 +4,14 @@ import { _url } from "config/utils";
 
 // Components
 import {
-    Header,
-    Footer,
     Delivery,
 } from "components/layouts"
 
 import {
-    SliderMain,
-    SliderMini,
     SliderProducts
 } from "components/slider"
 
-class Home extends React.Component {
+class Search extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -26,9 +22,9 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div className="Home">
-                <SliderMain />
-                <SliderMini />
+            <div className="Search">
+                <SliderProducts />
+                <SliderProducts />
                 <SliderProducts />
                 <Delivery />
                 <div className="item-hidden" id="btn-run-slider">CLICK</div>
@@ -37,4 +33,4 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+export default Search;

@@ -5,16 +5,8 @@ import { _url } from "config/utils";
 
 // Components
 import {
-    Header,
-    Footer,
     Delivery,
 } from "components/layouts"
-
-import {
-    SliderMain,
-    SliderMini,
-    SliderProducts
-} from "components/slider"
 
 import {
     AccountComponent
@@ -28,12 +20,8 @@ class Account extends React.Component {
     render() {
         return (
             <div className="Account">
-                <Header />
-
                 <AccountComponent />
-
                 <Delivery />
-                <Footer />
             </div>
         )
     }

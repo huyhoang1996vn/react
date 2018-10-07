@@ -4,9 +4,16 @@ import { Switch, Route } from "react-router-dom";
 import AdminApp from "containers/admin/App"; 
 import Owners from "containers/owners/App"; 
 
+
+
+// Components
 import {
-    Home,
-    Account
+    Header,
+    Footer,
+} from "components/layouts"
+
+import {
+    ClientApp
 } from "./index";
 
 function NotFound() {
@@ -29,11 +36,9 @@ class App extends Component {
                 <Switch>
                     <Route path="/admin" component={AdminApp} />
                     <Route path="/owners" component={Owners} />
-                    
-                    <Route exact path="/my-account" component={Account} />
-                    <Route exact path="/" component={Home} />
+                    <Route path="/not-found" component={NotFound} />
 
-                    <Route component={NotFound} />
+                    <Route path="/" component={ClientApp} />
                 </Switch>
             </div>
         );
