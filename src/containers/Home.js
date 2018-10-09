@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import { _url } from "config/utils";
 
@@ -15,9 +16,22 @@ import {
     SliderProducts
 } from "components/slider"
 
+// actions 
+import {
+    getTopProducts,
+    getByCategory
+} from "actions/products";
+
+
 class Home extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {};
+    }
+
+    static getDerivedStateFromProps(props) {
+        console.log(props);
+        return {};
     }
 
     componentDidMount() {
@@ -28,8 +42,12 @@ class Home extends React.Component {
         return (
             <div className="Home">
                 <SliderMain />
-                <SliderMini />
-                <SliderProducts />
+                <SliderMini 
+                    products={this.props.products.topPropducts}
+                />
+                <SliderProducts 
+                    products={this.props.products.topPropducts}
+                />
                 <Delivery />
                 <div className="item-hidden" id="btn-run-slider">CLICK</div>
             </div>
@@ -37,4 +55,17 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+    return {
+        products: state.products
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    dispatch(getTopProducts());  
+    return {
+        dispatch
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

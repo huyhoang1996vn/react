@@ -14,6 +14,7 @@ jQuery.noConflict();
         function runSlider() {
             var objowlcarousel = $("body .owl-carousel-featured");
             if (objowlcarousel.length > 0) {
+                console.log(objowlcarousel);
                 objowlcarousel.owlCarousel({
                     items: 5,
                     lazyLoad: true,
