@@ -11,7 +11,7 @@ export const getTopProducts = (limit = 10) => dispatch => {
     return request().get("http://52.14.71.211/api/product/?item=" + limit).then(res => {
         dispatch({
             type: GET_TOP,
-            payload: res.data
+            data: res.data
         })
     })
 }

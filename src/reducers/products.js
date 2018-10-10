@@ -15,7 +15,7 @@ export default function(state = defaultState, action ) {
         case GET_TOP: {
             return {
                 ...state,
-                topPropducts: action.payload
+                topPropducts: action.data
             }
         }
         default: return state;

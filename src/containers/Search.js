@@ -23,9 +23,9 @@ class Search extends React.Component {
     render() {
         return (
             <div className="Search">
-                <SliderProducts />
-                <SliderProducts />
-                <SliderProducts />
+                <SliderProducts 
+                    products={[]}
+                />
                 <Delivery />
                 <div className="item-hidden" id="btn-run-slider">CLICK</div>
             </div>

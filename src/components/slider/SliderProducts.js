@@ -18,30 +18,30 @@ class SliderProducts extends React.Component {
                 urlImage = _apiUrl(item.picture[0].image);
             }
             return (
-            <div className="item" key={item.id || item} 
-            style={{ minWidth: "200px", width: "1px", alignSelf: "stretch" }}>
-            <div className="product">
-                <div className="product-header">
-                    <span className="badge badge-success">30%</span>
-                    <a href="/product/organic-broccoli/">
-                        <img
-                            className="img-fluid"
-                            src={urlImage}
-                            alt="Organic Broccoli" />
-                    </a>
-                    <span className="veg text-success mdi mdi-circle" />
-                </div>
-                <div className="product-body"><a href="/product/organic-broccoli/">
-                    <h5>{item.name.slice(0,20)}...</h5>
-                </a>
-                    <h6><strong><span className="mdi mdi-approval text-success" /> In Stock</strong> - 1 kg</h6>
-                </div>
-                <div className="product-footer">
-                    <p className="offer-price mb-0"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>10.00</span></del>
-                        <ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{item.price}</span></ins></p><a href="/?add-to-cart=63" className="btn btn-secondary btn-sm button product_type_simple add_to_cart_button ajax_add_to_cart"><i className="mdi mdi-cart-outline" /> Add to cart</a>
-                </div>
-            </div>
-        </div>)
+                <div className="item" key={item.id || item}
+                    style={{ minWidth: "200px", width: "1px", alignSelf: "stretch" }}>
+                    <div className="product">
+                        <div className="product-header">
+                            <span className="badge badge-success">30%</span>
+                            <a href="/product/organic-broccoli/">
+                                <img
+                                    className="img-fluid"
+                                    src={urlImage}
+                                    alt="Organic Broccoli" />
+                            </a>
+                            <span className="veg text-success mdi mdi-circle" />
+                        </div>
+                        <div className="product-body"><a href="/product/organic-broccoli/">
+                            <h5>{item.name.slice(0, 20)}...</h5>
+                        </a>
+                            <h6><strong><span className="mdi mdi-approval text-success" /> In Stock</strong> - 1 kg</h6>
+                        </div>
+                        <div className="product-footer">
+                            <p className="offer-price mb-0"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>10.00</span></del>
+                                <ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{item.price}</span></ins></p><a href="/?add-to-cart=63" className="btn btn-secondary btn-sm button product_type_simple add_to_cart_button ajax_add_to_cart"><i className="mdi mdi-cart-outline" /> Add to cart</a>
+                        </div>
+                    </div>
+                </div>)
         })
         return (
             <div className="SliderProducts">
