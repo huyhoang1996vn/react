@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 import { _staticUrl, _apiUrl } from "config/utils";
 
 
@@ -28,10 +30,12 @@ class SliderMini extends React.Component {
                                                     }
                                                     return (
                                                         <div className="item" key={item.id}>
-                                                            <div className="category-item"><a href="/product-category/beverages/"><img className="img-fluid" src={urlImage} />
-                                                                <h6>Beverages</h6>
-                                                                <p>1 Items</p>
-                                                            </a></div>
+                                                            <div className="category-item">
+                                                                <Link to={`/product/${item.id}/`}><img className="img-fluid" src={urlImage} />
+                                                                    <h6>{item.name.slice(0, 15)}</h6>
+                                                                    <p>1 Items</p>
+                                                                </Link>
+                                                            </div>
                                                         </div>
                                                     )
                                                 })

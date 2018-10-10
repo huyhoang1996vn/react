@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { _staticUrl, _apiUrl } from "config/utils";
 import uuid from "uuid";
@@ -15,7 +16,12 @@ class SliderProducts extends React.Component {
         let listProducts = this.props.products.map(item => {
             let urlImage = _staticUrl("/groci/wp-content/uploads/2018/08/2-1.jpg");
             if (item.picture && item.picture[0] && item.picture[0].image) {
-                urlImage = _apiUrl(item.picture[0].image);
+                if (!~item.picture[0].image.indexOf("http")) {
+                    urlImage = _apiUrl(item.picture[0].image);
+                } else {
+                    urlImage = item.picture[0].image;
+                }
+                
             }
             return (
                 <div className="item" key={item.id || item}
@@ -23,12 +29,12 @@ class SliderProducts extends React.Component {
                     <div className="product">
                         <div className="product-header">
                             <span className="badge badge-success">30%</span>
-                            <a href="/product/organic-broccoli/">
+                            <Link to={`/product/${item.id}/`}>
                                 <img
                                     className="img-fluid"
                                     src={urlImage}
                                     alt="Organic Broccoli" />
-                            </a>
+                            </Link>
                             <span className="veg text-success mdi mdi-circle" />
                         </div>
                         <div className="product-body"><a href="/product/organic-broccoli/">

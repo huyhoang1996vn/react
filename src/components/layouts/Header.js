@@ -1,12 +1,22 @@
 import React from "react";
 
 import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 import { _staticUrl } from "config/utils";
+
+// actions 
+import {
+    getCategories
+} from "actions/products";
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    componentWillMount() {
+        this.props.dispatch(getCategories());
     }
 
     onSubmitSearch = (e) => {
@@ -115,8 +125,8 @@ class Header extends React.Component {
                                 <li className="nav-item menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home active"><a className="nav-link" href="/">Home</a></li>
                                 <li className="nav-item menu-item menu-item-type-post_type menu-item-object-page"><a className="nav-link" href="/about-us">About
                   Us</a></li>
-                                <li className="nav-item menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a className="nav-link" href="/product-category/fruits-vegetables/">Fruits
-                  &amp; Vegetables</a></li>
+                                <li className="nav-item menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a className="nav-link" href="/product-category/fruits-vegetables/">Headache
+                  &amp; Stomatche</a></li>
                                 <li className="nav-item dropdown menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children"><a className="nav-link dropdown-toggle" href="/shop/">Shop</a>
                                     <ul className="dropdown-menu">
                                         <li className="nav-item menu-item menu-item-type-post_type menu-item-object-page"><a className="nav-link dropdown-item" href="/shop/"><i className="mdi mdi-chevron-right" aria-hidden="true" /> Products Grid</a></li>
@@ -127,10 +137,17 @@ class Header extends React.Component {
                                         <li className="nav-item menu-item menu-item-type-post_type menu-item-object-page"><a className="nav-link dropdown-item" href="/cart/"><i className="mdi mdi-chevron-right" aria-hidden="true" /> Cart</a></li>
                                     </ul>
                                 </li>
-                                <li className="nav-item dropdown menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a className="nav-link dropdown-toggle" href="#">Blog</a>
+                                <li className="nav-item dropdown menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a className="nav-link dropdown-toggle" href="#">Categories</a>
                                     <ul className="dropdown-menu">
-                                        <li className="nav-item menu-item menu-item-type-post_type menu-item-object-page"><a className="nav-link dropdown-item" href="/blog/"><i className="mdi mdi-chevron-right" aria-hidden="true" /> Blog List</a></li>
-                                        <li className="nav-item menu-item menu-item-type-post_type menu-item-object-post"><a className="nav-link dropdown-item" href="/blog/2018/08/12/restaurant-employer-read-clients-orders-on-his-ipad/"><i className="mdi mdi-chevron-right" aria-hidden="true" /> Blog Detail</a></li>
+                                        {
+                                            this.props.categories.map(item => (
+                                                <li key={item.id} className="nav-item menu-item menu-item-type-post_type menu-item-object-page">
+                                                    <Link className="nav-link dropdown-item" to={`/category/${item.id}`}>
+                                                        <i className="mdi mdi-chevron-right" aria-hidden="true" /> {item.name}
+                                                    </Link>
+                                                </li>
+                                            ))
+                                        }
                                     </ul>
                                 </li>
                                 <li className="nav-item menu-item menu-item-type-post_type menu-item-object-page"><a className="nav-link" href="/faq/">FAQ</a></li>
@@ -144,4 +161,11 @@ class Header extends React.Component {
     }
 }
 
-export default withRouter(Header);
+const mapStateToProps = (store) => {
+    return {
+        categories: store.products.categories,
+    }
+}
+
+
+export default connect(mapStateToProps)(withRouter(Header));

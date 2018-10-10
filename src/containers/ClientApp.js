@@ -14,7 +14,8 @@ import {
     Checkout,
     CheckoutSuccess,
     Search,
-    AboutUs
+    AboutUs,
+    CategoryProducts
 } from "./index";
 
 
@@ -36,7 +37,8 @@ class ClientApp extends Component {
                 <Header />
                 <Switch>
                     <Route exact path="/my-account" component={Account} />
-                    <Route exact path="/product/:product_name" component={ProudctDetail} />
+                    <Route exact path="/product/:product_id" component={ProudctDetail} />
+                    <Route exact path="/category/:category_id" component={CategoryProducts} />
                     <Route exact path="/checkout" component={Checkout} />
                     <Route exact path="/checkout-success" component={CheckoutSuccess} />
                     <Route exact path="/search/:keyword" component={Search} />

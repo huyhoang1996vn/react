@@ -7,7 +7,7 @@ import Checkout from "./Checkout";
 import CheckoutSuccess from "./CheckoutSuccess";
 import Search from "./Search";
 import AboutUs from "./AboutUs";
-
+import CategoryProducts from "./CategoryProducts";
 
 export {
     App,
@@ -18,5 +18,6 @@ export {
     Checkout,
     CheckoutSuccess,
     Search,
-    AboutUs
+    AboutUs,
+    CategoryProducts
 }

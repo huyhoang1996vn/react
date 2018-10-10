@@ -29,10 +29,9 @@ class Home extends React.Component {
         this.state = {};
     }
 
-    static getDerivedStateFromProps(props) {
-        console.log(props);
-        return {};
-    }
+    // static getDerivedStateFromProps(props) {
+    //     return {};
+    // }
 
     componentDidMount() {
         document.getElementById("btn-run-slider").click();
