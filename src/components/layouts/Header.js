@@ -196,7 +196,7 @@ class Header extends React.Component {
                                     <a onClick={this.onClickRemoveItem(cartItem)} className="float-right remove-cart" ><i className="mdi mdi-close" /></a>
                                     <img className="img-fluid" src={cartItem.product.picture[0].image || _staticUrl("/groci/wp-content/uploads/2018/08/1-1.jpg")} alt="Washed Sugar Snap Peas" />
                                     <span className="badge badge-success">20 % OFF</span>
-                                    <h5><a href="/groci/wp-content/uploads/2018/08/1-1.jpg">{cartItem.product.name}</a></h5>
+                                    <h5><Link to={`/product/${cartItem.product.id}`}>{cartItem.product.name}</Link></h5>
                                     <h6><strong><span className="mdi mdi-approval" /> </strong> - 1 kg</h6>
                                     <p className="offer-price mb-0"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>5.00</span></del> <ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{cartItem.product.price}</span></ins></p>
                                     <div>

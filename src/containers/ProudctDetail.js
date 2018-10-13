@@ -13,6 +13,8 @@ import {
 	getProductsByCategory
 } from "actions/products";
 
+import { withCartProductHOC } from "components/HOC";
+
 const getUrlImage = product => {
 	let urlImage = _staticUrl("/groci/wp-content/uploads/2018/08/2-1.jpg");
 
@@ -33,29 +35,52 @@ const getUrlImage = product => {
 class ProudctDetail extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			num_add_to_cart: 1
+		}
+
+		this.getProduct(props.match.params.product_id);
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.match.params.product_id !== this.props.match.params.product_id)
-			this.getProduct(nextProps.match.params.product_id);
+	componentWillReceiveProps(props) {
+		if (props.match.params.product_id !== this.props.match.params.product_id)
+			this.getProduct(props.match.params.product_id);
+		const productInCart = props.cart.items.find(it => it.product.id == props.detailProduct.product.id) || {};
+		this.setState({
+			num_add_to_cart: productInCart.quanlity || 1,
+		})
 	}
-
-	componentWillMount() {
-		this.getProduct(this.props.match.params.product_id);
-	}
-
+	
 
 	getProduct = (id) => {
 		this.props.dispatch(getProductById(id));
 	}
 
+	onAddToCart = product => e => {
+		e.preventDefault();
+		this.props.addNewItemToCart(product);
+	}
+
+	onChangeAmountItem = (e) => {
+		if (e.target.value && Math.abs(+e.target.value - +this.state.num_add_to_cart) == 1) {
+			console.log(Math.abs(+e.target.value));
+			this.setState({
+				num_add_to_cart: +e.target.value
+			})
+		}
+	}
+
+	onSubmitAddToCart = e => {
+		e.preventDefault();
+		this.props.updateItemInCart({
+			product: this.props.detailProduct.product,
+			quanlity: this.state.num_add_to_cart
+		})
+	}
+
 	render() {
 		const { product, relatedProducts } = this.props.detailProduct;
-
 		let urlImage = getUrlImage(product);
-
-
-
 		return (
 			<div className="ProudctDetail">
 				<section className="shop-single section-padding pt-3">
@@ -71,10 +96,10 @@ class ProudctDetail extends React.Component {
 									<p className="price"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>10.00</span></del>
 										<ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{product.price}</span></ins></p>
 									<p className="stock in-stock">In Stock</p>
-									<form className="cart" action="/groci/product/organic-broccoli/" method="post" encType="multipart/form-data">
+									<form className="cart" encType="multipart/form-data" onSubmit={this.onSubmitAddToCart}>
 										<div className="quantity">
 											<label className="screen-reader-text" htmlFor="quantity_5bb07e4411474">Quantity</label>
-											<input type="number" id="quantity_5bb07e4411474" className="input-text qty text" step={1} min={1} max={100} name="quantity" defaultValue={1} title="Qty" size={4} pattern="[0-9]*" inputMode="numeric" aria-labelledby />
+											<input onChange={this.onChangeAmountItem} value={this.state.num_add_to_cart} type="number" id="quantity_5bb07e4411474" className="input-text qty text" step={1} min={1} max={100} name="quantity" title="Qty" size={4} inputMode="numeric" aria-labelledby />
 										</div>
 										<button type="submit" name="add-to-cart" value={63} className="btn btn-secondary btn-lg single_add_to_cart_button button alt"><i className="mdi mdi-cart-outline" /> Add to cart</button>
 									</form>
@@ -133,7 +158,7 @@ class ProudctDetail extends React.Component {
 																</div>
 															</Link><div className="product-footer"><a href="/groci/product/fresh-red-seedless-grapes/">
 																<p className="offer-price mb-0"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>8.00</span></del>
-																	<ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{item.price}</span></ins></p></a><a href="/groci/product/organic-broccoli/?add-to-cart=69" className="btn btn-secondary btn-sm button product_type_simple add_to_cart_button ajax_add_to_cart"><i className="mdi mdi-cart-outline" /> Add to cart</a>
+																	<ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{item.price}</span></ins></p></a><a onClick={this.onAddToCart(item)} className="btn btn-secondary btn-sm button product_type_simple add_to_cart_button ajax_add_to_cart"><i className="mdi mdi-cart-outline" /> Add to cart</a>
 															</div>
 														</div>
 													</div>
@@ -152,6 +177,7 @@ class ProudctDetail extends React.Component {
 	}
 }
 
-export default connect(store => ({
-	detailProduct: store.products.detailProduct
-}))(ProudctDetail);
+export default withCartProductHOC(connect(store => ({
+	detailProduct: store.products.detailProduct,
+	cart: store.cart
+}))(ProudctDetail));
