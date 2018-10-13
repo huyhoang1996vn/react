@@ -57,3 +57,24 @@ export const getProductById = product_id => dispatch => {
         }
     })
 }
+
+export const SEARCH_PRODUCTS_BY_NAME = getActionType("SEARCH_PRODUCTS_BY_NAME");
+export const searchProductsByName = keyword => dispatch => {
+    return request().get(`/product/?search=${keyword}`).then(res => {
+        // in data tu server kiem tra co thanh cong khong
+        // console.log(res.data); // day chinh la products da sarch thanh cong
+        // chuyen vao store, mi chuyen thu coi :D
+        dispatch({
+            type: SEARCH_PRODUCTS_BY_NAME,
+            data: res.data
+        })
+        
+        /**
+         *dispatch({
+            type: SEARCH_PRODUCTS_BY_NAME,
+            data: res.data
+        })
+
+        */
+    })
+}

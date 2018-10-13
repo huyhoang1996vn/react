@@ -24,7 +24,14 @@ class Header extends React.Component {
 
     onSubmitSearch = (e) => {
         e.preventDefault();
-        this.props.history.push("/search/keyword");
+        // trc tien phai get dc du lieu trong form search
+        // Di tim form search :))
+        // Dung document.getElementById la cach de nhat
+        const text = document.getElementById("form-search-input");
+        // Kiem tra neu co thi search k thi k search
+        if (text.value !== "") {
+            this.props.history.push("/search/" + text.value);
+        }
     }
 
     onClickLogout = (e) => {
@@ -76,7 +83,7 @@ class Header extends React.Component {
                                     <div className="top-categories-search">
                                         <form className="search-form woocommerce-product-search" role="search" id="searchform" onSubmit={this.onSubmitSearch} >
                                             <div className="input-group">
-                                                <input className="form-control" type="text" name="s" id="s" placeholder="Enter Keyword Here ..." autoComplete="off" />
+                                                <input className="form-control" type="text" name="s" id="form-search-input" placeholder="Enter Keyword Here ..." autoComplete="off" />
                                                 <span className="input-group-btn-s">
                                                     <button className="btn btn-secondary" type="submit"><i className="mdi mdi-file-find" /> Search</button>
                                                     <input type="hidden" name="post_type" defaultValue="product" />
