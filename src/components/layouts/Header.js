@@ -69,6 +69,7 @@ class Header extends React.Component {
 
     render() {
         const { cart } = this.props;
+        const totalCartAmount = cart.items.reduce((cur, next) => cur + +next.quanlity * +next.product.price, 0);
         return (
             <div className="Header">
                 <div className="navbar-top pt-2 pb-2">
@@ -207,11 +208,11 @@ class Header extends React.Component {
 
                         <div className="cart-sidebar-footer">
                             <div className="cart-store-details">
-                                <p>Sub Total <strong className="float-right"><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>4.00</span></strong></p>
+                                <p>Sub Total <strong className="float-right"><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{totalCartAmount}</span></strong></p>
                                 <p>Delivery Charges <strong className="float-right text-danger">Free!</strong></p>
                             </div>
                             <a href="/checkout"><button className="btn btn-secondary btn-lg btn-block text-left" type="button">
-                                <span className="float-left"><i className="mdi mdi-cart-outline" /> Proceed to Checkout </span><span className="float-right"><strong><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>4.00</span></strong> <span className="mdi mdi-chevron-right" /></span></button></a>
+                                <span className="float-left"><i className="mdi mdi-cart-outline" /> Proceed to Checkout </span><span className="float-right"><strong><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{totalCartAmount}</span></strong> <span className="mdi mdi-chevron-right" /></span></button></a>
                         </div>
                     </div>
                 </div>

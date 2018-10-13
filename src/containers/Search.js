@@ -16,6 +16,7 @@ import {
 import{
     searchProductsByName
 } from "actions/products";
+import { constants } from "fs";
 
 class Search extends React.Component {
     constructor(props) {

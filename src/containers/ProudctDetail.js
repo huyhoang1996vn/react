@@ -116,11 +116,11 @@ class ProudctDetail extends React.Component {
 									<h2>Related products</h2>
 									<div className="row">
 										{
-											relatedProducts.slice(0, 4).map(item => {
+											relatedProducts.slice(0, 4).map((item, index) => {
 												let urlImage = getUrlImage(item);
 
 												return (
-													<div className="col-md-3">
+													<div key={index} className="col-md-3">
 														<a href="/groci/product/fresh-red-seedless-grapes/" className="woocommerce-LoopProduct-link woocommerce-loop-product__link">
 														</a><div className="product">
 															<a href="/groci/product/fresh-red-seedless-grapes/"
