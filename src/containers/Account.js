@@ -1,6 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import { _url } from "config/utils";
+
+import {
+    authLogin,
+    // authRegister
+} from "actions/auth";
 
 
 // Components
@@ -17,14 +23,24 @@ class Account extends React.Component {
         super(props);
     }
 
+    handleLogin = data => this.props.dispatch(authLogin(data));
+
+    handleRegister = data => {
+
+    }
+
     render() {
         return (
             <div className="Account">
-                <AccountComponent />
+                <AccountComponent 
+                    onLogin={this.handleLogin}
+                />
                 <Delivery />
             </div>
         )
     }
 }
 
-export default Account;
+export default connect((store) => ({
+    userAuth: store.session.userAuth
+}))(Account);

@@ -6,6 +6,55 @@ import { _url } from "config/utils";
 class Account extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            login: {
+                error: "",
+            },
+            register: {
+                error: "",
+            }
+        }
+
+        this.form_data = {
+            login: {
+                email: React.createRef(),
+                password: React.createRef(),
+            },
+            register: {
+                email: React.createRef(),
+                password: React.createRef(),
+                confirm: React.createRef(),
+                first_name: React.createRef(),
+                last_name: React.createRef(),
+            },
+        }
+    }
+
+    valForm = (path, name) => {
+        return this.form_data[path][name].current.value || "";
+    }
+
+    handleError = (path, error) => {
+        this.setState((prevState) => {
+            prevState[path].error = error;
+            return prevState;
+        })
+    }
+
+    onSubmitFormLogin = async e => {
+        e.preventDefault();
+        try {
+            await this.props.onLogin({
+                email: this.valForm("login", "email"),
+                password: this.valForm("login", "password")
+            });
+        } catch (er) {
+            this.handleError("login", "Email or password invalid")
+        }
+    }
+
+    onSubmitFormRegister = e => {
+        e.preventDefault();
     }
 
     render() {
@@ -31,19 +80,19 @@ class Account extends React.Component {
                                 <div className="row">
                                     <div className="u-column1 col-md-6">
                                         <h2>Login</h2>
-                                        <form className="woocommerce-form woocommerce-form-login login" method="post">
+                                        <form className="woocommerce-form woocommerce-form-login login" onSubmit={this.onSubmitFormLogin}>
                                             <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                                 <label htmlFor="username">Username or email address<span className="required">*</span></label>
-                                                <input type="text" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="username" id="username" autoComplete="username" />
+                                                <input ref={this.form_data.login.email} type="email" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="email" id="email" />
                                             </p>
-                                          
+
                                             <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                                 <label htmlFor="password">Password<span className="required">*</span></label>
-                                                <input className="woocommerce-Input woocommerce-Input--text input-text form-control" type="password" name="password" id="password" autoComplete="current-password" />
+                                                <input ref={this.form_data.login.password} className="woocommerce-Input woocommerce-Input--text input-text form-control" type="password" name="password" id="password" />
                                             </p>
 
 
-                                            
+
                                             <p className="form-row">
                                                 <input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" defaultValue="ea79594446" /><input type="hidden" name="_wp_http_referer" defaultValue="groci/my-account/" /> <button type="submit" className="btn btn-secondary woocommerce-Button button" name="login" value="Log in">Log in</button>
                                             </p><div className="custom-control custom-checkbox mb-3">
@@ -61,7 +110,7 @@ class Account extends React.Component {
                                         <form method="post" className="woocommerce-form woocommerce-form-register register">
                                             <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                                 <label htmlFor="reg_email">Email address&nbsp;<span className="required">*</span></label>
-                                                <input type="email" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="email" id="reg_email" autoComplete="email"/> </p>
+                                                <input type="email" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="email" id="reg_email" autoComplete="email" /> </p>
                                             <div className="woocommerce-privacy-policy-text">
                                                 <p>Your personal data will be used to support your experience throughout this website, to manage access to
                         your account, and for other purposes described in our <a href="groci/?page_id=3" className="woocommerce-privacy-policy-link" target="_blank">privacy policy</a>.</p>

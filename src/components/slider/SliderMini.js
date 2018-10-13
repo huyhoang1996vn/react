@@ -27,6 +27,9 @@ class SliderMini extends React.Component {
                                                     let urlImage = _staticUrl("/groci/wp-content/uploads/2018/08/2-1.jpg");
                                                     if (item.picture && item.picture[0] && item.picture[0].image) {
                                                         urlImage = _apiUrl(item.picture[0].image);
+                                                        if (~item.picture[0].image.indexOf("http")) {
+                                                            urlImage = item.picture[0].image;
+                                                        }
                                                     }
                                                     return (
                                                         <div className="item" key={item.id}>

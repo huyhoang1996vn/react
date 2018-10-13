@@ -9,7 +9,7 @@ const debugData = data => {
 
 const debugError = er => {
     // _store.dispatch(fetchingServer(false));
-    if (er.response && er.response.statusText === 'Unauthorized') window.location.replace("/login");
+    // if (er.response && er.response.statusText === 'Unauthorized') window.location.replace("/login");
     return Promise.reject(er);
 }
 
@@ -17,12 +17,20 @@ const request = () => {
     const token = _store.getState().session.userAuth.token;
 
 
-    const axiosApi = axios.create({
+    const options = {
         baseURL: API_URL,
         headers: {
-            Authorization: `Token=${token}`
+            // Authorization: `Token ${token}`
         }
-    });
+    }
+    if (token) {
+        options.headers = {
+            ...options.headers,
+            Authorization: `Token ${token}`
+        }
+    }
+
+    const axiosApi = axios.create(options);
 
     // _store.dispatch(fetchingServer(true));
 
