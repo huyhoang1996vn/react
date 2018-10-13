@@ -14,7 +14,7 @@ const debugData = data => {
 
 const debugError = er => {
     _store.dispatch(fetchingServer(false));
-    // if (er.response && er.response.statusText === 'Unauthorized') window.location.replace("/login");
+    if (er.response && er.response.statusText === 'Unauthorized') window.location.replace("/my-account");
     return Promise.reject(er);
 }
 

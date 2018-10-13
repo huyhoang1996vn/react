@@ -13,9 +13,20 @@ import {
     getCategories
 } from "actions/products";
 
+import {
+    getCart,
+    updateItemInCart
+} from "actions/cart";
+
 class Header extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.userAuth.token !== this.props.userAuth.token) {
+            this.props.dispatch(getCart());
+        }
     }
 
     componentWillMount() {
@@ -32,7 +43,25 @@ class Header extends React.Component {
         this.props.dispatch(authLogout());
     }
 
+    onClickRemoveItem = item => e => {
+        e.preventDefault();
+        this.props.dispatch(updateItemInCart({
+            ...item,
+            quanlity: 0
+        }))
+    }
+
+    onChangeQuantityItemCart = (item) => e => {
+        if (e.target.value && Math.abs(item.quanlity - e.target.value) == 1 ) {
+            this.props.dispatch(updateItemInCart({
+                ...item,
+                quanlity: e.target.value
+            })) 
+        }
+    }
+
     render() {
+        const { cart } = this.props;
         return (
             <div className="Header">
                 <div className="navbar-top pt-2 pb-2">
@@ -91,7 +120,7 @@ class Header extends React.Component {
                                     <ul className="list-inline main-nav-right">
                                         <li className="list-inline-item cart-btn">
                                             <a role="button" tabIndex="0" data-toggle="offcanvas" className="btn btn-link border-none"><i className="mdi mdi-cart" /> My Cart
-                      <small className="cart-value cart-contents">0</small></a>
+                      <small className="cart-value cart-contents">{cart.items.length}</small></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -148,19 +177,27 @@ class Header extends React.Component {
                 <div className="cart-sidebar">
                     <div className="cart-sidebar-header">
                         <h5>
-                            My Cart <span className="text-success">(0 items)</span> <a role="button" tabIndex="0" data-toggle="offcanvas" className="float-right"><i className="mdi mdi-close" />
+                            My Cart <span className="text-success">({cart.items.length} items)</span> <a role="button" tabIndex="0" data-toggle="offcanvas" className="float-right"><i className="mdi mdi-close" />
                             </a>
                         </h5>
                     </div>
                     <div className="cart-sidebar-body cart_list product_list_widget">
-                        <div className="cart-list-product">
-                            <a className="float-right remove-cart" href="/groci/wp-content/uploads/2018/08/1-1.jpg"><i className="mdi mdi-close" /></a>
-                            <img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/1-1.jpg")} alt="Washed Sugar Snap Peas" />
-                            <span className="badge badge-success">20 % OFF</span>
-                            <h5><a href="/groci/wp-content/uploads/2018/08/1-1.jpg">Washed Sugar Snap Peas</a></h5>
-                            <h6><strong><span className="mdi mdi-approval" /> </strong> - 1 kg</h6>
-                            <p className="offer-price mb-0"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>5.00</span></del> <ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>4.00</span></ins></p>
-                        </div>
+                        {
+                            cart.items.map((cartItem, index) => (
+                                <div key={index} className="cart-list-product">
+                                    <a onClick={this.onClickRemoveItem(cartItem)} className="float-right remove-cart" ><i className="mdi mdi-close" /></a>
+                                    <img className="img-fluid" src={cartItem.product.picture[0].image || _staticUrl("/groci/wp-content/uploads/2018/08/1-1.jpg")} alt="Washed Sugar Snap Peas" />
+                                    <span className="badge badge-success">20 % OFF</span>
+                                    <h5><a href="/groci/wp-content/uploads/2018/08/1-1.jpg">{cartItem.product.name}</a></h5>
+                                    <h6><strong><span className="mdi mdi-approval" /> </strong> - 1 kg</h6>
+                                    <p className="offer-price mb-0"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>5.00</span></del> <ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{cartItem.product.price}</span></ins></p>
+                                    <div>
+                                        <input onChange={this.onChangeQuantityItemCart(cartItem)} type="number" value={cartItem.quanlity}/>
+                                    </div>
+                                </div>
+                            ))
+                        }
+
                         <div className="cart-sidebar-footer">
                             <div className="cart-store-details">
                                 <p>Sub Total <strong className="float-right"><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>4.00</span></strong></p>
@@ -180,6 +217,7 @@ const mapStateToProps = (store) => {
     return {
         userAuth: store.session.userAuth,
         categories: store.products.categories,
+        cart: store.cart
     }
 }
 

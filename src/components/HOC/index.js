@@ -1,0 +1,1 @@
+export { default as withCartProductHOC } from "./withCartProductHOC";

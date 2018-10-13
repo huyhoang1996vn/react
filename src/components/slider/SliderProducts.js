@@ -6,10 +6,19 @@ import uuid from "uuid";
 
 
 // Components
+import {
+    withCartProductHOC
+} from "components/HOC";
+
 
 class SliderProducts extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    onAddToCart = product => e => {
+        e.preventDefault();
+        this.props.addNewItemToCart(product);
     }
 
     render() {
@@ -44,7 +53,7 @@ class SliderProducts extends React.Component {
                         </div>
                         <div className="product-footer">
                             <p className="offer-price mb-0"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>10.00</span></del>
-                                <ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{item.price}</span></ins></p><a href="/?add-to-cart=63" className="btn btn-secondary btn-sm button product_type_simple add_to_cart_button ajax_add_to_cart"><i className="mdi mdi-cart-outline" /> Add to cart</a>
+                                <ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{item.price}</span></ins></p><a onClick={this.onAddToCart(item)} className="btn btn-secondary btn-sm button product_type_simple add_to_cart_button ajax_add_to_cart"><i className="mdi mdi-cart-outline" /> Add to cart</a>
                         </div>
                     </div>
                 </div>)
@@ -76,4 +85,4 @@ class SliderProducts extends React.Component {
     }
 }
 
-export default SliderProducts;
+export default withCartProductHOC(SliderProducts);
