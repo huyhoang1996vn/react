@@ -2,6 +2,10 @@ import React from "react";
 
 import { _url } from "config/utils";
 
+// components 
+import {
+	AccountInfo
+} from "./index";
 
 class Account extends React.Component {
 	constructor(props) {
@@ -11,6 +15,12 @@ class Account extends React.Component {
 				error: "",
 			},
 			register: {
+				error: "",
+			},
+			profile: {
+				error: "",
+			},
+			editPass: {
 				error: "",
 			}
 		}
@@ -27,6 +37,15 @@ class Account extends React.Component {
 				first_name: React.createRef(),
 				last_name: React.createRef(),
 			},
+			profile: {
+				email: React.createRef(),
+				first_name: React.createRef(),
+				last_name: React.createRef(),
+			},
+			editPass: {
+				password: React.createRef(),
+				confirm: React.createRef(),
+			}
 		}
 	}
 
@@ -70,6 +89,16 @@ class Account extends React.Component {
 		return data;
 	}
 
+	validateFormEditProfile = (data) => {
+		if (
+			!data.first_name ||
+			!data.last_name
+		) {
+			throw new Error("You can leave these empty");
+		}
+		return data;
+	}
+
 	onSubmitFormRegister = async e => {
 		e.preventDefault();
 		try {
@@ -81,9 +110,36 @@ class Account extends React.Component {
 				last_name: this.valForm("register", "last_name")
 			})
 			await this.props.onRegister(body);
+			this.handleError("register", "");
+			alert("Register successful!");
 		} catch (er) {
 			this.handleError("register", er.message || "Can not register with your info!")
 		}
+	}
+
+	onSubmitFormEdit = typeForm => async e => {
+		e.preventDefault();
+		switch (typeForm) {
+			case "profile": {
+				try {
+					const body = this.validateFormEditProfile({
+						first_name: this.valForm("profile", "first_name"),
+						last_name: this.valForm("profile", "last_name")
+					})
+					await this.props.onEditProfile(body);
+					this.handleError("profile", "");
+					alert("Edit successful!");
+				} catch (er) {
+					this.handleError("profile", er.message || "Can not edit with your info!")
+				}
+				break;
+			}
+			case "editPass": {
+				break;
+			}
+			default: return;
+		}
+
 	}
 
 	render() {
@@ -119,7 +175,7 @@ class Account extends React.Component {
 
 													<p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label htmlFor="password">Password<span className="required">*</span></label>
-														<input ref={this.form_data.login.password} className="woocommerce-Input woocommerce-Input--text input-text form-control" type="password" name="password" id="password" autoComplete="new-password"/>
+														<input ref={this.form_data.login.password} className="woocommerce-Input woocommerce-Input--text input-text form-control" type="password" name="password" id="password" autoComplete="new-password" />
 													</p>
 
 
@@ -143,7 +199,7 @@ class Account extends React.Component {
 												<form className="woocommerce-form woocommerce-form-register register" onSubmit={this.onSubmitFormRegister}>
 													<p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label htmlFor="reg_email">Email address&nbsp;<span className="required">*</span></label>
-														<input ref={this.form_data.register.email}  type="email" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="email" id="reg_email" autoComplete="off" />
+														<input ref={this.form_data.register.email} type="email" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="email" id="reg_email" autoComplete="off" />
 													</p>
 													<p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label htmlFor="reg_email">Password&nbsp;<span className="required">*</span></label>
@@ -172,10 +228,20 @@ class Account extends React.Component {
 													</p>
 												</form>
 											</div>
-										</div> :
-										<div>
-											Logged
 										</div>
+										:
+										<AccountInfo
+											form_data={{
+												profile: this.form_data.profile,
+												editPass: this.form_data.editPass
+											}}
+											editState={{
+												profile: this.state.profile,
+												editPass: this.state.editPass
+											}}
+											data={this.props.userAuth.data}
+											onSubmitForm={this.onSubmitFormEdit}
+										/>
 								}
 
 							</div>

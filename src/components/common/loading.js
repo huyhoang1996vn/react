@@ -4,7 +4,6 @@ import {
 } from "react-redux";
 
 const Loading = ({ isFetching }) => {
-    console.log(isFetching);
     if (!isFetching) return null;
     return (
         <div

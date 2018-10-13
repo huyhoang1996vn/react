@@ -29,9 +29,6 @@ export const authRegister = (data) => dispatch => {
         last_name,
         avatar: null,
         roll: "customer"
-    }).then(res => {
-        console.log(res);
-
     })
 }
 
@@ -44,6 +41,16 @@ export const authLogout = () => ({
 export const GET_PROFILE = getActionType(prefix)("GET_PROFILE");
 export const getProfle = () => dispatch => {
     return request().get("/profile/").then(res => {
+        dispatch({
+            type: GET_PROFILE,
+            data: res.data,
+        })
+    })
+}
+
+
+export const editProfle = (data) => dispatch => {
+    return request().put("/profile/", data).then(res => {
         dispatch({
             type: GET_PROFILE,
             data: res.data,
