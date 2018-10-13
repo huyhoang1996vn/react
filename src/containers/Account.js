@@ -5,7 +5,7 @@ import { _url } from "config/utils";
 
 import {
     authLogin,
-    // authRegister
+    authRegister
 } from "actions/auth";
 
 
@@ -24,10 +24,7 @@ class Account extends React.Component {
     }
 
     handleLogin = data => this.props.dispatch(authLogin(data));
-
-    handleRegister = data => {
-
-    }
+    handleRegister = data => this.props.dispatch(authRegister(data));
 
     render() {
         return (
@@ -35,6 +32,7 @@ class Account extends React.Component {
                 <AccountComponent
                     userAuth={this.props.userAuth}
                     onLogin={this.handleLogin}
+                    onRegister={this.handleRegister}
                 />
                 <Delivery />
             </div>

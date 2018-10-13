@@ -19,6 +19,22 @@ export const authLogin = (data) => dispatch => {
     })
 }
 
+export const AUTH_REGISTER = getActionType(prefix)("AUTH_REGISTER");
+export const authRegister = (data) => dispatch => {
+    const { email, password, first_name, last_name } = data;
+    return request().post("/register/", {
+        email,
+        password,
+        first_name,
+        last_name,
+        avatar: null,
+        roll: "customer"
+    }).then(res => {
+        console.log(res);
+
+    })
+}
+
 export const AUTH_LOGOUT = getActionType(prefix)("AUTH_LOGOUT");
 export const authLogout = () => ({
     type: AUTH_LOGOUT
