@@ -2,7 +2,8 @@ import {
     GET_TOP,
     GET_CATEGORIES,
     GET_PRODUCTS_BY_CATEGORY,
-    GET_PRODUCT_BY_ID
+    GET_PRODUCT_BY_ID,
+    SEARCH_PRODUCTS_BY_NAME
 } from "actions/products";
 
 
@@ -17,7 +18,7 @@ const defaultState = {
         products: [],
     },  
     categories: [],
-    
+    searchedProducts: [],
 }
 
 
@@ -49,6 +50,12 @@ export default function (state = defaultState, action) {
             return {
                 ...state,
                 detailProduct: action.data
+            }
+        }
+        case SEARCH_PRODUCTS_BY_NAME: {
+            return {
+                ...state,
+                searchedProducts: action.data
             }
         }
         default: return state;
