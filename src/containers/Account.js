@@ -32,7 +32,8 @@ class Account extends React.Component {
     render() {
         return (
             <div className="Account">
-                <AccountComponent 
+                <AccountComponent
+                    userAuth={this.props.userAuth}
                     onLogin={this.handleLogin}
                 />
                 <Delivery />

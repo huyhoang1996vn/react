@@ -19,12 +19,18 @@ export const authLogin = (data) => dispatch => {
     })
 }
 
+export const AUTH_LOGOUT = getActionType(prefix)("AUTH_LOGOUT");
+export const authLogout = () => ({
+    type: AUTH_LOGOUT
+})
+
+
 export const GET_PROFILE = getActionType(prefix)("GET_PROFILE");
 export const getProfle = () => dispatch => {
     return request().get("/profile/").then(res => {
-        console.log(res);
-        // dispatch({
-
-        // })
+        dispatch({
+            type: GET_PROFILE,
+            data: res.data,
+        })
     })
 }

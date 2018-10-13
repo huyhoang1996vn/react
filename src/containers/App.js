@@ -13,6 +13,10 @@ import {
 } from "components/layouts"
 
 import {
+    Loading
+} from "components/common";
+
+import {
     ClientApp
 } from "./index";
 
@@ -40,6 +44,7 @@ class App extends Component {
 
                     <Route path="/" component={ClientApp} />
                 </Switch>
+                <Loading />
             </div>
         );
     }

@@ -2,13 +2,18 @@ import axios from "axios";
 import { _store } from "index";
 import { API_URL } from "config";
 
+import {
+    fetchingServer
+} from "actions/common";
+
+
 const debugData = data => {
-    // _store.dispatch(fetchingServer(false));
+    _store.dispatch(fetchingServer(false));
     return Promise.resolve(data);
 }
 
 const debugError = er => {
-    // _store.dispatch(fetchingServer(false));
+    _store.dispatch(fetchingServer(false));
     // if (er.response && er.response.statusText === 'Unauthorized') window.location.replace("/login");
     return Promise.reject(er);
 }
@@ -32,7 +37,7 @@ const request = () => {
 
     const axiosApi = axios.create(options);
 
-    // _store.dispatch(fetchingServer(true));
+    _store.dispatch(fetchingServer(true));
 
     return {
         get(url, options = {}) {

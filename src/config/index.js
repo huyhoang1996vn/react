@@ -1,6 +1,6 @@
 import utils from "./utils";
 
-const KEY_PERSIST_STORE = 'react-template-v16.5.1';
+const KEY_PERSIST_STORE = 'project-14t3-pharmacy';
 const API_URL = process.env.REACT_APP_API_URL;
 const PUBLIC_URL = process.env.REACT_APP_PUBLIC_URL;
 const BASE_PATH =  process.env.REACT_APP_BASE_PATH;

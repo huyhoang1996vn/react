@@ -7,6 +7,9 @@ import { _staticUrl } from "config/utils";
 
 // actions 
 import {
+    authLogout
+} from "actions/auth";
+import {
     getCategories
 } from "actions/products";
 
@@ -24,37 +27,14 @@ class Header extends React.Component {
         this.props.history.push("/search/keyword");
     }
 
+    onClickLogout = (e) => {
+        e.preventDefault();
+        this.props.dispatch(authLogout());
+    }
+
     render() {
         return (
             <div className="Header">
-                <div className="cart-sidebar">
-                    <div className="cart-sidebar-header">
-                        <h5>
-                            My Cart <span className="text-success">(0 items)</span> <a role="button" tabIndex="0" data-toggle="offcanvas" className="float-right"><i className="mdi mdi-close" />
-                            </a>
-                        </h5>
-                    </div>
-                    <div className="cart-sidebar-body cart_list product_list_widget">
-                        <div className="cart-list-product">
-                            <a className="float-right remove-cart" href="/groci/wp-content/uploads/2018/08/1-1.jpg"><i className="mdi mdi-close" /></a>
-                            <img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/1-1.jpg")} alt="Washed Sugar Snap Peas" />
-                            <span className="badge badge-success">20 % OFF</span>
-                            <h5><a href="/groci/wp-content/uploads/2018/08/1-1.jpg">Washed Sugar Snap Peas</a></h5>
-                            <h6><strong><span className="mdi mdi-approval" /> </strong> - 1 kg</h6>
-                            <p className="offer-price mb-0"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>5.00</span></del> <ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>4.00</span></ins></p>
-                        </div>
-                        <div className="cart-sidebar-footer">
-                            <div className="cart-store-details">
-                                <p>Sub Total <strong className="float-right"><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>4.00</span></strong></p>
-                                <p>Delivery Charges <strong className="float-right text-danger">Free!</strong></p>
-                            </div>
-                            <a href="/checkout"><button className="btn btn-secondary btn-lg btn-block text-left" type="button">
-                                <span className="float-left"><i className="mdi mdi-cart-outline" /> Proceed to Checkout </span><span className="float-right"><strong><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>4.00</span></strong> <span className="mdi mdi-chevron-right" /></span></button></a>
-                        </div>
-                    </div>
-                </div>
-
-
                 <div className="navbar-top pt-2 pb-2">
                     <div className="container">
                         <div className="row">
@@ -64,10 +44,18 @@ class Header extends React.Component {
                                     </strong> </a>
                             </div>
                             <div className="col-md-6 text-right top-right-menu">
-                                <ul id="menu-top-right" className="nav-top-right list-inline t-md-right">
-                                    <li id="menu-item-260" className="mdi mdi-lock menu-item menu-item-type-post_type menu-item-object-page menu-item-260"><a href="/my-account/">Sign In</a></li>
-                                    <li id="menu-item-261" className="mdi mdi-account-circle menu-item menu-item-type-post_type menu-item-object-page menu-item-261"><a href="/my-account/">Sign Up</a></li>
-                                </ul>
+                                {
+                                    this.props.userAuth.token === "" ?
+                                        <ul id="menu-top-right" className="nav-top-right list-inline t-md-right">
+                                            <li id="menu-item-260" className="mdi mdi-lock menu-item menu-item-type-post_type menu-item-object-page menu-item-260"><Link to="/my-account/">Sign In</Link></li>
+                                            <li id="menu-item-261" className="mdi mdi-account-circle menu-item menu-item-type-post_type menu-item-object-page menu-item-261"><Link to="/my-account/">Sign Up</Link></li>
+                                        </ul>
+                                        :
+                                        <ul id="menu-top-right" className="nav-top-right list-inline t-md-right">
+                                            <li id="menu-item-261" className="mdi mdi-account-circle menu-item menu-item-type-post_type menu-item-object-page menu-item-261"><a role="button" tabIndex="0" onClick={this.onClickLogout}>Log out</a></li>
+                                        </ul>
+                                }
+
                             </div>
                         </div>
                     </div>
@@ -156,6 +144,33 @@ class Header extends React.Component {
                         </div>
                     </div>
                 </nav>
+
+                <div className="cart-sidebar">
+                    <div className="cart-sidebar-header">
+                        <h5>
+                            My Cart <span className="text-success">(0 items)</span> <a role="button" tabIndex="0" data-toggle="offcanvas" className="float-right"><i className="mdi mdi-close" />
+                            </a>
+                        </h5>
+                    </div>
+                    <div className="cart-sidebar-body cart_list product_list_widget">
+                        <div className="cart-list-product">
+                            <a className="float-right remove-cart" href="/groci/wp-content/uploads/2018/08/1-1.jpg"><i className="mdi mdi-close" /></a>
+                            <img className="img-fluid" src={_staticUrl("/groci/wp-content/uploads/2018/08/1-1.jpg")} alt="Washed Sugar Snap Peas" />
+                            <span className="badge badge-success">20 % OFF</span>
+                            <h5><a href="/groci/wp-content/uploads/2018/08/1-1.jpg">Washed Sugar Snap Peas</a></h5>
+                            <h6><strong><span className="mdi mdi-approval" /> </strong> - 1 kg</h6>
+                            <p className="offer-price mb-0"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>5.00</span></del> <ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>4.00</span></ins></p>
+                        </div>
+                        <div className="cart-sidebar-footer">
+                            <div className="cart-store-details">
+                                <p>Sub Total <strong className="float-right"><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>4.00</span></strong></p>
+                                <p>Delivery Charges <strong className="float-right text-danger">Free!</strong></p>
+                            </div>
+                            <a href="/checkout"><button className="btn btn-secondary btn-lg btn-block text-left" type="button">
+                                <span className="float-left"><i className="mdi mdi-cart-outline" /> Proceed to Checkout </span><span className="float-right"><strong><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>4.00</span></strong> <span className="mdi mdi-chevron-right" /></span></button></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
@@ -163,6 +178,7 @@ class Header extends React.Component {
 
 const mapStateToProps = (store) => {
     return {
+        userAuth: store.session.userAuth,
         categories: store.products.categories,
     }
 }

@@ -9,8 +9,8 @@ import config from "config";
 const persistConfig = {
     key: config.KEY_PERSIST_STORE,
     storage,
-    blacklist: ['session'],
-    whitelist: [],
+    blacklist: [],
+    whitelist: ['session'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
