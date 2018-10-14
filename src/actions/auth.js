@@ -3,6 +3,10 @@ import {
     getActionType
 } from "actions/utils";
 
+import {
+    CLEAN_CART
+} from "./cart";
+
 const prefix = "action.auth";
 
 export const AUTH_LOGIN = getActionType(prefix)("AUTH_LOGIN");
@@ -33,9 +37,14 @@ export const authRegister = (data) => dispatch => {
 }
 
 export const AUTH_LOGOUT = getActionType(prefix)("AUTH_LOGOUT");
-export const authLogout = () => ({
-    type: AUTH_LOGOUT
-})
+export const authLogout = () => dispatch => {
+    dispatch({
+        type: AUTH_LOGOUT
+    })
+    dispatch({
+        type: CLEAN_CART
+    })
+}
 
 
 export const GET_PROFILE = getActionType(prefix)("GET_PROFILE");

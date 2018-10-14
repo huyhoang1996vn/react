@@ -9,6 +9,7 @@ export const GET_CART = getActionType(prefix)("GET_CART");
 export const ADD_CART = getActionType(prefix)("ADD_CART");
 export const UPDATE_CART = getActionType(prefix)("UPDATE_CART");
 export const DELETE_CART = getActionType(prefix)("DELETE_CART");
+export const CLEAN_CART = getActionType(prefix)("CLEAN_CART");
 
 
 export const getCart = () => (dispatch, getState) => {

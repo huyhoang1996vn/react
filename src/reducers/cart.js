@@ -2,7 +2,8 @@ import {
     GET_CART,
     ADD_CART,
     UPDATE_CART,
-    DELETE_CART
+    DELETE_CART,
+    CLEAN_CART,
 } from "actions/cart";
 
 
@@ -47,6 +48,10 @@ export default function (state = defaultState, action) {
                 ...state,
                 items: newItems
             }
+        }
+
+        case CLEAN_CART: {
+            return defaultState;
         }
         default: return state;
     }
