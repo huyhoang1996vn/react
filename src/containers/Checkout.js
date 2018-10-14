@@ -1,7 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import { _url } from "config/utils";
+import { Link, withRouter } from "react-router-dom";
 
+// actions 
+import{
+    getCart
+} from "actions/cart"
 
 class Checkout extends React.Component {
     constructor(props) {
@@ -13,7 +19,13 @@ class Checkout extends React.Component {
         this.props.history.push("/checkout-success");
     }
 
+    // componentDidMount(){
+    //     console.log(this.props.cart.items);
+    // }
+
     render() {
+        const { cart } = this.props;
+        const totalCartAmount = cart.items.reduce((cur, next) => cur + +next.quanlity * +next.product.price, 0);
         return (
             <div className="Checkout">
                 <section className="section-padding bg-dark inner-header klb-breadcrumb">
@@ -76,22 +88,25 @@ class Checkout extends React.Component {
                                                     <th className="product-total">Total</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr className="cart_item">
-                                                    <td className="product-name">
-                                                        Washed Sugar Snap Peas&nbsp;							 <strong className="product-quantity">× 1</strong>													</td>
-                                                    <td className="product-total">
-                                                        <span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>4.00</span>						</td>
-                                                </tr>
+                                            <tbody>{
+                                                cart.items.map((cartItem, index) => (
+                                                    <tr className="cart_item">
+                                                        <td className="product-name">
+                                                            <Link to={`/product/${cartItem.product.id}`}>{cartItem.product.name}</Link>&nbsp; <strong className="product-quantity">x{cartItem.quanlity}</strong>													</td>
+                                                        <td className="product-total">
+                                                            <span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{cartItem.product.price * cartItem.quanlity}</span>						</td>
+                                                    </tr>
+                                                ))
+                                            }
                                             </tbody>
                                             <tfoot>
                                                 <tr className="cart-subtotal">
                                                     <th>Subtotal</th>
-                                                    <td><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>4.00</span></td>
+                                                    <td><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{totalCartAmount}</span></td>
                                                 </tr>
                                                 <tr className="order-total">
                                                     <th>Total</th>
-                                                    <td><strong><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>4.00</span></strong> </td>
+                                                    <td><strong><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{totalCartAmount}</span></strong> </td>
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -120,9 +135,22 @@ class Checkout extends React.Component {
                         </div>
                     </div>
                 </section>
-            </div>
+            </div>    
         )
     }
 }
 
-export default Checkout;
+const mapStateToProps = (state) => {
+    return {
+        cart: state.cart
+    }
+}
+
+const mapDispatchToProps = dispatch => {  
+    dispatch(getCart())
+    return {
+        dispatch
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
