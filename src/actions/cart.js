@@ -49,6 +49,8 @@ export const addNewItemToCart = (product) => (dispatch, getState) => {
 }
 
 export const updateItemInCart = (item) => (dispatch, getState) => {
+
+    const productInCart = getState().cart.items.find(pr => pr.product.id === item.product.id);
     if (getState().session.userAuth.token) {
         return dispatch(postCart({
             product_id: item.product.id,
@@ -56,16 +58,22 @@ export const updateItemInCart = (item) => (dispatch, getState) => {
         }))
     } else {
         if (item.quanlity == 0) {
-            console.log(item);
             dispatch({
                 type: DELETE_CART,
                 product_id: item.product.id,
             })
         } else {
-            dispatch({
-                type: UPDATE_CART,
-                item,
-            })
+            if (productInCart) {
+                dispatch({
+                    type: UPDATE_CART,
+                    item,
+                })
+            } else {
+                dispatch({
+                    type: ADD_CART,
+                    item,
+                })
+            }
         }
 
     }

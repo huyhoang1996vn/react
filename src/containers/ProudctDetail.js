@@ -50,7 +50,7 @@ class ProudctDetail extends React.Component {
 			num_add_to_cart: productInCart.quanlity || 1,
 		})
 	}
-	
+
 
 	getProduct = (id) => {
 		this.props.dispatch(getProductById(id));
@@ -72,6 +72,10 @@ class ProudctDetail extends React.Component {
 
 	onSubmitAddToCart = e => {
 		e.preventDefault();
+		// console.log({
+		// 	product: this.props.detailProduct.product,
+		// 	quanlity: this.state.num_add_to_cart
+		// });
 		this.props.updateItemInCart({
 			product: this.props.detailProduct.product,
 			quanlity: this.state.num_add_to_cart
