@@ -90,7 +90,7 @@ class Checkout extends React.Component {
                                             </thead>
                                             <tbody>{
                                                 cart.items.map((cartItem, index) => (
-                                                    <tr className="cart_item">
+                                                    <tr key={index} className="cart_item">
                                                         <td className="product-name">
                                                             <Link to={`/product/${cartItem.product.id}`}>{cartItem.product.name}</Link>&nbsp; <strong className="product-quantity">x{cartItem.quanlity}</strong>													</td>
                                                         <td className="product-total">
