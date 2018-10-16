@@ -15,10 +15,12 @@ export const CLEAN_CART = getActionType(prefix)("CLEAN_CART");
 export const getCart = () => (dispatch, getState) => {
     if (getState().session.userAuth.token) {
         return request().get("/cart/").then(res => {
-            dispatch({
-                type: GET_CART,
-                items: res.data
-            })
+            if (res.data.length > 0 && res.data.slice(-1)[0].total_price) {
+                dispatch({
+                    type: GET_CART,
+                    items: res.data
+                })
+            }
         })
     }
 }
@@ -83,8 +85,6 @@ export const updateItemInCart = (item) => (dispatch, getState) => {
 
 export const postCart = (data) => (dispatch) => {
     return request().post("/cart/modify/", data).then(res => {
-        if (res.data.message === "success") {
-            return dispatch(getCart());
-        }
+        return dispatch(getCart());
     })
 }

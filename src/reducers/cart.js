@@ -9,6 +9,7 @@ import {
 
 const defaultState = {
     items: [],
+    total_price: 0,
 }
 
 export default function (state = defaultState, action) {
@@ -16,7 +17,8 @@ export default function (state = defaultState, action) {
         case GET_CART: {
             return {
                 ...state,
-                items: action.items
+                items: action.items.slice(0, -1),
+                total_price: action.items.slice(-1)[0].total_price,
             }
         }
 
