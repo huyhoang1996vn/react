@@ -8,8 +8,14 @@ import {
     Dashboard,
     Users,
     UserDetail,
-    AddUser
+    AddUser,
+    Categories
 } from "./index";
+
+import {
+    AddCategory,
+    EditCategory
+} from "./categories";
 
 const menuAdmin = [
     {
@@ -20,12 +26,34 @@ const menuAdmin = [
         icon: <Icon type="dashboard" theme="outlined" />
     },
     {
-        id: 1,
+        id: 2,
         key: "users",
         name: "Users",
         path: "/admin/users",
         icon: <Icon type="user" theme="outlined" />
+    },
+    {
+        id: 3,
+        key: "shops",
+        name: "Shops",
+        path: "/admin/shops",
+        icon: <Icon type="shop" theme="outlined" />
+    },
+    {
+        id: 4,
+        key: "statistic",
+        name: "Statistic",
+        path: "/admin/statistic",
+        icon: <Icon type="area-chart" theme="outlined" />
+    },
+    {
+        id: 5,
+        key: "categories",
+        name: "Categories",
+        path: "/admin/categories",
+        icon: <Icon type="ordered-list" theme="outlined" />
     }
+    
 ]
 
 const findMenu = (key, value) => (data) => data.find(item => item[key] == value) || {}
@@ -57,6 +85,9 @@ class Admin extends React.Component {
                         <Route exact path="/admin/users" component={Users} />
                         <Route exact path="/admin/user/add" component={AddUser} />
                         <Route exact path="/admin/user/:user_id" component={UserDetail} />
+                        <Route exact path="/admin/categories" component={Categories} />
+                        <Route exact path="/admin/categories/add" component={AddCategory} />
+                        <Route exact path="/admin/categories/edit/:category_id" component={EditCategory} />
                     </Switch>
                 </DashContainer>
             </div>
