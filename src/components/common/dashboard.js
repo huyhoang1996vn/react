@@ -33,7 +33,7 @@ class Dashboard extends React.Component {
                         </div>
                         <Menu onClick={this.props.onClickMenuItem} theme="dark" mode="inline" defaultSelectedKeys={[ this.props.menuSelected ]}>
                             {
-                                this.props.menu.map(item => (
+                                this.props.menu.filter(item => !item.hidden).map(item => (
                                     <Menu.Item key={item.key}>
                                         {item.icon}
                                         <span>{item.name}</span>

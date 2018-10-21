@@ -54,22 +54,22 @@ class Header extends React.Component {
         e.preventDefault();
         this.props.dispatch(updateItemInCart({
             ...item,
-            quanlity: 0
+            quantity: 0
         }))
     }
 
     onChangeQuantityItemCart = (item) => e => {
-        if (e.target.value && Math.abs(item.quanlity - e.target.value) == 1 ) {
+        if (e.target.value && Math.abs(item.quantity - e.target.value) == 1 ) {
             this.props.dispatch(updateItemInCart({
                 ...item,
-                quanlity: e.target.value
+                quantity: e.target.value
             })) 
         }
     }
 
     render() {
         const { cart } = this.props;
-        const totalCartAmount = cart.items.reduce((cur, next) => cur + +next.quanlity * +next.product.price, 0);
+        const totalCartAmount = cart.items.reduce((cur, next) => cur + +next.quantity * +next.product.price, 0);
         return (
             <div className="Header">
                 <div className="navbar-top pt-2 pb-2">
@@ -200,7 +200,7 @@ class Header extends React.Component {
                                     <h6><strong><span className="mdi mdi-approval" /> </strong> - 1 kg</h6>
                                     <p className="offer-price mb-0"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>5.00</span></del> <ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{cartItem.product.price}</span></ins></p>
                                     <div>
-                                        <input onChange={this.onChangeQuantityItemCart(cartItem)} type="number" value={cartItem.quanlity}/>
+                                        <input onChange={this.onChangeQuantityItemCart(cartItem)} type="number" value={cartItem.quantity}/>
                                     </div>
                                 </div>
                             ))

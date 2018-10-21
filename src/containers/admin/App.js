@@ -22,11 +22,19 @@ import {
 
 const menuAdmin = [
     {
+        id: 0,
+        key: "dashboard",
+        name: "Dashboard",
+        path: "/admin",
+        hidden: true,
+        icon: <Icon type="dashboard" theme="outlined" />
+    },
+    {
         id: 1,
         key: "dashboard",
         name: "Dashboard",
         path: "/admin/dashboard",
-        icon: <Icon type="dashboard" theme="outlined" />
+        icon: <Icon type="dashboard" theme="outlined" />,
     },
     {
         id: 2,
@@ -84,6 +92,7 @@ class Admin extends React.Component {
                     onClickLogout={this.onClickLogout}
                 >
                     <Switch>
+                        <Route exact path="/admin" component={Dashboard} />
                         <Route exact path="/admin/dashboard" component={Dashboard} />
                         <Route exact path="/admin/users" component={Users} />
                         <Route exact path="/admin/user/add" component={AddUser} />

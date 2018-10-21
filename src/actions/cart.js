@@ -15,7 +15,7 @@ export const CLEAN_CART = getActionType(prefix)("CLEAN_CART");
 export const getCart = () => (dispatch, getState) => {
     if (getState().session.userAuth.token) {
         return request().get("/cart/").then(res => {
-            if (res.data.length > 0 && res.data.slice(-1)[0].total_price) {
+            if (res.data.length > 0) {
                 dispatch({
                     type: GET_CART,
                     items: res.data
@@ -30,12 +30,12 @@ export const addNewItemToCart = (product) => (dispatch, getState) => {
     if (getState().session.userAuth.token) {
         return dispatch(postCart({
             product_id: product.id,
-            quanlity: productInCart ? +productInCart.quanlity + 1 : 1
+            quantity: productInCart ? +productInCart.quantity + 1 : 1
         }))
     } else {
         const item = {
             product,
-            quanlity: productInCart ? +productInCart.quanlity + 1 : 1
+            quantity: productInCart ? +productInCart.quantity + 1 : 1
         }
         if (productInCart) {
             dispatch({
@@ -57,10 +57,10 @@ export const updateItemInCart = (item) => (dispatch, getState) => {
     if (getState().session.userAuth.token) {
         return dispatch(postCart({
             product_id: item.product.id,
-            quanlity: item.quanlity,
+            quantity: item.quantity,
         }))
     } else {
-        if (item.quanlity == 0) {
+        if (item.quantity == 0) {
             dispatch({
                 type: DELETE_CART,
                 product_id: item.product.id,

@@ -28,7 +28,7 @@ class Checkout extends React.Component {
      * 
      */
     const { cart } = this.props;
-    const totalCartAmount = cart.items.reduce((cur, next) => cur + +next.quanlity * +next.product.price, 0);
+    const totalCartAmount = cart.items.reduce((cur, next) => cur + +next.quantity * +next.product.price, 0);
 
     const bill = {
       "product": {
@@ -39,7 +39,7 @@ class Checkout extends React.Component {
               ...cur[next.product.stores[0]] ? cur[next.product.stores[0]] : [],
               {
                 product_id: next.product.id,
-                quantity: next.quanlity,
+                quantity: next.quantity,
               }
             ]
           }
@@ -73,7 +73,7 @@ class Checkout extends React.Component {
 
   render() {
     const { cart } = this.props;
-    const totalCartAmount = cart.items.reduce((cur, next) => cur + +next.quanlity * +next.product.price, 0);
+    const totalCartAmount = cart.items.reduce((cur, next) => cur + +next.quantity * +next.product.price, 0);
     return (
       <div className="Checkout">
         <section className="section-padding bg-dark inner-header klb-breadcrumb">
@@ -153,9 +153,9 @@ class Checkout extends React.Component {
                         cart.items.map((cartItem, index) => (
                           <tr key={index} className="cart_item">
                             <td className="product-name">
-                              <Link to={`/product/${cartItem.product.id}`}>{cartItem.product.name}</Link>&nbsp; <strong className="product-quantity">x{cartItem.quanlity}</strong>													</td>
+                              <Link to={`/product/${cartItem.product.id}`}>{cartItem.product.name}</Link>&nbsp; <strong className="product-quantity">x{cartItem.quantity}</strong>													</td>
                             <td className="product-total">
-                              <span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{cartItem.product.price * cartItem.quanlity}</span>						</td>
+                              <span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{cartItem.product.price * cartItem.quantity}</span>						</td>
                           </tr>
                         ))
                       }

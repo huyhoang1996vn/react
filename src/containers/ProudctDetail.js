@@ -47,7 +47,7 @@ class ProudctDetail extends React.Component {
 			this.getProduct(props.match.params.product_id);
 		const productInCart = props.cart.items.find(it => it.product.id == props.detailProduct.product.id) || {};
 		this.setState({
-			num_add_to_cart: productInCart.quanlity || 1,
+			num_add_to_cart: productInCart.quantity || 1,
 		})
 	}
 
@@ -74,11 +74,11 @@ class ProudctDetail extends React.Component {
 		e.preventDefault();
 		// console.log({
 		// 	product: this.props.detailProduct.product,
-		// 	quanlity: this.state.num_add_to_cart
+		// 	quantity: this.state.num_add_to_cart
 		// });
 		this.props.updateItemInCart({
 			product: this.props.detailProduct.product,
-			quanlity: this.state.num_add_to_cart
+			quantity: this.state.num_add_to_cart
 		})
 	}
 
