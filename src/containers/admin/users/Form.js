@@ -1,35 +1,11 @@
 import React from "react";
-import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
+import { Form, Input, Tooltip, Icon, Select, Button } from 'antd';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-const AutoCompleteOption = AutoComplete.Option;
 
-const residences = [{
-    value: 'zhejiang',
-    label: 'Zhejiang',
-    children: [{
-        value: 'hangzhou',
-        label: 'Hangzhou',
-        children: [{
-            value: 'xihu',
-            label: 'West Lake',
-        }],
-    }],
-}, {
-    value: 'jiangsu',
-    label: 'Jiangsu',
-    children: [{
-        value: 'nanjing',
-        label: 'Nanjing',
-        children: [{
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
-        }],
-    }],
-}];
 
-class RegistrationForm extends React.Component {
+class UserForm extends React.Component {
     state = {
         confirmDirty: false,
         autoCompleteResult: [],
@@ -39,7 +15,7 @@ class RegistrationForm extends React.Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                this.props.onSubmitForm(values);
             }
         });
     }
@@ -66,39 +42,26 @@ class RegistrationForm extends React.Component {
         callback();
     }
 
-    handleWebsiteChange = (value) => {
-        let autoCompleteResult;
-        if (!value) {
-            autoCompleteResult = [];
-        } else {
-            autoCompleteResult = ['.com', '.org', '.net'].map(domain => `${value}${domain}`);
-        }
-        this.setState({ autoCompleteResult });
-    }
-
     render() {
         const { getFieldDecorator } = this.props.form;
-        const { autoCompleteResult } = this.state;
 
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
-                sm: { span: 8 },
+                sm: { span: 6 },
             },
             wrapperCol: {
                 xs: { span: 24 },
-                sm: { span: 16 },
+                sm: { span: 12 },
             },
         };
         const tailFormItemLayout = {
             wrapperCol: {
                 xs: {
-                    span: 24,
-                    offset: 0,
+                    span: 6,
                 },
                 sm: {
-                    span: 16,
-                    offset: 8,
+                    offset: 6,
                 },
             },
         };
@@ -110,10 +73,6 @@ class RegistrationForm extends React.Component {
                 <Option value="87">+87</Option>
             </Select>
         );
-
-        const websiteOptions = autoCompleteResult.map(website => (
-            <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
-        ));
 
         return (
             <Form onSubmit={this.handleSubmit}>
@@ -170,8 +129,8 @@ class RegistrationForm extends React.Component {
                         </span>
                     )}
                 >
-                    {getFieldDecorator('nickname', {
-                        rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+                    {getFieldDecorator('fullname', {
+                        rules: [{ required: true, message: 'Please input your fullname!', whitespace: true }],
                     })(
                         <Input />
                     )}
@@ -208,23 +167,19 @@ class RegistrationForm extends React.Component {
     }
 }
 
-const WrappedRegistrationForm = Form.create()(RegistrationForm);
-
-class UserDetail extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <div className="AddUser" >
-                <h3>Add new user</h3>
-                <div style={{ padding: "15px 300px" }}>
-                    <WrappedRegistrationForm />
-                </div>
-            </div>
-        )
-    }
+const getValue = props => field => {
+    return Form.createFormField({
+        value: props.data ? props.data[field] : "",
+    })
 }
 
-export default UserDetail;
+export default Form.create({
+    mapPropsToFields(props) {
+        return {
+            email: getValue(props)("email"),
+            fullname: getValue(props)("fullname"),
+            address: getValue(props)("address"),
+            phone: getValue(props)("phone"),
+        };
+    }
+})(UserForm);

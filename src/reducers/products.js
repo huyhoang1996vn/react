@@ -21,6 +21,7 @@ const defaultState = {
     searchedProducts: [],
 }
 
+const isActiveCategory = t => t.is_active;
 
 export default function (state = defaultState, action) {
     switch (action.type) {
@@ -33,7 +34,7 @@ export default function (state = defaultState, action) {
         case GET_CATEGORIES: {
             return {
                 ...state,
-                categories: action.data
+                categories: action.data.filter(isActiveCategory)
             }
         }
 

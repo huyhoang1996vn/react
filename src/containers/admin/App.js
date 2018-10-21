@@ -7,8 +7,6 @@ import { Dashboard as DashContainer } from "components/common";
 import {
     Dashboard,
     Users,
-    UserDetail,
-    AddUser,
     Categories
 } from "./index";
 
@@ -16,6 +14,11 @@ import {
     AddCategory,
     EditCategory
 } from "./categories";
+
+import {
+    AddUser,
+    UserDetail
+} from "./users";
 
 const menuAdmin = [
     {

@@ -1,4 +1,5 @@
 import request from "api/request";
+import axios from "axios";
 import {
     getActionType
 } from "actions/utils";
