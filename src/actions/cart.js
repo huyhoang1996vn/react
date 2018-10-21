@@ -93,6 +93,6 @@ export const postCart = (data) => (dispatch) => {
 export const orderProducts = (data) => (dispatch) => {
     return request().post("/order/create/", data)
     .then(res => {
-        console.log(res);
+        dispatch(getCart());
     })
 }
