@@ -12,7 +12,7 @@ const prefix = "action.auth";
 export const AUTH_LOGIN = getActionType(prefix)("AUTH_LOGIN");
 export const authLogin = (data) => dispatch => {
     return request().post("/login/", {
-        username: data.email,
+        username: data.username || data.email,
         password: data.password,
     }).then(res => {
         dispatch({

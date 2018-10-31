@@ -20,24 +20,10 @@ const menuAdmin = [
         icon: <Icon type="dashboard" theme="outlined" />,
     },
     {
-        id: 2,
-        key: "products",
-        name: "Products",
-        path: "/owners/products",
-        icon: <Icon type="save" theme="outlined" />
-    },
-    {
-        id: 3,
-        key: "orders",
-        name: "Orders",
-        path: "/owners/orders",
-        icon: <Icon type="shopping-cart" theme="outlined" />
-    },
-    {
         id: 4,
         key: "store",
-        name: "store",
-        path: "/owners/store",
+        name: "storers",
+        path: "/owners/storers",
         icon: <Icon type="appstore" theme="outlined" />
     },
     {
@@ -54,7 +40,6 @@ const menuAdmin = [
         path: "/owners/remove",
         icon: <Icon type="delete" theme="outlined" />
     }
-
 ]
 
 const findMenu = (key, value) => (data) => data.find(item => item[key] == value) || {}

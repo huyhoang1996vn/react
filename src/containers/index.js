@@ -1,23 +1,11 @@
-import App from "./App";
-import Home from "./Home";
-import Account from "./Account";
-import ProudctDetail from "./ProudctDetail";
-import ClientApp from "./ClientApp";
-import Checkout from "./Checkout";
-import CheckoutSuccess from "./CheckoutSuccess";
-import Search from "./Search";
-import AboutUs from "./AboutUs";
-import CategoryProducts from "./CategoryProducts";
-
-export {
-    App,
-    Home,
-    Account,
-    ProudctDetail,
-    ClientApp,
-    Checkout,
-    CheckoutSuccess,
-    Search,
-    AboutUs,
-    CategoryProducts
-}
+export { default as App } from "./App";
+export { default as Home } from "./Home";
+export { default as Account } from "./Account";
+export { default as ProudctDetail } from "./ProudctDetail";
+export { default as ClientApp } from "./ClientApp";
+export { default as Checkout } from "./Checkout";
+export { default as CheckoutSuccess } from "./CheckoutSuccess";
+export { default as Search } from "./Search";
+export { default as AboutUs } from "./AboutUs";
+export { default as CategoryProducts } from "./CategoryProducts";
+export { default as SystemLogin } from "./SystemLogin";

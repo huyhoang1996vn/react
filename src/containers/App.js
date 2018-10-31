@@ -1,27 +1,31 @@
 import React, { Component } from 'react';
 import { Switch, Route } from "react-router-dom";
 
-import AdminApp from "containers/admin/App"; 
-import Owners from "containers/owners/App"; 
+import AdminApp from "containers/admin/App";
+import Owners from "containers/owners/App";
+import Storers from "containers/storers/App";
 
 
 
 // Components
-import {
-    Header,
-    Footer,
-} from "components/layouts"
+import { AuthRoute } from "components";
 
 import {
     Loading
 } from "components/common";
 
 import {
-    ClientApp
+    ClientApp,
+    SystemLogin
 } from "./index";
 
+// Midleware
+import { AuthMiddleware } from "middlewares"
+
+
 function NotFound() {
-    return(
+
+    return (
         <div>
             <h1>404 - NOT FOUND</h1>
         </div>
@@ -38,10 +42,24 @@ class App extends Component {
         return (
             <div className="Root-App">
                 <Switch>
-                    <Route path="/admin" component={AdminApp} />
-                    <Route path="/owners" component={Owners} />
-                    <Route path="/not-found" component={NotFound} />
+                    <AuthRoute
+                        path="/admin"
+                        middlewares={[AuthMiddleware.Admin]}
+                        component={AdminApp}
+                    />
+                    <AuthRoute
+                        path="/owners"
+                        middlewares={[AuthMiddleware.Owner]}
+                        component={Owners}
+                    />
+                    <AuthRoute
+                        path="/storers"
+                        middlewares={[AuthMiddleware.Storer]}
+                        component={Storers}
+                    />
 
+                    <Route path="/login" component={SystemLogin} />
+                    <Route path="/not-found" component={NotFound} />
                     <Route path="/" component={ClientApp} />
                 </Switch>
                 <Loading />
