@@ -62,8 +62,8 @@ const WrappedNormalLoginForm = Form.create()(NormalLoginForm);
 const getUrlRediect = (props) => {
     switch (props.userAuth && props.userAuth.data && props.userAuth.data.role) {
         case "admin": return "/admin" 
-        case "owners": return "/owners" 
-        case "storers": return "/storers"
+        case "owner": return "/owners" 
+        case "store": return "/storers"
         default: return null 
     }
 }
@@ -76,7 +76,7 @@ class SystemLogin extends React.Component {
         }
     }
 
-    static getDerivedStateFromProps(state, props) {
+    static getDerivedStateFromProps(props, state) {
         return {
             ...state,
             urlRedirect: getUrlRediect(props)
