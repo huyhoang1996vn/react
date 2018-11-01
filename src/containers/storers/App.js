@@ -1,14 +1,17 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 import { Icon } from 'antd';
 import { Dashboard as DashContainer } from "components/common";
+
+import { withDashboardHOC } from "components/HOC";
 
 const menuAdmin = [
     {
         id: 0,
         key: "dashboard",
         name: "Dashboard",
-        path: "/owners",
+        path: "/storers",
         hidden: true,
         icon: <Icon type="dashboard" theme="outlined" />
     },
@@ -16,42 +19,42 @@ const menuAdmin = [
         id: 1,
         key: "dashboard",
         name: "Dashboard",
-        path: "/owners/dashboard",
+        path: "/storers/dashboard",
         icon: <Icon type="dashboard" theme="outlined" />,
     },
     {
         id: 2,
         key: "products",
         name: "Products",
-        path: "/owners/products",
+        path: "/storers/products",
         icon: <Icon type="save" theme="outlined" />
     },
     {
         id: 3,
         key: "orders",
         name: "Orders",
-        path: "/owners/orders",
+        path: "/storers/orders",
         icon: <Icon type="shopping-cart" theme="outlined" />
     },
     {
         id: 4,
         key: "store",
         name: "store",
-        path: "/owners/store",
+        path: "/storers/store",
         icon: <Icon type="appstore" theme="outlined" />
     },
     {
         id: 5,
         key: "information",
         name: "Information",
-        path: "/owners/information",
+        path: "/storers/information",
         icon: <Icon type="radius-bottomleft" theme="outlined" />
     },
     {
         id: 5,
         key: "remove",
         name: "Remove",
-        path: "/owners/remove",
+        path: "/storers/remove",
         icon: <Icon type="delete" theme="outlined" />
     }
 ]
@@ -68,10 +71,6 @@ class Storers extends React.Component {
         this.props.history.push(findMenu('key', item.key)(menuAdmin).path)
     }
 
-    onClickLogout = () => {
-        alert("onClickLogout");
-    }
-
     render() {
         return (
             <div className="Owners">
@@ -79,7 +78,7 @@ class Storers extends React.Component {
                     onClickMenuItem={this.onClickMenuItem}
                     menu={menuAdmin}
                     menuSelected={findMenu('path', this.props.history.location.pathname)(menuAdmin).key}
-                    onClickLogout={this.onClickLogout}
+                    onClickLogout={this.props.onClickLogout}
                 >
                     <Switch>
                     </Switch>
@@ -89,4 +88,4 @@ class Storers extends React.Component {
     }
 }
 
-export default Storers;
+export default withDashboardHOC(Storers);

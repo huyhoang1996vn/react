@@ -27,7 +27,7 @@ const Storer = (userAuth) => new Promise((rs, rj) => {
     setTimeout(() => {
         // we will call api to check on server correct role
         if (userAuth.data.role !== "store") {
-            rs(URL_REDIRECT_STORER);
+            rj(URL_REDIRECT_STORER);
         } rs(true);
     }, 1000);
 })
