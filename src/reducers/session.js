@@ -8,6 +8,10 @@ const defaultState = {
     userAuth: {
         data: {},
         token: ""
+    },
+    managerAuth: {
+        data: {},
+        token: ""
     }
 }
 

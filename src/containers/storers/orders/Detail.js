@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { message } from "antd";
 
 // components
 import { FormOrder } from "./index";
@@ -7,7 +8,8 @@ import { FormOrder } from "./index";
 
 // actions 
 import {
-    getOrder
+    getOrder,
+    editOrder
 } from "actions/storers";
 
 
@@ -33,10 +35,10 @@ class OrderDetail extends React.Component {
         }
     }
 
-    static getDerivedStateFromProps(props, state) {
-        return {
-            order: props.order
-        }
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            order: nextProps.order
+        })   
     }
 
     componentDidMount() {
@@ -54,7 +56,21 @@ class OrderDetail extends React.Component {
     }
 
     onClickStatus = (curData, status) => () => {
-        console.log(curData, status);
+        this.setState({
+            order: {
+                ...this.state.order,
+                [curData.key]: status
+            }
+        })
+    }
+
+    handleSubmitForm = async (data) => {
+        try {
+            await this.props.dispatch(editOrder({ ...this.state.order, ...data }));
+            message.success("Edit successful!");
+        } catch(er) {
+            message.error("Edit failed!");
+        }
     }
 
     render() {
@@ -62,8 +78,10 @@ class OrderDetail extends React.Component {
             <div className="OrderDetail">
                 OrderDetail
                 <FormOrder
+                    onSubmitForm={this.handleSubmitForm}
                     data={this.state.order}
                     onClickStatus={this.onClickStatus}
+                    isChanged={JSON.stringify(this.props.order) !== JSON.stringify(this.state.order)}
                 />
             </div>
         )

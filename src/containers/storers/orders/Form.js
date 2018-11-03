@@ -19,6 +19,13 @@ const formType = {
     status_order: "tag",
 }
 
+const STATUS = {
+    status_payment: ["pending", "completed", "payment_error"],
+    status_order: ["pending", "accepted", "shipping", "completed", "canceled"]
+}
+
+
+
 // const STATUS_COLOR = {
 //     pending: "blue",
 //     accepted: "blue",
@@ -39,24 +46,17 @@ class FormOrder extends React.Component {
     formatStatus = ({ key, status }) => {
         return (
             <div>
-                <span><Tag 
-                    onClick={this.props.onClickStatus({key, status}, "pending")} 
-                    color={`${status == "pending" ? "green" : "blue"}`}
-                    >Pending</Tag>
-                </span>
-                <span><Tag 
-                    onClick={this.props.onClickStatus({key, status}, "accepted")} 
-                    color={`${status == "accepted" ? "green" : "blue"}`}
-                    >Accepted</Tag>
-                </span>
-                <span><Tag 
-                    onClick={this.props.onClickStatus({key, status}, "completed")} 
-                    color={`${status == "completed" ? "green" : "blue"}`}
-                    >Completed</Tag>
-                </span>
-
-                {/* <span><Tag color={`${status == "accepted" ? "green" : "blue"}`}>Accepted</Tag></span>
-                <span><Tag color={`${status == "completed" ? "green" : "blue"}`}>Completed</Tag></span> */}
+                {
+                    STATUS[key].map((status_item) => {
+                        return (
+                            <span key={status_item}><Tag
+                                onClick={this.props.onClickStatus({ key, status }, status_item)}
+                                color={`${status == status_item ? "green" : "blue"}`}
+                            >{_.upperFirst(status_item)}</Tag>
+                            </span>
+                        )
+                    })
+                }
             </div>
         )
     }
@@ -70,7 +70,6 @@ class FormOrder extends React.Component {
     }
 
     render() {
-        // console.log(this.props);
         const { getFieldDecorator } = this.props.form;
 
         const formItemLayout = {
@@ -105,9 +104,9 @@ class FormOrder extends React.Component {
                                 label={_.upperFirst(key)}
                             >
                                 {getFieldDecorator(key, {
-                                    rules: [{
-                                        required: true, message: 'Please input this feild!',
-                                    }],
+                                    // rules: [{
+                                    //     required: true, message: 'Please input this feild!',
+                                    // }],
                                 })(
                                     this.getFormField(formType[key], { key, status: this.props.data[key] })
                                 )}
@@ -117,7 +116,7 @@ class FormOrder extends React.Component {
                 }
 
                 <FormItem {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit">Save</Button>
+                    <Button disabled={!this.props.isChanged} type="primary" htmlType="submit">Save</Button>
                 </FormItem>
             </Form>
         );

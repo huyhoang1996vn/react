@@ -5,7 +5,8 @@ import { Table, Divider, Tag, Button } from 'antd';
 
 // actions 
 import {
-    getOrders
+    getOrders,
+    deleteOrder
 } from "actions/storers";
 
 
@@ -34,22 +35,12 @@ class OrdersTable extends React.Component {
             title: 'Status payment',
             key: 'status_payment',
             dataIndex: 'status_payment',
-            render: status => (
-                <span>
-                    { status == "pending" && <Tag color="blue">Pending</Tag> }
-                    { status == "accepted" && <Tag color="green">Accepted</Tag> }
-                </span>
-            ),
+            render: this.formatStatus
         }, {
             title: 'Status order',
             key: 'status_order',
             dataIndex: 'status_order',
-            render: status => (
-                <span>
-                    { status == "pending" && <Tag color="blue">Pending</Tag> }
-                    { status == "accepted" && <Tag color="green">Accepted</Tag> }
-                </span>
-            ),
+            render: this.formatStatus
         }, {
             title: 'Created',
             dataIndex: 'created',
@@ -62,7 +53,7 @@ class OrdersTable extends React.Component {
                 <span>
                     <a onClick={this.onClickAction("detail")(record)} href="javascript:;">View</a>
                     <Divider type="vertical" />
-                    <a onClick={this.onClickAction("activation")(record)} href="javascript:;">Delete</a>
+                    <a onClick={this.onClickAction("delete")(record)} href="javascript:;">Delete</a>
                 </span>
             ),
         }];
@@ -72,12 +63,15 @@ class OrdersTable extends React.Component {
         this.props.dispatch(getOrders());
     }
 
+    formatStatus = (st) => <Tag color="blue">{st}</Tag>
+
     onClickAction = (type) => record => () => {
         switch (type) {
             case "detail": {
                 return this.props.history.push(`/storers/order/${record.id}`);
             }
-            case "activation": {
+            case "delete": {
+                this.props.dispatch(deleteOrder(record.id))
                 return;
             }
             default: return;
