@@ -41,6 +41,9 @@ export const authLogout = () => dispatch => {
     dispatch({
         type: AUTH_LOGOUT
     })
+    dispatch({
+        type: CLEAN_CART
+    })
 }
 
 

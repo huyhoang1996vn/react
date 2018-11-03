@@ -3,7 +3,7 @@ import {
     getActionType
 } from "actions/utils";
 
-const prefix = "action.storers";
+const prefix = "action.storers.orders";
 
 export const GET_ORDERS = getActionType(prefix)("GET_ORDERS");
 export const GET_ORDER = getActionType(prefix)("GET_ORDER");

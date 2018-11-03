@@ -29,14 +29,13 @@ class Checkout extends React.Component {
      */
     const { cart } = this.props;
     const totalCartAmount = cart.items.reduce((cur, next) => cur + +next.quantity * +next.product.price, 0);
-
     const bill = {
       "product": {
         ...cart.items.reduce((cur, next) => {
           return {
             ...cur,
-            [next.product.stores[0]]: [
-              ...cur[next.product.stores[0]] ? cur[next.product.stores[0]] : [],
+            [next.product.stores[0] || next.product.stores]: [
+              ...cur[next.product.stores[0] || next.product.stores] ? cur[next.product.stores[0] || next.product.stores] : [],
               {
                 product_id: next.product.id,
                 quantity: next.quantity,
@@ -53,7 +52,6 @@ class Checkout extends React.Component {
     };
     if (bill.money && bill.phone && bill.first_name && bill.last_name && bill.address) {
       try {
-        // console.log(bill);
         await this.props.dispatch(orderProducts(bill));
         message.success("Order successful");
 

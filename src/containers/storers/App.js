@@ -4,12 +4,22 @@ import { Switch, Route } from "react-router-dom";
 import { Icon } from 'antd';
 import { Dashboard as DashContainer } from "components/common";
 
+
+// components
+
 import { withDashboardHOC } from "components/HOC";
 
 import {
     OrdersTable,
-    OrderDetail
+    OrderDetail,
 } from "containers/storers/orders";
+
+import {
+    ProductsTable,
+    ProductDetail
+} from "containers/storers/products";
+
+
 
 const menuAdmin = [
     {
@@ -41,20 +51,20 @@ const menuAdmin = [
         path: "/storers/orders",
         icon: <Icon type="shopping-cart" theme="outlined" />
     },
-    {
-        id: 4,
-        key: "information",
-        name: "Information",
-        path: "/storers/information",
-        icon: <Icon type="radius-bottomleft" theme="outlined" />
-    },
-    {
-        id: 5,
-        key: "remove",
-        name: "Remove",
-        path: "/storers/remove",
-        icon: <Icon type="delete" theme="outlined" />
-    }
+    // {
+    //     id: 4,
+    //     key: "information",
+    //     name: "Information",
+    //     path: "/storers/information",
+    //     icon: <Icon type="radius-bottomleft" theme="outlined" />
+    // },
+    // {
+    //     id: 5,
+    //     key: "remove",
+    //     name: "Remove",
+    //     path: "/storers/remove",
+    //     icon: <Icon type="delete" theme="outlined" />
+    // }
 ]
 
 const findMenu = (key, value) => (data) => data.find(item => item[key] == value) || {}
@@ -81,6 +91,8 @@ class Storers extends React.Component {
                     <Switch>
                         <Route exact path="/storers/orders" component={OrdersTable} />
                         <Route exact path="/storers/order/:order_id" component={OrderDetail} />
+                        <Route exact path="/storers/products" component={ProductsTable} />
+                        <Route exact path="/storers/product/:product_id" component={ProductDetail} />
                     </Switch>
                 </DashContainer>
             </div>

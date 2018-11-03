@@ -15,7 +15,7 @@ export const CLEAN_CART = getActionType(prefix)("CLEAN_CART");
 export const getCart = () => (dispatch, getState) => {
     if (getState().session.userAuth.token) {
         return request().get("/cart/").then(res => {
-            if (res.data.length > 0) {
+            if (res.data.length >= 0) {
                 dispatch({
                     type: GET_CART,
                     items: res.data

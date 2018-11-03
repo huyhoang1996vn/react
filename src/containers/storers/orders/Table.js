@@ -7,7 +7,7 @@ import { Table, Divider, Tag, Button } from 'antd';
 import {
     getOrders,
     deleteOrder
-} from "actions/storers";
+} from "actions/storers/orders";
 
 
 class OrdersTable extends React.Component {

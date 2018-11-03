@@ -3,7 +3,7 @@ import {
     GET_ORDER,
     EDIT_ORDER,
     DELETE_ORDER
-} from "actions/storers";
+} from "actions/storers/orders";
 
 const defaultState = {
     allOrders: [],
@@ -33,7 +33,6 @@ export default function(state = defaultState, action) {
         }
 
         case DELETE_ORDER: {
-            console.log(action);
             return {
                 ...state,
                 allOrders: state.allOrders.filter(order => order.id !== action.order_id)
