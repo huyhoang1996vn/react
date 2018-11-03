@@ -1,0 +1,138 @@
+import React from "react";
+import { Form, Input, Button, Tag } from 'antd';
+import _ from "lodash";
+
+const FormItem = Form.Item;
+
+const formType = {
+    store: "text",
+    money: "text",
+    products: "text",
+    created: "text",
+    modified: "text",
+    order_code: "text",
+    transaction_id: "text",
+    payer_id: "text",
+    customer: "text",
+    payment_method: "text",
+    status_payment: "tag",
+    status_order: "tag",
+}
+
+// const STATUS_COLOR = {
+//     pending: "blue",
+//     accepted: "blue",
+//     completed: "blue",
+// }
+
+class FormOrder extends React.Component {
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.form.validateFieldsAndScroll((err, values) => {
+            if (!err) {
+                this.props.onSubmitForm(values);
+            }
+        });
+    }
+
+    formatStatus = ({ key, status }) => {
+        return (
+            <div>
+                <span><Tag 
+                    onClick={this.props.onClickStatus({key, status}, "pending")} 
+                    color={`${status == "pending" ? "green" : "blue"}`}
+                    >Pending</Tag>
+                </span>
+                <span><Tag 
+                    onClick={this.props.onClickStatus({key, status}, "accepted")} 
+                    color={`${status == "accepted" ? "green" : "blue"}`}
+                    >Accepted</Tag>
+                </span>
+                <span><Tag 
+                    onClick={this.props.onClickStatus({key, status}, "completed")} 
+                    color={`${status == "completed" ? "green" : "blue"}`}
+                    >Completed</Tag>
+                </span>
+
+                {/* <span><Tag color={`${status == "accepted" ? "green" : "blue"}`}>Accepted</Tag></span>
+                <span><Tag color={`${status == "completed" ? "green" : "blue"}`}>Completed</Tag></span> */}
+            </div>
+        )
+    }
+
+    getFormField = (type, { key, status }) => {
+        switch (type) {
+            case "text": return <Input />
+            case "tag": return this.formatStatus({ key, status })
+            default: return <Input />
+        }
+    }
+
+    render() {
+        // console.log(this.props);
+        const { getFieldDecorator } = this.props.form;
+
+        const formItemLayout = {
+            labelCol: {
+                xs: { span: 24 },
+                sm: { span: 6 },
+            },
+            wrapperCol: {
+                xs: { span: 24 },
+                sm: { span: 12 },
+            },
+        };
+        const tailFormItemLayout = {
+            wrapperCol: {
+                xs: {
+                    span: 6,
+                },
+                sm: {
+                    offset: 6,
+                },
+            },
+        };
+
+        return (
+            <Form onSubmit={this.handleSubmit}>
+                {
+                    Object.keys(formType).map((key) => {
+                        return (
+                            <FormItem
+                                key={key}
+                                {...formItemLayout}
+                                label={_.upperFirst(key)}
+                            >
+                                {getFieldDecorator(key, {
+                                    rules: [{
+                                        required: true, message: 'Please input this feild!',
+                                    }],
+                                })(
+                                    this.getFormField(formType[key], { key, status: this.props.data[key] })
+                                )}
+                            </FormItem>
+                        )
+                    })
+                }
+
+                <FormItem {...tailFormItemLayout}>
+                    <Button type="primary" htmlType="submit">Save</Button>
+                </FormItem>
+            </Form>
+        );
+    }
+}
+
+export default Form.create({
+    mapPropsToFields(props) {
+        return Object.entries(formType).reduce((cur, [key, value]) => {
+            return {
+                ...cur,
+                [key]: Form.createFormField({
+                    value: props.data ? props.data[key] : "",
+                })
+            }
+        }, {});
+    }
+})(FormOrder);

@@ -6,6 +6,11 @@ import { Dashboard as DashContainer } from "components/common";
 
 import { withDashboardHOC } from "components/HOC";
 
+import {
+    OrdersTable,
+    OrderDetail
+} from "containers/storers/orders";
+
 const menuAdmin = [
     {
         id: 0,
@@ -38,13 +43,6 @@ const menuAdmin = [
     },
     {
         id: 4,
-        key: "store",
-        name: "store",
-        path: "/storers/store",
-        icon: <Icon type="appstore" theme="outlined" />
-    },
-    {
-        id: 5,
         key: "information",
         name: "Information",
         path: "/storers/information",
@@ -81,6 +79,8 @@ class Storers extends React.Component {
                     onClickLogout={this.props.onClickLogout}
                 >
                     <Switch>
+                        <Route exact path="/storers/orders" component={OrdersTable} />
+                        <Route exact path="/storers/order/:order_id" component={OrderDetail} />
                     </Switch>
                 </DashContainer>
             </div>
