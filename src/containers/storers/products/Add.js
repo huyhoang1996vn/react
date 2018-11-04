@@ -30,6 +30,7 @@ class AddProduct extends React.Component {
                 status: "still",
             }
         }
+
     }
 
     componentDidMount() {
@@ -57,19 +58,22 @@ class AddProduct extends React.Component {
         try {
             let form_data = new FormData();
             delete data.picture;
+            delete data.id_images_delete;
+
             Object.entries(data).forEach(([key, value]) => {
                 if (key === "image") {
                     value.forEach(image => {
-                        form_data.append(key, new Blob([image], {type: 'image/jpg'}), image.name);
+                        form_data.append(key, new Blob([image], {type: image.type}), image.name);
                     })
                 } else {
                     form_data.append(key, value);
                 }
             })
-            
+
             await this.props.dispatch(addProduct(form_data));
             message.success("Add successful!");
         } catch (er) {
+            console.log(er.message);
             message.error("Add failed!");
         }
     }

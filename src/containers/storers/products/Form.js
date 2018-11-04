@@ -53,11 +53,10 @@ class FormOrder extends React.Component {
             if (!err) {
                 this.props.onSubmitForm({
                     ...values,
-                    image: Object.values(this.state.product_pictures).filter(pic => pic.url === undefined),
+                    image: Object.values(this.state.product_pictures).filter(pic => pic.url === undefined).map(i => i.originFileObj),
                     id_images_delete: this.props.data.picture ? this.props.data.picture.filter(pic => {
                         return this.state.product_pictures[pic.id] === undefined
                     }).map(pic => pic.id) : []
-                    // image: Object.values(this.product_pictures),
                 });
             }
         });
