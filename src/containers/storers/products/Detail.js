@@ -71,7 +71,7 @@ class ProductDetail extends React.Component {
             Object.entries(data).forEach(([key, value]) => {
                 if (key === "image") {
                     value.forEach(image => {
-                        form_data.append(key, new Blob([image], { type: 'image/jpg' }), image.name);
+                        form_data.append(key, new Blob([image]), image.name);
                     })
                 } else {
                     form_data.append(key, value);
