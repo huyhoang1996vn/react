@@ -8,15 +8,14 @@ import { FormProduct } from "./index";
 
 // actions 
 import {
-    getProduct,
-    updateProduct
+    addProduct
 } from "actions/storers/products";
 import {
     getCategories
 } from "actions/categories";
 
 
-class ProductDetail extends React.Component {
+class AddProduct extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -27,16 +26,10 @@ class ProductDetail extends React.Component {
                 created: "",
                 price: "",
                 tax: "",
-                is_active: "",
-                status: "",
+                is_active: true,
+                status: "still",
             }
         }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            product: nextProps.product
-        })
     }
 
     componentDidMount() {
@@ -46,10 +39,6 @@ class ProductDetail extends React.Component {
     getData = async () => {
         try {
             await this.props.dispatch(getCategories());
-            await this.props.dispatch(getProduct(
-                this.props.match.params.product_id
-            ));
-
         } catch (er) {
             this.props.history.push("/storers/products");
         }
@@ -78,10 +67,7 @@ class ProductDetail extends React.Component {
                 }
             })
             
-            await this.props.dispatch(updateProduct(
-                this.state.product.id,
-                form_data
-            ));
+            await this.props.dispatch(addProduct(form_data));
             message.success("Edit successful!");
         } catch (er) {
             message.error("Edit failed!");
@@ -89,9 +75,6 @@ class ProductDetail extends React.Component {
     }
 
     handleChangeItem = (key, data) => {
-        // if (key == "picture") {
-        //     this.form_data.append(key, data);
-        // }
         this.setState({
             product: {
                 ...this.state.product,
@@ -102,16 +85,15 @@ class ProductDetail extends React.Component {
 
     render() {
         return (
-            <div className="ProductDetail">
-                Product Detail
+            <div className="AddProduct">
+                Add Product
                 <FormProduct
                     categories={this.props.categories}
                     onSubmitForm={this.handleSubmitForm}
                     data={this.state.product}
                     onClickStatus={this.onClickStatus}
                     onChangeItem={this.handleChangeItem}
-                    type="Edit"
-                // isChanged={JSON.stringify(this.props.order) !== JSON.stringify(this.state.order)}
+                    type="Add"
                 />
             </div>
         )
@@ -119,6 +101,5 @@ class ProductDetail extends React.Component {
 }
 
 export default connect((state) => ({
-    product: state.storers.products.productDetail,
     categories: state.categories
-}))(ProductDetail);
+}))(AddProduct);

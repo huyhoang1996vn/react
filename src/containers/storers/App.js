@@ -16,7 +16,8 @@ import {
 
 import {
     ProductsTable,
-    ProductDetail
+    ProductDetail,
+    AddProduct
 } from "containers/storers/products";
 
 
@@ -92,7 +93,8 @@ class Storers extends React.Component {
                         <Route exact path="/storers/orders" component={OrdersTable} />
                         <Route exact path="/storers/order/:order_id" component={OrderDetail} />
                         <Route exact path="/storers/products" component={ProductsTable} />
-                        <Route exact path="/storers/product/:product_id" component={ProductDetail} />
+                        <Route exact path="/storers/product/add" component={AddProduct} />
+                        <Route exact path="/storers/product/detail/:product_id" component={ProductDetail} />
                     </Switch>
                 </DashContainer>
             </div>

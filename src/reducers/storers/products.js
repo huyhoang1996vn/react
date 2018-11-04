@@ -1,6 +1,7 @@
 import {
     GET_PRODUCTS,
-    GET_PRODUCT
+    GET_PRODUCT,
+    DEL_PRODUCT
 } from "actions/storers/products";
 
 const defaultState = {
@@ -17,26 +18,18 @@ export default function(state = defaultState, action) {
             }
         }
         case GET_PRODUCT: {
-            console.log(action);
             return {
                 ...state,
                 productDetail: action.product
             }
         }
 
-        // case EDIT_ORDER: {
-        //     return {
-        //         ...state,
-        //         orderDetail: action.order
-        //     }
-        // }
-
-        // case DELETE_ORDER: {
-        //     return {
-        //         ...state,
-        //         allPRODUCTS: state.allPRODUCTS.filter(order => order.id !== action.order_id)
-        //     }
-        // }
+        case DEL_PRODUCT: {
+            return {
+                ...state,
+                allProducts: state.allProducts.filter(product => product.id !== action.product_id)
+            }
+        }
 
         default: return state;
     }

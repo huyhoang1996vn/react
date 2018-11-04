@@ -18,7 +18,7 @@ const debugError = er => {
     return Promise.reject(er);
 }
 
-const request = () => {
+const request = (headers = {}) => {
     const token = _store.getState().session.userAuth.token;
 
 
@@ -26,6 +26,7 @@ const request = () => {
         baseURL: API_URL,
         headers: {
             // Authorization: `Token ${token}`
+            ...headers,
         }
     }
     if (token) {

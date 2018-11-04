@@ -5,7 +5,8 @@ import { Table, Divider, Tag, Button } from 'antd';
 
 // actions 
 import {
-    getProducts
+    getProducts,
+    delProduct
 } from "actions/storers/products";
 
 
@@ -84,10 +85,10 @@ class ProductsTable extends React.Component {
     onClickAction = (type) => record => () => {
         switch (type) {
             case "detail": {
-                return this.props.history.push(`/storers/product/${record.id}`);
+                return this.props.history.push(`/storers/product/detail/${record.id}`);
             }
             case "delete": {
-                this.props.dispatch(getProducts(record.id))
+                this.props.dispatch(delProduct(record.id))
                 return;
             }
             default: return;
@@ -98,6 +99,15 @@ class ProductsTable extends React.Component {
         return (
             <div className="Users">
                 <h1>Products Table</h1>
+                <Button
+                    onClick={
+                        () => this.props.history.push("/storers/product/add")
+                    }
+                    type="primary"
+                    shape="circle"
+                    icon="plus"
+                    size="large"
+                />
                 <br />
                 <br />
                 <br />
