@@ -28,8 +28,8 @@ class FormOrder extends React.Component {
 
     state = { product_pictures: {} }
 
-    componentWillReceiveProps(nextProps, nextState) {
-        if (nextProps.data.picture && nextProps.data.picture.length !== this.props.data.picture.length) {
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.data.picture && JSON.stringify(nextProps.data.picture) !== JSON.stringify(this.props.data.picture)) {
             this.setState({
                 product_pictures: nextProps.data.picture.reduce((cur, pic) => {
                     return {

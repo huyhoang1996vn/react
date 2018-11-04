@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Table, Divider, Tag, Button } from 'antd';
+import { Table, Dropdown, Menu, Divider, Tag, Button, message, Icon } from 'antd';
 import moment from "moment";
 
 // actions 
@@ -9,11 +9,21 @@ import {
     delProduct
 } from "actions/storers/products";
 
+import {
+    getCategories
+} from "actions/categories";
+
 const formatDay = d => d.split("/").reverse().join("-")
 
 class ProductsTable extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            filter: {
+                category: {}
+            },
+            allProducts: [],
+        }
 
         this.columns = [{
             title: 'Image',
@@ -75,8 +85,19 @@ class ProductsTable extends React.Component {
         }];
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            allProducts: nextProps.allProducts
+        })
+    }
+
     componentDidMount() {
+        this.getData();
+    }
+
+    getData = () => {
         this.props.dispatch(getProducts());
+        this.props.dispatch(getCategories());
     }
 
     formatStatus = (st) => <Tag color="blue">{st}</Tag>
@@ -95,6 +116,25 @@ class ProductsTable extends React.Component {
     }
 
     render() {
+        const handleMenuClick = (e) => {
+            this.setState(prev => {
+                prev.filter.category = this.props.categories.find(ct => +ct.id === +e.key) || {}
+                prev.allProducts = this.props.allProducts.filter(prd => +prd.category[0] == +prev.filter.category.id);
+                return prev;
+            })
+        }
+
+        const menu = (
+            <Menu onClick={handleMenuClick}>
+            {
+                this.props.categories.map(ct => (
+                    <Menu.Item key={ct.id}>{ct.name}</Menu.Item>
+                ))
+            }
+            </Menu>
+        );
+
+
         return (
             <div className="Users">
                 <h1>Products Table</h1>
@@ -107,12 +147,17 @@ class ProductsTable extends React.Component {
                     icon="plus"
                     size="large"
                 />
+                <div style={{ textAlign: "right" }}>
+                    <Dropdown.Button trigger={['click']} overlay={menu}>
+                        {this.state.filter.category.name || "All"} 
+                    </Dropdown.Button>
+                </div>
                 <br />
                 <br />
                 <br />
                 <Table
                     columns={this.columns}
-                    dataSource={this.props.allProducts}
+                    dataSource={this.state.allProducts}
                 />
             </div>
         )
@@ -120,5 +165,6 @@ class ProductsTable extends React.Component {
 }
 
 export default connect((state) => ({
-    allProducts: state.storers.products.allProducts
+    allProducts: state.storers.products.allProducts,
+    categories: state.categories
 }))(ProductsTable);
