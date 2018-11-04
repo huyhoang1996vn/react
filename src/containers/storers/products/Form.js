@@ -1,6 +1,8 @@
 import React from "react";
-import { Form, Select, Input, Button, Tag, Upload, Icon } from 'antd';
+import { Avatar, Form, Select, Input, Button, Tag, Upload, Icon } from 'antd';
 import _ from "lodash";
+import uuid from "uuid";
+
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -24,15 +26,38 @@ const STATUS = {
 
 class FormOrder extends React.Component {
 
-    product_pictures = {};
+    state = { product_pictures: {} }
+
+    componentWillReceiveProps(nextProps, nextState) {
+        if (nextProps.data.picture && nextProps.data.picture.length !== this.props.data.picture.length) {
+            this.setState({
+                product_pictures: nextProps.data.picture.reduce((cur, pic) => {
+                    return {
+                        ...cur,
+                        [pic.id]: {
+                            uid: pic.id,
+                            name: pic.id,
+                            status: "done",
+                            url: pic.image
+                        }
+                    }
+                }, {})
+            })
+        }
+    }
 
     handleSubmit = (e) => {
         e.preventDefault();
+
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 this.props.onSubmitForm({
                     ...values,
-                    image: Object.values(this.product_pictures),
+                    image: Object.values(this.state.product_pictures).filter(pic => pic.url === undefined),
+                    id_images_delete: this.props.data.picture ? this.props.data.picture.filter(pic => {
+                        return this.state.product_pictures[pic.id] === undefined
+                    }).map(pic => pic.id) : []
+                    // image: Object.values(this.product_pictures),
                 });
             }
         });
@@ -71,24 +96,39 @@ class FormOrder extends React.Component {
         )
     }
 
+    handleChange = ({ fileList }) => {
+        this.setState({
+            product_pictures: fileList.reduce((cur, pic) => ({
+                ...cur,
+                [pic.uid]: pic
+            }), {})
+        })
+    }
+
     formatImgForm = ({ key, data }) => {
         return (
             <div>
-                <div>
-                    {
-                        data && data[0] ?
-                            <img src={data[0].image} alt="" /> : "No picture"
-                    }
-                </div>
                 <Upload
                     name="picture"
                     listType="picture-card"
+                    fileList={Object.values(this.state.product_pictures)}
+                    onChange={this.handleChange}
                     beforeUpload={(file) => {
-                        this.product_pictures[file.name] = file;
+                        // this.product_pictures.push({
+                        //     uid: uuid(),
+                        //     name: file.name,
+                        //     status: "done",
+                        //     // url: pic.image
+                        //     file
+                        // })
+                        // this.product_pictures[file.name] = file;
                         return false;
                     }}
                     onRemove={file => {
-                        delete this.product_pictures[file.name];
+                        this.setState(preSate => {
+                            delete preSate.product_pictures[file.name];
+                            return preSate;
+                        })
                     }}
                 >
                     <div>
@@ -146,7 +186,7 @@ class FormOrder extends React.Component {
                             >
                                 {getFieldDecorator(key, {
                                     rules: [{
-                                        required: true, message: 'Please input this feild!',
+                                        required: key !== "picture", message: 'Please input this feild!',
                                     }],
                                 })(
                                     this.getFormField(formType[key], { key, data: this.props.data[key] })

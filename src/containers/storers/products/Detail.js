@@ -69,9 +69,13 @@ class ProductDetail extends React.Component {
             let form_data = new FormData();
             delete data.picture;
             Object.entries(data).forEach(([key, value]) => {
-                if (key === "image") {
+                if (key === "id_images_delete") {
+                    value.forEach(image_id_deleted => {
+                        form_data.append(key, image_id_deleted);
+                    }) 
+                } else if (key === "image") {
                     value.forEach(image => {
-                        form_data.append(key, new Blob([image]), image.name);
+                        form_data.append(key, new Blob([image], {type: 'image/jpg'}), image.name);
                     })
                 } else {
                     form_data.append(key, value);

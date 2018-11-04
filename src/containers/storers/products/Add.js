@@ -20,7 +20,7 @@ class AddProduct extends React.Component {
         super(props);
         this.state = {
             product: {
-                picture: "",
+                picture: [],
                 name: "",
                 expire_date: "",
                 created: "",
@@ -60,7 +60,7 @@ class AddProduct extends React.Component {
             Object.entries(data).forEach(([key, value]) => {
                 if (key === "image") {
                     value.forEach(image => {
-                        form_data.append(key, new Blob([image]), image.name);
+                        form_data.append(key, new Blob([image], {type: 'image/jpg'}), image.name);
                     })
                 } else {
                     form_data.append(key, value);
@@ -68,9 +68,9 @@ class AddProduct extends React.Component {
             })
             
             await this.props.dispatch(addProduct(form_data));
-            message.success("Edit successful!");
+            message.success("Add successful!");
         } catch (er) {
-            message.error("Edit failed!");
+            message.error("Add failed!");
         }
     }
 

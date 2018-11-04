@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Table, Divider, Tag, Button } from 'antd';
-
+import moment from "moment";
 
 // actions 
 import {
@@ -9,6 +9,7 @@ import {
     delProduct
 } from "actions/storers/products";
 
+const formatDay = d => d.split("/").reverse().join("-")
 
 class ProductsTable extends React.Component {
     constructor(props) {
@@ -20,7 +21,7 @@ class ProductsTable extends React.Component {
             key: 'picture',
             width: "10%",
             render: (picture) => {
-                return <img src={picture[0].image} alt="" />
+                return picture[0] ? <img src={picture[0].image} alt="" /> : "No image"
             }
         }, {
             title: 'Name',
@@ -30,10 +31,7 @@ class ProductsTable extends React.Component {
             title: 'Expired',
             dataIndex: 'expire_date',
             key: 'expire_date',
-        }, {
-            title: 'Stores',
-            dataIndex: 'stores',
-            key: 'stores',
+            sorter: (a, b) => moment(formatDay(a.expire_date)).diff(formatDay(b.expire_date), "days")
         }, {
             title: 'Created',
             dataIndex: 'created',
@@ -42,6 +40,7 @@ class ProductsTable extends React.Component {
             title: 'Price',
             key: 'price',
             dataIndex: 'price',
+            sorter: (a, b) => parseFloat(a.price) - parseFloat(b.price),
         }, {
             title: 'Tax',
             key: 'tax',
