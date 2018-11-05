@@ -53,7 +53,8 @@ class AccountInfo extends React.Component {
                         <form className="woocommerce-form woocommerce-form-register register" onSubmit={this.props.onSubmitForm("editPass")}>
                             <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                 <label htmlFor="reg_edit_email">Password&nbsp;<span className="required">*</span></label>
-                                <input ref={this.props.form_data.editPass.password} type="password" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="password" id="reg_edit_password" autoComplete="new-password" />
+                                <input ref={this.props.form_data.editPass.password} type="password" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="password" id="reg_edit_password" 
+                                    autoComplete="new-password" minLength="6" required="true" pattern="[^' ']+" title="Password only include letters, digits and @/./+/-/_" />
                             </p>
                             <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                 <label htmlFor="reg_edit_email">Confirm&nbsp;<span className="required">*</span></label>
