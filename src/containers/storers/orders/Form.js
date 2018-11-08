@@ -5,16 +5,16 @@ import _ from "lodash";
 const FormItem = Form.Item;
 
 const formType = {
-    store: "text",
-    money: "text",
-    products: "text",
-    created: "text",
-    modified: "text",
-    order_code: "text",
-    transaction_id: "text",
-    payer_id: "text",
-    customer: "text",
-    payment_method: "text",
+    store: "text_disable",
+    money: "text_disable",
+    products: "text_disable",
+    created: "text_disable",
+    modified: "text_disable",
+    order_code: "text_disable",
+    transaction_id: "text_disable",
+    payer_id: "text_disable",
+    customer: "text_disable",
+    payment_method: "text_disable",
     status_payment: "tag",
     status_order: "tag",
 }
@@ -64,6 +64,7 @@ class FormOrder extends React.Component {
     getFormField = (type, { key, status }) => {
         switch (type) {
             case "text": return <Input />
+            case "text_disable": return <Input disabled />
             case "tag": return this.formatStatus({ key, status })
             default: return <Input />
         }
