@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Steps, Button, Card, Tag } from 'antd';
+import { Steps, Button, Card, Tag, Divider } from 'antd';
 
-import { _url } from "config/utils";
+import { _url, _staticUrl } from "config/utils";
 import { STATUSES_ORDER, STATUS_COLOR } from "constants/index";
 import { formatVnd } from "../constants/func.utils";
 
@@ -82,7 +82,19 @@ class MyOrders extends React.Component {
                                         >
                                             {
                                                 order.products.map(product => (
-                                                    <p>product here</p>        
+                                                    <div key={product.id}>
+                                                        <div className="row">
+                                                            <div className="col-md-2">
+                                                                <img style={{ width: "100%" }} src={_staticUrl("/groci/wp-content/uploads/2018/08/1-1.jpg")} alt=""/>
+                                                            </div>
+                                                            <div className="col-md-10">
+                                                                <h3>{product.name}</h3>
+                                                                <p>{product.detail}</p>
+                                                                <h4>{formatVnd(product.price)}</h4>
+                                                            </div>
+                                                        </div>
+                                                        <Divider />
+                                                    </div>        
                                                 ))
                                             }
                                             <h1 className="text-right">{formatVnd(order.money)}</h1>
