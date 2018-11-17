@@ -1,22 +1,30 @@
 import React from "react";
-import { Avatar, Form, Select, Input, Button, Tag, Upload, Icon } from 'antd';
+import { Avatar, Form, Select, Input, Button, Tag, Upload, Icon, DatePicker } from 'antd';
 import _ from "lodash";
 import uuid from "uuid";
+
+import moment from 'moment';
+const dateFormat = 'DD/MM/YYYY';
 
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-
+const formatDay = d => d.split("/").reverse().join("-")
 const formType = {
     is_active: "tag",
     status: "tag",
     picture: "img",
     name: "text",
     category: "select",
-    expire_date: "text",
-    created: "text",
+    expire_date: "datePicker",
+    created: "text_disable",
     price: "text",
     tax: "text",
+}
+
+const PATTERN = {
+    // "name": [/^111$/, "Name not match"],
+    "price": [/^\d+(,\d{3})*(\.\d{1,2})?$/, "Price not match"],
 }
 
 const STATUS = {
@@ -53,6 +61,7 @@ class FormOrder extends React.Component {
             if (!err) {
                 this.props.onSubmitForm({
                     ...values,
+                    expire_date: moment(values["expire_date"]).format(dateFormat),
                     image: Object.values(this.state.product_pictures).filter(pic => pic.url === undefined).map(i => i.originFileObj),
                     id_images_delete: this.props.data.picture ? this.props.data.picture.filter(pic => {
                         return this.state.product_pictures[pic.id] === undefined
@@ -142,6 +151,8 @@ class FormOrder extends React.Component {
     getFormField = (type, { key, data }) => {
         switch (type) {
             case "text": return <Input />
+            case "text_disable": return <Input disabled />
+            case "datePicker": return <DatePicker />
             case "tag": return this.formatStatus({ key, status: data })
             case "img": return this.formatImgForm({ key, data })
             case "select": return this.formatSelect({ key, data })
@@ -185,7 +196,9 @@ class FormOrder extends React.Component {
                             >
                                 {getFieldDecorator(key, {
                                     rules: [{
-                                        required: key !== "picture", message: 'Please input this feild!',
+                                        required: key !== "picture", 
+                                        message: PATTERN[key] ? PATTERN[key][1] : 'Please input this feild!',
+                                        pattern: PATTERN[key] ? PATTERN[key][0] : /./
                                     }],
                                 })(
                                     this.getFormField(formType[key], { key, data: this.props.data[key] })
@@ -209,6 +222,7 @@ export default Form.create({
             delete formType.created;
         }
         return Object.entries(formType).reduce((cur, [key, value]) => {
+            if (key == "expire_date" && props.data[key]) props.data[key] = moment(props.data[key], dateFormat);
             return {
                 ...cur,
                 [key]: Form.createFormField({
