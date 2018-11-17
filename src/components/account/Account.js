@@ -86,10 +86,10 @@ class Account extends React.Component {
 			!data.first_name ||
 			!data.last_name
 		) {
-			throw new Error("You can leave these empty");
+			throw new Error("Please enter required fields");
 		}
 		if (data.password != data.confirm) {
-			throw new Error("Password confirm in correct");
+			throw new Error("Password confirm is incorrect");
 		}
 		return data;
 	}
@@ -99,7 +99,7 @@ class Account extends React.Component {
 			!data.first_name ||
 			!data.last_name
 		) {
-			throw new Error("You can leave these empty");
+			throw new Error("Please enter required fields");
 		}
 		return data;
 	}
@@ -212,13 +212,15 @@ class Account extends React.Component {
 												<h2>Login</h2> <span className="text-danger" >{this.state.login.error}</span>
 												<form name="formLogin" className="woocommerce-form woocommerce-form-login login" onSubmit={this.onSubmitFormLogin}>
 													<p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-														<label htmlFor="username">Username or email address<span className="required">*</span></label>
-														<input ref={this.form_data.login.email} type="email" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="email" id="email" autoComplete="off" />
+														<label htmlFor="username">Email address<span className="required">*</span></label>
+														<input ref={this.form_data.login.email} type="email" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="email" id="email" 
+															autoComplete="off" minLength="10" maxLength="50" required="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="please enter email in correct format"/>
 													</p>
 
 													<p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label htmlFor="password">Password<span className="required">*</span></label>
-														<input ref={this.form_data.login.password} className="woocommerce-Input woocommerce-Input--text input-text form-control" type="password" name="password" id="password" autoComplete="new-password" />
+														<input ref={this.form_data.login.password} className="woocommerce-Input woocommerce-Input--text input-text form-control" type="password" name="password" id="password" 
+															autoComplete="new-password" minLength="6" required="true" pattern="[^' ']+" title="Password only include letters, digits and @/./+/-/_" />
 													</p>
 
 
@@ -242,11 +244,13 @@ class Account extends React.Component {
 												<form className="woocommerce-form woocommerce-form-register register" onSubmit={this.onSubmitFormRegister}>
 													<p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label htmlFor="reg_email">Email address&nbsp;<span className="required">*</span></label>
-														<input ref={this.form_data.register.email} type="email" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="email" id="reg_email" autoComplete="off" />
+														<input ref={this.form_data.register.email} type="email" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="email" id="reg_email" 
+															autoComplete="off" minLength="10" maxLength="50" required="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="please enter email in correct format"/>
 													</p>
 													<p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label htmlFor="reg_email">Password&nbsp;<span className="required">*</span></label>
-														<input ref={this.form_data.register.password} type="password" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="password" id="reg_password" autoComplete="new-password" />
+														<input ref={this.form_data.register.password} type="password" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="password" id="reg_password" 
+															autoComplete="new-password" minLength="6" required="true" pattern="[^' ']+" title="Password only include letters, digits and @/./+/-/_" />
 													</p>
 													<p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label htmlFor="reg_email">Confirm&nbsp;<span className="required">*</span></label>
