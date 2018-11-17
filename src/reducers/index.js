@@ -6,6 +6,7 @@ import common from "./common";
 import cart from "./cart";
 import categories from "./categories";
 import storers from "./storers";
+import orders from "./orders";
 
 export default combineReducers({
     session,
@@ -13,5 +14,6 @@ export default combineReducers({
     common,
     cart,
     categories,
-    storers
+    storers,
+    orders
 })

@@ -9,3 +9,5 @@ export { default as Search } from "./Search";
 export { default as AboutUs } from "./AboutUs";
 export { default as CategoryProducts } from "./CategoryProducts";
 export { default as SystemLogin } from "./SystemLogin";
+export { default as MyOrders } from "./MyOrders";
+

@@ -50,6 +50,7 @@ function TestPaypal(props) {
 }
 
 function Confirm(props) {
+    // props.history.push("/checkout-confirm")
     const clickBtn = (e) => {
         request().get("/paypal/confirm" + props.location.search)
             .then(res => {
@@ -108,7 +109,7 @@ class App extends Component {
                     />
 
                     <Route path="/test-paypal" component={TestPaypal} />
-                    <Route path="/checkout-confirm" component={Confirm} />
+                    {/* <Route path="/checkout-confirm" component={Confirm} /> */}
 
 
                     <Route path="/login" component={SystemLogin} />

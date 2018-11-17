@@ -15,8 +15,10 @@ import {
     CheckoutSuccess,
     Search,
     AboutUs,
-    CategoryProducts
+    CategoryProducts,
+    MyOrders
 } from "./index";
+
 
 
 function NotFound() {
@@ -40,7 +42,10 @@ class ClientApp extends Component {
                     <Route exact path="/product/:product_id" component={ProudctDetail} />
                     <Route exact path="/category/:category_id" component={CategoryProducts} />
                     <Route exact path="/checkout" component={Checkout} />
+                    <Route exact path="/checkout-confirm" component={Checkout} />
+
                     <Route exact path="/checkout-success" component={CheckoutSuccess} />
+                    <Route exact path="/my-orders" component={MyOrders} />
                     <Route exact path="/search/:keyword" component={Search} />
                     <Route exact path="/about-us" component={AboutUs} />
 

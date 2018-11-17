@@ -4,6 +4,9 @@ import { message } from "antd";
 
 import { _url } from "config/utils";
 import { Link, withRouter } from "react-router-dom";
+import request from "api/request";
+
+import { vndToUsd } from "../constants/func.utils";
 
 // actions 
 import {
@@ -12,10 +15,33 @@ import {
 } from "actions/cart"
 
 const getIdEle = id => document.getElementById(id);
+const totalCart = cart => cart.items.reduce((cur, next) => cur + +next.quantity * +next.product.price, 0);
 
 class Checkout extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      paypal: {
+        TOKEN: null,
+        PAYERID: null,
+        currency: null,
+        money: null,
+      }
+    }
+
+    if (props.location.search) {
+      request().get("/paypal/confirm" + props.location.search)
+        .then(res => {
+          this.setPaypal(res.data.message);
+        })
+    }
+  }
+
+  setPaypal = data => {
+    this.setState({
+      paypal: data
+    })
+    message.success("Now you can submit to make a payment with paypal!")
   }
 
   onSubmitCheckout = async (e) => {
@@ -28,7 +54,7 @@ class Checkout extends React.Component {
      * 
      */
     const { cart } = this.props;
-    const totalCartAmount = cart.items.reduce((cur, next) => cur + +next.quantity * +next.product.price, 0);
+    const totalCartAmount = totalCart(cart);
     const bill = {
       "product": {
         ...cart.items.reduce((cur, next) => {
@@ -52,8 +78,18 @@ class Checkout extends React.Component {
     };
     if (bill.money && bill.phone && bill.first_name && bill.last_name && bill.address) {
       try {
-        await this.props.dispatch(orderProducts(bill));
-        message.success("Order successful");
+        await this.props.dispatch(orderProducts(bill, this.state.paypal));
+        const coundown = (i = 3) => {
+          if (i === 0 ) {
+            return this.props.history.push("/my-orders");
+          } else {
+            message.success("Order successful, redirect to orders in " + i + "s");
+            setTimeout(() => {
+              coundown(i - 1)
+            }, 1000);
+          }
+        }
+        coundown();
 
       } catch (er) {
         message.error("Cant create order");
@@ -65,13 +101,25 @@ class Checkout extends React.Component {
 
   }
 
+  onPaypal = (e) => {
+    e.preventDefault();
+    const totalCartAmount = totalCart(this.props.cart);
+    request().get("/paypal/redirect?money=" + 2)
+      .then(res => {
+        window.location.replace(res.data);
+      })
+      .catch(er => {
+        message.error("Paypal orror!");
+      })
+  }
+
   // componentDidMount(){
   //     console.log(this.props.cart.items);
   // }
 
   render() {
     const { cart } = this.props;
-    const totalCartAmount = cart.items.reduce((cur, next) => cur + +next.quantity * +next.product.price, 0);
+    const totalCartAmount = totalCart(cart);
     return (
       <div className="Checkout">
         <section className="section-padding bg-dark inner-header klb-breadcrumb">
@@ -173,8 +221,9 @@ class Checkout extends React.Component {
                       <ul className="wc_payment_methods payment_methods methods">
                         <li className="wc_payment_method payment_method_bacs">
                           <input id="payment_method_bacs" type="radio" className="input-radio" name="payment_method" defaultValue="bacs" defaultChecked="checked" data-order_button_text style={{ display: 'none' }} />
-                          <label htmlFor="payment_method_bacs">
-                            Direct bank transfer 	</label>
+                          {
+                            this.state.paypal.TOKEN == null && <label>Direct bank transfer with <button onClick={this.onPaypal}><img style={{ width: "50px", height: "auto" }} src="/assets/images/paypal-btn.png" alt="" /></button></label>
+                          }
                           <div className="payment_box payment_method_bacs">
                             <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
                           </div>

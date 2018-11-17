@@ -90,9 +90,21 @@ export const postCart = (data) => (dispatch) => {
 }
 
 
-export const orderProducts = (data) => (dispatch) => {
-    return request().post("/order/create/", data)
-    .then(res => {
-        dispatch(getCart());
-    })
+export const orderProducts = (data, paypal = {}) => (dispatch) => {
+    if (paypal.TOKEN) {
+        console.log(paypal);
+        return request().post("/paypal/payment/", {
+            ...data,
+            token: paypal.TOKEN,
+            PayerID: paypal.PAYERID,
+            money: +paypal.money,
+        }).then(res => {
+            dispatch(getCart());
+        })
+    } else {
+        return request().post("/order/create/", data)
+        .then(res => {
+            dispatch(getCart());
+        })
+    }
 }

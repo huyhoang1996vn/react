@@ -59,11 +59,11 @@ class Header extends React.Component {
     }
 
     onChangeQuantityItemCart = (item) => e => {
-        if (e.target.value && Math.abs(item.quantity - e.target.value) == 1 ) {
+        if (e.target.value && Math.abs(item.quantity - e.target.value) == 1) {
             this.props.dispatch(updateItemInCart({
                 ...item,
                 quantity: e.target.value
-            })) 
+            }))
         }
     }
 
@@ -158,6 +158,7 @@ class Header extends React.Component {
                                         <li className="nav-item menu-item menu-item-type-post_type menu-item-object-product"><a className="nav-link dropdown-item" href="/product/jumbo-rainier-cherries/"><i className="mdi mdi-chevron-right" aria-hidden="true" /> Product
                       Detail</a></li>
                                         <li className="nav-item menu-item menu-item-type-post_type menu-item-object-page"><Link className="nav-link dropdown-item" to="/my-account"><i className="mdi mdi-chevron-right" aria-hidden="true" /> My account</Link></li>
+                                        <li className="nav-item menu-item menu-item-type-post_type menu-item-object-page"><Link className="nav-link dropdown-item" to="/my-orders"><i className="mdi mdi-chevron-right" aria-hidden="true" /> My Orders</Link></li>
                                         <li className="nav-item menu-item menu-item-type-post_type menu-item-object-page"><a className="nav-link dropdown-item" href="/checkout/"><i className="mdi mdi-chevron-right" aria-hidden="true" /> Checkout</a></li>
                                         <li className="nav-item menu-item menu-item-type-post_type menu-item-object-page"><a className="nav-link dropdown-item" href="/cart/"><i className="mdi mdi-chevron-right" aria-hidden="true" /> Cart</a></li>
                                     </ul>
@@ -194,13 +195,13 @@ class Header extends React.Component {
                             cart.items.map((cartItem, index) => (
                                 <div key={index} className="cart-list-product">
                                     <a onClick={this.onClickRemoveItem(cartItem)} className="float-right remove-cart" ><i className="mdi mdi-close" /></a>
-                                    <img className="img-fluid" src={cartItem.product.picture[0].image || _staticUrl("/groci/wp-content/uploads/2018/08/1-1.jpg")} alt="Washed Sugar Snap Peas" />
+                                    <img className="img-fluid" src={cartItem.product.picture[0] && cartItem.product.picture[0].image || _staticUrl("/groci/wp-content/uploads/2018/08/1-1.jpg")} alt="Washed Sugar Snap Peas" />
                                     <span className="badge badge-success">20 % OFF</span>
                                     <h5><Link to={`/product/${cartItem.product.id}`}>{cartItem.product.name}</Link></h5>
                                     <h6><strong><span className="mdi mdi-approval" /> </strong> - 1 kg</h6>
                                     <p className="offer-price mb-0"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>5.00</span></del> <ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{cartItem.product.price}</span></ins></p>
                                     <div>
-                                        <input onChange={this.onChangeQuantityItemCart(cartItem)} type="number" value={cartItem.quantity}/>
+                                        <input onChange={this.onChangeQuantityItemCart(cartItem)} type="number" value={cartItem.quantity} />
                                     </div>
                                 </div>
                             ))
