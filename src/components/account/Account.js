@@ -1,6 +1,9 @@
 import React from "react";
-
+import { message } from "antd";
 import { _url } from "config/utils";
+
+import request from "api/request";
+
 
 // components 
 import {
@@ -45,6 +48,7 @@ class Account extends React.Component {
 			editPass: {
 				password: React.createRef(),
 				confirm: React.createRef(),
+				oldPassword: React.createRef(),
 			}
 		}
 	}
@@ -68,6 +72,7 @@ class Account extends React.Component {
 				email: this.valForm("login", "email"),
 				password: this.valForm("login", "password")
 			});
+			message.success("Login successful");
 		} catch (er) {
 			this.handleError("login", "Email or password invalid!")
 		}
@@ -95,6 +100,21 @@ class Account extends React.Component {
 			!data.last_name
 		) {
 			throw new Error("You can leave these empty");
+		}
+		return data;
+	}
+
+	validateFormEditPass = (data) => {
+		if (
+			!data.new_password ||
+			!data.new_password2 ||
+			!data.old_password
+		) {
+			throw new Error("You can leave these empty");
+		}
+
+		if (data.new_password !== data.new_password2) {
+			throw new Error("Confirm password not match");
 		}
 		return data;
 	}
@@ -135,6 +155,29 @@ class Account extends React.Component {
 				break;
 			}
 			case "editPass": {
+				try {
+					const body = this.validateFormEditPass({
+						new_password: this.valForm("editPass", "password"),
+						new_password2: this.valForm("editPass", "confirm"),
+						old_password: this.valForm("editPass", "oldPassword"),
+					})
+
+					request({
+						// "X-CSRFToken": "DZYMwEskKyMdu0LyJ7EqTAuWyndLN0PRL3t6uwa8LpkpDBqEE1kPCM8LfX3bvrcx",
+						// "xsrfHeaderName": "X-CSRFToken",
+						// "xsrfCookieName": "XSRF-TOKEN"
+					}).post("/change/pasword/", body)
+						.then(data => {
+							console.log(data);
+						})
+						.catch(er => {
+							console.log(er.message);
+						})
+
+				} catch (er) {
+					this.handleError("editPass", er.message || "Can not edit with your info!")
+				}
+
 				break;
 			}
 			default: return;

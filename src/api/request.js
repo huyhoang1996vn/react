@@ -27,7 +27,7 @@ const request = (headers = {}) => {
         headers: {
             // Authorization: `Token ${token}`
             ...headers,
-        }
+        },
     }
     if (token) {
         options.headers = {

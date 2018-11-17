@@ -59,6 +59,10 @@ class AccountInfo extends React.Component {
                                 <label htmlFor="reg_edit_email">Confirm&nbsp;<span className="required">*</span></label>
                                 <input ref={this.props.form_data.editPass.confirm} type="password" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="confirm" id="reg_edit_confirm" />
                             </p>
+                            <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+                                <label htmlFor="reg_edit_email">Confirm&nbsp;<span className="required">*</span></label>
+                                <input ref={this.props.form_data.editPass.oldPassword} type="password" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="confirm" id="reg_edit_confirm" />
+                            </p>
 
                             <p className="woocommerce-FormRow form-row">
                                 <input type="hidden" id="woocommerce-register-nonce_change" name="woocommerce-register-nonce" defaultValue="ba42be52f2" /><input type="hidden" name="_wp_http_referer" defaultValue="groci/my-account/" /> <button type="submit" className="btn btn-secondary woocommerce-Button button" name="edit" value="Edit">Edit</button>
