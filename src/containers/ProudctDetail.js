@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { _staticUrl, _apiUrl } from "config/utils";
-
+import { formatVnd } from "constants/func.utils";
 
 // acitons
 import {
@@ -95,10 +95,10 @@ class ProudctDetail extends React.Component {
 							</div>
 							<div className="col-md-6">
 								<div className="shop-detail-right klb-product-right">
-									<span className="badge badge-success">30% OFF</span>
+									{/* <span className="badge badge-success">30% OFF</span> */}
 									<h2>{product.name}</h2>
-									<p className="price"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>10.00</span></del>
-										<ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{product.price}</span></ins></p>
+									<p className="price"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol"></span></span></del>
+										<ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol"></span>{formatVnd(product.price)}</span></ins></p>
 									<p className="stock in-stock">In Stock</p>
 									<form className="cart" encType="multipart/form-data" onSubmit={this.onSubmitAddToCart}>
 										<div className="quantity">
@@ -155,14 +155,14 @@ class ProudctDetail extends React.Component {
 															<a href="/groci/product/fresh-red-seedless-grapes/"
 																className="woocommerce-LoopProduct-link woocommerce-loop-product__link" />
 															<Link to={`/product/${item.id}`}>
-																<div className="product-header"><span className="badge badge-success">13%</span><img className="img-fluid" src={urlImage} alt="Fresh Red Seedless" /><span className="veg text-success mdi mdi-circle" /></div>
+																<div className="product-header"><span className="badge badge-success"></span><img className="img-fluid" src={urlImage} alt="Fresh Red Seedless" /><span className="veg text-success mdi mdi-circle" /></div>
 																<div className="product-body">
 																	<h5>{item.name.slice(0, 20)}...</h5>
 																	<h6><strong><span className="mdi mdi-approval text-success" /> In Stock</strong> - 1 kg</h6>
 																</div>
 															</Link><div className="product-footer"><a href="/groci/product/fresh-red-seedless-grapes/">
-																<p className="offer-price mb-0"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>8.00</span></del>
-																	<ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{item.price}</span></ins></p></a><a onClick={this.onAddToCart(item)} className="btn btn-secondary btn-sm button product_type_simple add_to_cart_button ajax_add_to_cart"><i className="mdi mdi-cart-outline" /> Add to cart</a>
+																<p className="offer-price mb-0"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol"></span></span></del>
+																	<ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol"></span>{formatVnd(item.price)}</span></ins></p></a><a onClick={this.onAddToCart(item)} className="btn btn-secondary btn-sm button product_type_simple add_to_cart_button ajax_add_to_cart"><i className="mdi mdi-cart-outline" /> Add to cart</a>
 															</div>
 														</div>
 													</div>

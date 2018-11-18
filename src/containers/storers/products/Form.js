@@ -12,7 +12,7 @@ const Option = Select.Option;
 const formatDay = d => d.split("/").reverse().join("-")
 const formType = {
     is_active: "tag",
-    status: "tag",
+    // status: "tag",
     picture: "img",
     name: "text",
     category: "select",

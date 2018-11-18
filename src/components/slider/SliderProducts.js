@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { _staticUrl, _apiUrl } from "config/utils";
 import uuid from "uuid";
-
+import { formatVnd } from "constants/func.utils";
 
 // Components
 import {
@@ -37,7 +37,7 @@ class SliderProducts extends React.Component {
                     style={{ minWidth: "200px", width: "1px", alignSelf: "stretch" }}>
                     <div className="product">
                         <div className="product-header">
-                            <span className="badge badge-success">30%</span>
+                            {/* <span className="badge badge-success">30%</span> */}
                             <Link to={`/product/${item.id}/`}>
                                 <img
                                     className="img-fluid"
@@ -52,8 +52,8 @@ class SliderProducts extends React.Component {
                             <h6><strong><span className="mdi mdi-approval text-success" /> In Stock</strong> - 1 kg</h6>
                         </div>
                         <div className="product-footer">
-                            <p className="offer-price mb-0"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>10.00</span></del>
-                                <ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{item.price}</span></ins></p><a onClick={this.onAddToCart(item)} className="btn btn-secondary btn-sm button product_type_simple add_to_cart_button ajax_add_to_cart"><i className="mdi mdi-cart-outline" /> Add to cart</a>
+                            <p className="offer-price mb-0"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol"></span></span></del>
+                                <ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{formatVnd(item.price)}</span></ins></p><a onClick={this.onAddToCart(item)} className="btn btn-secondary btn-sm button product_type_simple add_to_cart_button ajax_add_to_cart"><i className="mdi mdi-cart-outline" /> Add to cart</a>
                         </div>
                     </div>
                 </div>)

@@ -89,7 +89,7 @@ class Header extends React.Component {
                                         </ul>
                                         :
                                         <ul id="menu-top-right" className="nav-top-right list-inline t-md-right">
-                                            <li id="menu-item-261" className="mdi mdi-account-circle menu-item menu-item-type-post_type menu-item-object-page menu-item-261"><a role="button" tabIndex="0" onClick={this.onClickLogout}>Log out</a></li>
+                                            <li id="menu-item-261" className="mdi mdi-account-circle menu-item menu-item-type-post_type menu-item-object-page menu-item-261"><Link to="/my-account/" style={{ color: "#2bd891", marginRight: "15px" }} >{this.props.userAuth.data.email}</Link> <a role="button" tabIndex="0" onClick={this.onClickLogout}>Log out</a></li>
                                         </ul>
                                 }
 

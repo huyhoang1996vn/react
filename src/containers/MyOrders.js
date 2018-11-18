@@ -76,7 +76,7 @@ class MyOrders extends React.Component {
                                     this.state.ordersOnStep.map(order => (
                                         <Card
                                             key={order.id}
-                                            title={order.store}
+                                            title={"shop"}
                                             extra={<b>Payment: <Tag color={STATUS_COLOR[order.status_payment]} >{order.status_payment}</Tag></b>}
                                             style={{ marginBottom: "15px" }}
                                         >

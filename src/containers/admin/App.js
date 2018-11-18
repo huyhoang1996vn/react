@@ -4,6 +4,8 @@ import { Icon } from 'antd';
 import { Dashboard as DashContainer } from "components/common";
 
 // containers
+import { withDashboardHOC } from "components/HOC";
+
 import {
     Dashboard,
     Users,
@@ -45,26 +47,11 @@ const menuAdmin = [
     },
     {
         id: 3,
-        key: "shops",
-        name: "Shops",
-        path: "/admin/shops",
-        icon: <Icon type="shop" theme="outlined" />
-    },
-    {
-        id: 4,
-        key: "statistic",
-        name: "Statistic",
-        path: "/admin/statistic",
-        icon: <Icon type="area-chart" theme="outlined" />
-    },
-    {
-        id: 5,
         key: "categories",
         name: "Categories",
         path: "/admin/categories",
         icon: <Icon type="ordered-list" theme="outlined" />
     }
-    
 ]
 
 const findMenu = (key, value) => (data) => data.find(item => item[key] == value) || {}
@@ -78,10 +65,6 @@ class Admin extends React.Component {
         this.props.history.push(findMenu('key', item.key)(menuAdmin).path)
     }
 
-    onClickLogout = () => {
-        alert("onClickLogout");
-    }
-
     render() {
         return (
             <div className="Admin">
@@ -89,7 +72,7 @@ class Admin extends React.Component {
                     onClickMenuItem={this.onClickMenuItem}
                     menu={menuAdmin}
                     menuSelected={findMenu('path', this.props.history.location.pathname)(menuAdmin).key}
-                    onClickLogout={this.onClickLogout}
+                    onClickLogout={this.props.onClickLogout}
                 >
                     <Switch>
                         <Route exact path="/admin" component={Dashboard} />
@@ -107,4 +90,4 @@ class Admin extends React.Component {
     }
 }
 
-export default Admin;
+export default withDashboardHOC(Admin);

@@ -72,7 +72,18 @@ class Account extends React.Component {
 				email: this.valForm("login", "email"),
 				password: this.valForm("login", "password")
 			});
-			message.success("Login successful");
+			const coundown = (i = 2) => {
+				if (i === 0 ) {
+				  return this.props.loginSuccess();
+				} else {
+				  message.success("Go to home in " + i + "s");
+				  setTimeout(() => {
+					coundown(i - 1)
+				  }, 1000);
+				}
+			  }
+			  coundown();
+			
 		} catch (er) {
 			this.handleError("login", "Email or password invalid!")
 		}
@@ -133,7 +144,11 @@ class Account extends React.Component {
 			this.handleError("register", "");
 			alert("Register successful!");
 		} catch (er) {
-			this.handleError("register", er.message || "Can not register with your info!")
+			let error = "Can not register with your info!";
+			if (er.response.data) {
+				error = Object.values(er.response.data)[0];
+			}
+			this.handleError("register", error)
 		}
 	}
 

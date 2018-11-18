@@ -36,6 +36,9 @@ class Account extends React.Component {
                     onLogin={this.handleLogin}
                     onRegister={this.handleRegister}
                     onEditProfile={this.handleEditProfile}
+                    loginSuccess={() => {
+                        this.props.history.push("/");
+                    }}
                 />
             </div>
         )

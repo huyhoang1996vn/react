@@ -1,15 +1,35 @@
 import React from "react";
-import { Form, Input, Tooltip, Icon, Select, Button } from 'antd';
+import { Form, Input, Button, Tag, Select } from 'antd';
+import _ from "lodash";
+
+import { GROUP_USERS } from "constants/index";
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 
+const formTypeEdit = {
+    "email": "text_disabled",
+    "groupUser": "text_disabled",
+    "first_name": "text",
+    "last_name": "text",
+    "date_joined": "text_disabled",
+    "is_active": "tag",
+}
 
-class UserForm extends React.Component {
-    state = {
-        confirmDirty: false,
-        autoCompleteResult: [],
-    };
+const formTypeAdd = {
+    "groupUser": "tag",
+    "email": "text",
+    "password": "text",
+    "first_name": "text",
+    "last_name": "text",
+}
+
+const STATUS = {
+    'is_active': [true, false]
+}
+
+
+class FormOrder extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -20,26 +40,57 @@ class UserForm extends React.Component {
         });
     }
 
-    handleConfirmBlur = (e) => {
-        const value = e.target.value;
-        this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+    onChangeData = (data, newValue) => () => {
+        this.props.onChangeData({
+            key: data.key,
+            value: newValue,
+        })
     }
 
-    compareToFirstPassword = (rule, value, callback) => {
-        const form = this.props.form;
-        if (value && value !== form.getFieldValue('password')) {
-            callback('Two passwords that you enter is inconsistent!');
-        } else {
-            callback();
+    formatTags = ({ key, tag }) => {
+        if (key == "is_active") {
+            return (
+                <div>
+                    {
+                        STATUS[key].map((status_item) => {
+                            return (
+                                <span key={status_item}><Tag
+                                    onClick={this.onChangeData({ key, tag }, status_item)}
+                                    color={`${tag == status_item ? "green" : "grey"}`}
+                                >{_.upperFirst(status_item.toString())}</Tag>
+                                </span>
+                            )
+                        })
+                    }
+                </div>
+            )
+        }
+        if (key == "groupUser") {
+            return (
+                <div>
+                    {
+                        Object.entries(GROUP_USERS).map(([group_id, group_name]) => (
+                            <Tag
+                                key={group_id}
+                                color={`${tag == group_id ? "green" : "grey"}`}
+                                onClick={this.onChangeData({ key, tag }, +group_id)}
+                            >
+                                {group_name}
+                            </Tag>
+                        ))
+                    }
+                </div>
+            )
         }
     }
 
-    validateToNextPassword = (rule, value, callback) => {
-        const form = this.props.form;
-        if (value && this.state.confirmDirty) {
-            form.validateFields(['confirm'], { force: true });
+    getFormField = (type, { key, value }) => {
+        switch (type) {
+            case "text": return <Input type={key == "password" ? key : type} />
+            case "tag": return this.formatTags({ key, tag: value })
+            case "text_disabled": return <Input disabled />
+            default: return <Input />
         }
-        callback();
     }
 
     render() {
@@ -65,121 +116,52 @@ class UserForm extends React.Component {
                 },
             },
         };
-        const prefixSelector = getFieldDecorator('prefix', {
-            initialValue: '86',
-        })(
-            <Select style={{ width: 70 }}>
-                <Option value="86">+86</Option>
-                <Option value="87">+87</Option>
-            </Select>
-        );
+
+        let formType = this.props.type == "add" ? formTypeAdd : formTypeEdit;
 
         return (
             <Form onSubmit={this.handleSubmit}>
-                <FormItem
-                    {...formItemLayout}
-                    label="E-mail"
-                >
-                    {getFieldDecorator('email', {
-                        rules: [{
-                            type: 'email', message: 'The input is not valid E-mail!',
-                        }, {
-                            required: true, message: 'Please input your E-mail!',
-                        }],
-                    })(
-                        <Input />
-                    )}
-                </FormItem>
-                <FormItem
-                    {...formItemLayout}
-                    label="Password"
-                >
-                    {getFieldDecorator('password', {
-                        rules: [{
-                            required: true, message: 'Please input your password!',
-                        }, {
-                            validator: this.validateToNextPassword,
-                        }],
-                    })(
-                        <Input type="password" />
-                    )}
-                </FormItem>
-                <FormItem
-                    {...formItemLayout}
-                    label="Confirm Password"
-                >
-                    {getFieldDecorator('confirm', {
-                        rules: [{
-                            required: true, message: 'Please confirm your password!',
-                        }, {
-                            validator: this.compareToFirstPassword,
-                        }],
-                    })(
-                        <Input type="password" onBlur={this.handleConfirmBlur} />
-                    )}
-                </FormItem>
-                <FormItem
-                    {...formItemLayout}
-                    label={(
-                        <span>
-                            Fullname&nbsp;
-              <Tooltip title="What do you want others to call you?">
-                                <Icon type="question-circle-o" />
-                            </Tooltip>
-                        </span>
-                    )}
-                >
-                    {getFieldDecorator('fullname', {
-                        rules: [{ required: true, message: 'Please input your fullname!', whitespace: true }],
-                    })(
-                        <Input />
-                    )}
-                </FormItem>
-                <FormItem
-                    {...formItemLayout}
-                    label={(
-                        <span>
-                            Address&nbsp;
-                        </span>
-                    )}
-                >
-                    {getFieldDecorator('address', {
-                        rules: [{ required: true, message: 'Please input your address!', whitespace: true }],
-                    })(
-                        <Input />
-                    )}
-                </FormItem>
-                <FormItem
-                    {...formItemLayout}
-                    label="Phone Number"
-                >
-                    {getFieldDecorator('phone', {
-                        rules: [{ required: true, message: 'Please input your phone number!' }],
-                    })(
-                        <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
-                    )}
-                </FormItem>
+                {
+                    Object.keys(formType).map((key) => {
+                        return (
+                            <FormItem
+                                key={key}
+                                {...formItemLayout}
+                                label={_.upperFirst(key)}
+                            >
+                                {getFieldDecorator(key, {
+                                    // rules: [{
+                                    //     required: true, message: 'Please input this feild!',
+                                    // }],
+                                })(
+                                    this.getFormField(formType[key], { key, value: this.props.data[key] })
+                                )}
+                            </FormItem>
+                        )
+                    })
+                }
+
                 <FormItem {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit">Add</Button>
+                    <Button type="primary" htmlType="submit">Save</Button>
                 </FormItem>
             </Form>
         );
     }
 }
 
-const getValue = props => field => {
-    return Form.createFormField({
-        value: props.data ? props.data[field] : "",
-    })
-}
-
 export default Form.create({
     mapPropsToFields(props) {
-        return {
-            email: getValue(props)("email"),
-            fullname: getValue(props)("fullname"),
-            address: getValue(props)("address"),
-            phone: getValue(props)("phone"),
-        };
+        let formType = formTypeEdit;
+        if (props.type == "add") {
+            formType = formTypeAdd;
+        }
+        return Object.entries(formType).reduce((cur, [key, value]) => {
+            return {
+                ...cur,
+                [key]: Form.createFormField({
+                    value: props.data ? props.data[key] : "",
+                })
+            }
+        }, {});
     }
-})(UserForm);
+})(FormOrder);

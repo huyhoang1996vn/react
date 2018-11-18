@@ -37,6 +37,7 @@ class ProductsTable extends React.Component {
             title: 'Name',
             key: 'name',
             dataIndex: 'name',
+            width: "20%",
         }, {
             title: 'Expired',
             dataIndex: 'expire_date',
@@ -66,12 +67,14 @@ class ProductsTable extends React.Component {
                     </span>
                 )
             }
-        }, {
-            title: 'Status',
-            dataIndex: 'status',
-            key: 'status',
-            render: this.formatStatus
-        }, {
+        }, 
+        // {
+        //     title: 'Status',
+        //     dataIndex: 'status',
+        //     key: 'status',
+        //     render: this.formatStatus
+        // }, 
+        {
             title: 'Action',
             dataIndex: 'id',
             key: 'action',
@@ -117,6 +120,15 @@ class ProductsTable extends React.Component {
 
     render() {
         const handleMenuClick = (e) => {
+            if (e.key == 'all') {
+                this.setState({
+                    filter: {
+                        category: {}
+                    },
+                    allProducts: this.props.allProducts
+                })
+                return;
+            }
             this.setState(prev => {
                 prev.filter.category = this.props.categories.find(ct => +ct.id === +e.key) || {}
                 prev.allProducts = this.props.allProducts.filter(prd => +prd.category[0] == +prev.filter.category.id);
@@ -126,6 +138,7 @@ class ProductsTable extends React.Component {
 
         const menu = (
             <Menu onClick={handleMenuClick}>
+                <Menu.Item key="all" >All</Menu.Item>
             {
                 this.props.categories.map(ct => (
                     <Menu.Item key={ct.id}>{ct.name}</Menu.Item>
