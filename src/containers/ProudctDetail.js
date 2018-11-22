@@ -109,14 +109,10 @@ class ProudctDetail extends React.Component {
 									</form>
 									<div className="woocommerce-product-details__short-description short-description">
 										<h5>Quick Overview</h5>
-										<p><strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong> Nam fringilla augue nec est
-                    tristique auctor. Donec non est at libero vulputate rutrum.</p>
-										<p>Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt. Class aptent taciti
-											sociosqu ad litora torquent per conubia nostra, per inceptos hiMenaeos. Integer enim purus, posuere at
-                    ultricies eu, placerat a felis. Suspendisse aliquet urna pretium eros convallis interdum.</p>
+										<p>{product.detail}</p>
+										
 									</div>
 									<div className="product_meta">
-										<span className="sku_wrapper">SKU: <span className="sku">9S3M4N</span></span>
 										<span className="posted_in">Categories: <a href="/groci/product-category/fruits-vegetables/" rel="tag">Fruits &amp;
                       Vegetables</a>, <a href="/groci/product-category/home-kitchen/" rel="tag">Home &amp; Kitchen</a></span>
 									</div>
@@ -125,15 +121,12 @@ class ProudctDetail extends React.Component {
 										<div className="col-md-6">
 											<div className="feature-box">
 												<i className="mdi mdi-truck-fast" />
-												<h6 className="text-info">Free Delivery</h6>
-												<p>Lorem ipsum dolor...</p>
-											</div>
+												<h6 className="text-info">Free Delivery</h6>											</div>
 										</div>
 										<div className="col-md-6">
 											<div className="feature-box">
 												<i className="mdi mdi-basket" />
 												<h6 className="text-info">100% Guarantee</h6>
-												<p>Lorem Ipsum Dolor sit...</p>
 											</div>
 										</div>
 									</div>
@@ -183,5 +176,7 @@ class ProudctDetail extends React.Component {
 
 export default withCartProductHOC(connect(store => ({
 	detailProduct: store.products.detailProduct,
-	cart: store.cart
+	cart: store.cart,
+	categories: store.products.categories,
+
 }))(ProudctDetail));
