@@ -28,6 +28,11 @@ const STATUS = {
     'is_active': [true, false]
 }
 
+const PATTERN = {
+    "email1": [/^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/, "Invalid email"],
+    "password": [/^(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{6,50}$/, "Invalid password"],
+}
+
 
 class FormOrder extends React.Component {
 
@@ -86,7 +91,7 @@ class FormOrder extends React.Component {
 
     getFormField = (type, { key, value }) => {
         switch (type) {
-            case "text": return <Input type={key == "password" ? key : type} />
+            case "text": return <Input type={key == "password" ? key : key == "email" ? key : type} maxLength= "50"/>
             case "tag": return this.formatTags({ key, tag: value })
             case "text_disabled": return <Input disabled />
             default: return <Input />
@@ -130,9 +135,12 @@ class FormOrder extends React.Component {
                                 label={_.upperFirst(key)}
                             >
                                 {getFieldDecorator(key, {
-                                    // rules: [{
-                                    //     required: true, message: 'Please input this feild!',
-                                    // }],
+                                    rules: [{
+                                        required: true,
+                                        message: PATTERN[key] ? PATTERN[key][1] : 'Please input this feild!',
+                                        pattern: PATTERN[key] ? PATTERN[key][0] : /./,
+                                        
+                                    }],
                                 })(
                                     this.getFormField(formType[key], { key, value: this.props.data[key] })
                                 )}
