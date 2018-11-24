@@ -30,9 +30,10 @@ class Checkout extends React.Component {
     }
 
     if (props.location.search) {
-      request().get("/paypal/confirm" + props.location.search)
+      let body = props.location.search.slice(1).split("&").reduce((cur, next) => ({ ...cur, [next.split("=")[0]]: next.split("=")[1] }), {})
+      request().post("/paypal/payment/", body)
         .then(res => {
-          this.setPaypal(res.data.message);
+          console.log(res);
         })
     }
   }
@@ -44,15 +45,7 @@ class Checkout extends React.Component {
     message.success("Now you can submit to make a payment with paypal!")
   }
 
-  onSubmitCheckout = async (e) => {
-    e.preventDefault();
-    /**
-     * billing_first_name
-     * billing_last_name
-     * billing_address
-     * billing_phone
-     * 
-     */
+  getBill = () => {
     const { cart } = this.props;
     const totalCartAmount = totalCart(cart);
     const bill = {
@@ -76,11 +69,22 @@ class Checkout extends React.Component {
       "last_name": getIdEle("billing_last_name").value,
       "address": getIdEle("billing_address").value
     };
+
     if (bill.money && bill.phone && bill.first_name && bill.last_name && bill.address) {
+      return bill;
+    } else {
+      return null;
+    }
+  }
+
+  onSubmitCheckout = async (e) => {
+    e.preventDefault();
+    const bill = this.getBill();
+    if (bill) {
       try {
         await this.props.dispatch(orderProducts(bill, this.state.paypal));
         const coundown = (i = 3) => {
-          if (i === 0 ) {
+          if (i === 0) {
             return this.props.history.push("/my-orders");
           } else {
             message.success("Order successful, redirect to orders in " + i + "s");
@@ -90,32 +94,29 @@ class Checkout extends React.Component {
           }
         }
         coundown();
-
       } catch (er) {
         message.error("Cant create order");
       }
-      // this.props.history.push("/checkout-success");
-    } else {
-      message.error("Please fill all form");
     }
-
   }
 
   onPaypal = (e) => {
     e.preventDefault();
-    const totalCartAmount = totalCart(this.props.cart);
-    request().get("/paypal/redirect?money=" + 2)
-      .then(res => {
-        window.location.replace(res.data);
-      })
-      .catch(er => {
-        message.error("Paypal orror!");
-      })
+    const bill = this.getBill();
+    if (bill) {
+      request().post("/paypal/redirect/", bill)
+        .then(res => {
+          if (res.data) {
+            window.open(res.data);
+          }
+        })
+        .catch(er => {
+          message.error(er.message || "Can not submit form with paypal");
+        })
+    } else {
+      message.error("Please fill all form");
+    }
   }
-
-  // componentDidMount(){
-  //     console.log(this.props.cart.items);
-  // }
 
   render() {
     const { cart } = this.props;

@@ -76,7 +76,7 @@ class MyOrders extends React.Component {
                                     this.state.ordersOnStep.map(order => (
                                         <Card
                                             key={order.id}
-                                            title={"shop"}
+                                            title={order.store.name}
                                             extra={<b>Payment: <Tag color={STATUS_COLOR[order.status_payment]} >{order.status_payment}</Tag></b>}
                                             style={{ marginBottom: "15px" }}
                                         >
@@ -85,7 +85,7 @@ class MyOrders extends React.Component {
                                                     <div key={product.id}>
                                                         <div className="row">
                                                             <div className="col-md-2">
-                                                                <img style={{ width: "100%" }} src={_staticUrl("/groci/wp-content/uploads/2018/08/1-1.jpg")} alt=""/>
+                                                                <img style={{ width: "100%" }} src={product.picture.length > 0 ? product.picture[0].image : _staticUrl("/groci/wp-content/uploads/2018/08/1-1.jpg")} alt=""/>
                                                             </div>
                                                             <div className="col-md-10">
                                                                 <h3>{product.name}</h3>
