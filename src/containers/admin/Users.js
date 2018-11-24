@@ -9,39 +9,6 @@ import {
   get as getUserBase
 } from "actions/admin/users";
 
-const data = [
-  {
-    "id": 41,
-    "groupUser": 1,
-    "email": "tired@gmail.com",
-    "is_superuser": false,
-    "last_login": null,
-    "first_name": "hai",
-    "last_name": "z",
-    "date_joined": "10:30:12 - 05/11/2018",
-    "is_active": true,
-    "avatar": null,
-    "is_staff": false,
-    "groups": [],
-    "user_permissions": []
-  },
-  {
-    "id": 42,
-    "groupUser": 2,
-    "email": "tired1@gmail.com",
-    "is_superuser": false,
-    "last_login": null,
-    "first_name": "abc",
-    "last_name": "zwd",
-    "date_joined": "10:30:12 - 05/11/2018",
-    "is_active": true,
-    "avatar": null,
-    "is_staff": false,
-    "groups": [],
-    "user_permissions": []
-  },
-];
-
 class Users extends React.Component {
   constructor(props) {
     super(props);
@@ -150,9 +117,9 @@ class Users extends React.Component {
               ...GROUP_USERS,
             }).map(([id, name]) => (
               <Tag
-              key={id}
-              color={this.state.filter == id ? "green" : "grey"}
-              onClick={this.filterTable(id)}
+                key={id}
+                color={this.state.filter == id ? "green" : "grey"}
+                onClick={this.filterTable(id)}
               >
                 {name}
               </Tag>
