@@ -51,7 +51,7 @@ class Dashboard extends React.Component {
                             />
                             <span style={{ float: "right" }}>Log out <Icon onClick={this.props.onClickLogout} type="logout" theme="outlined" /></span>
                         </Header>
-                        <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
+                        <Content style={{ margin: '24px 16px', padding: 24, minHeight: 280 }}>
                             {
                                 this.props.children
                             }

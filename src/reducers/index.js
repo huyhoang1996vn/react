@@ -9,6 +9,7 @@ import admin from "./admin";
 import owners from "./owners";
 import storers from "./storers";
 import orders from "./orders";
+import overviews from "./overviews";
 
 export default combineReducers({
     session,
@@ -19,5 +20,6 @@ export default combineReducers({
     admin,
     owners,
     storers,
-    orders
+    orders,
+    overviews
 })

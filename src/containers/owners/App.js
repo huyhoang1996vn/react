@@ -11,6 +11,7 @@ import {
     UserForm,
     UserTable
 } from "./storers";
+import Dashboard from "./Dashboard";
 
 const menuAdmin = [
     {
@@ -63,6 +64,7 @@ class Owners extends React.Component {
                     onClickLogout={this.props.onClickLogout}
                 >
                     <Switch>
+                        <Route exact path="/owners" component={Dashboard} />
                         <Route exact path="/owners/storers" component={UserTable} />
                         <Route exact path="/owners/storer/add" component={AddUser} />
                         <Route exact path="/owners/storer/:store_id" component={UserDetail} />
