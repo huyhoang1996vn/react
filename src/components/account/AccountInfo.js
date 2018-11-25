@@ -4,6 +4,10 @@ import React from "react";
 class AccountInfo extends React.Component {
     constructor(props) {
         super(props);
+        
+        if (props.data.role !== "customer") {
+            this.props.onLogout();
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -24,6 +28,7 @@ class AccountInfo extends React.Component {
     }
 
     render() {
+
         return (
             <div className="AccountInfo">
                 <div className="row">

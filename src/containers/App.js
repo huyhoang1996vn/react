@@ -34,54 +34,6 @@ function NotFound() {
     )
 }
 
-function TestPaypal(props) {
-    const clickBtn = (e) => { 
-        request().get("/paypal/redirect?money=2")
-            .then(res => {
-                console.log(res);
-                window.location.replace(res.data);
-            })
-    }
-    return (
-        <div>
-            <button onClick={clickBtn}>Click to payment</button>
-        </div>
-    )
-}
-
-function Confirm(props) {
-    // props.history.push("/checkout-confirm")
-    const clickBtn = (e) => {
-        request().get("/paypal/confirm" + props.location.search)
-            .then(res => {
-                const data = res.data.message;
-                request().post("/paypal/payment/", {
-                    "product": {
-                        "6": [
-                            { "product_id": 91, "quantity": 2 }
-                        ]
-                    },
-                    "money": parseInt(data.money),
-                    "phone": "0905137940",
-                    "first_name": "hoang",
-                    "last_name": "huy",
-                    "address": "356 ha noi",
-                    "token": data.TOKEN,
-                    "PayerID": data.PAYERID
-                }).then(res => {
-                    console.log("SUCCESS", res);
-                })
-                // window.location.replace(res.data);
-            })
-    }
-    return (
-        <div>
-            <button onClick={clickBtn}>Click to confirm</button>
-        </div>
-    )
-}
-
-
 class App extends Component {
     constructor(props) {
         super(props);
@@ -108,12 +60,9 @@ class App extends Component {
                         component={Storers}
                     />
 
-                    <Route path="/test-paypal" component={TestPaypal} />
-                    {/* <Route path="/checkout-confirm" component={Confirm} /> */}
-
-
                     <Route path="/login" component={SystemLogin} />
                     <Route path="/not-found" component={NotFound} />
+
                     <Route path="/" component={ClientApp} />
                 </Switch>
                 <Loading />

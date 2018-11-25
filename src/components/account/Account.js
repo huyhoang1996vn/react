@@ -303,6 +303,7 @@ class Account extends React.Component {
 											}}
 											data={this.props.userAuth.data}
 											onSubmitForm={this.onSubmitFormEdit}
+											onLogout={this.props.onLogout}
 										/>
 								}
 

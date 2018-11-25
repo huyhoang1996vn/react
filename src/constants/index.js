@@ -12,6 +12,12 @@ const STATUS_COLOR = {
     payment_error: "red",
 }
 
+const GROUP_USERS_NAME = {
+    'customer': 1,
+    'store': 2,
+    'owner': 3
+}
+
 const GROUP_USERS = {
     1: 'customer',
     2: 'store',
@@ -21,5 +27,6 @@ const GROUP_USERS = {
 export {
     STATUSES_ORDER,
     STATUS_COLOR,
-    GROUP_USERS
+    GROUP_USERS,
+    GROUP_USERS_NAME
 }

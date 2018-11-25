@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { message } from "antd";
+import qs from "qs";
 
 import { _url } from "config/utils";
 import { Link, withRouter } from "react-router-dom";
@@ -30,11 +31,27 @@ class Checkout extends React.Component {
     }
 
     if (props.location.search) {
-      let body = props.location.search.slice(1).split("&").reduce((cur, next) => ({ ...cur, [next.split("=")[0]]: next.split("=")[1] }), {})
+      // let body = props.location.search.slice(1).split("&").reduce((cur, next) => ({ ...cur, [next.split("=")[0]]: next.split("=")[1] }), {})
+      let body = qs.parse(props.location.search.slice(1));
+      body.list_order_code = eval(body.list_order_code);
+
       request().post("/paypal/payment/", body)
         .then(res => {
-          console.log(res);
+          if (res.data.message == "success") {
+            this.coundown();
+          }
         })
+    }
+  }
+
+  coundown = (i = 3) => {
+    if (i === 0) {
+      return this.props.history.push("/my-orders");
+    } else {
+      message.success("Order successful, redirect to orders in " + i + "s");
+      setTimeout(() => {
+        this.coundown(i - 1)
+      }, 1000);
     }
   }
 
@@ -83,17 +100,7 @@ class Checkout extends React.Component {
     if (bill) {
       try {
         await this.props.dispatch(orderProducts(bill, this.state.paypal));
-        const coundown = (i = 3) => {
-          if (i === 0) {
-            return this.props.history.push("/my-orders");
-          } else {
-            message.success("Order successful, redirect to orders in " + i + "s");
-            setTimeout(() => {
-              coundown(i - 1)
-            }, 1000);
-          }
-        }
-        coundown();
+        this.coundown();
       } catch (er) {
         message.error("Cant create order");
       }

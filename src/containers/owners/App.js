@@ -3,6 +3,15 @@ import { Switch, Route } from "react-router-dom";
 import { Icon } from 'antd';
 import { Dashboard as DashContainer } from "components/common";
 
+import { withDashboardHOC } from "components/HOC";
+
+import {
+    AddUser,
+    UserDetail,
+    UserForm,
+    UserTable
+} from "./storers";
+
 const menuAdmin = [
     {
         id: 0,
@@ -26,20 +35,6 @@ const menuAdmin = [
         path: "/owners/storers",
         icon: <Icon type="appstore" theme="outlined" />
     },
-    {
-        id: 5,
-        key: "information",
-        name: "Information",
-        path: "/owners/information",
-        icon: <Icon type="radius-bottomleft" theme="outlined" />
-    },
-    {
-        id: 5,
-        key: "remove",
-        name: "Remove",
-        path: "/owners/remove",
-        icon: <Icon type="delete" theme="outlined" />
-    }
 ]
 
 const findMenu = (key, value) => (data) => data.find(item => item[key] == value) || {}
@@ -65,9 +60,12 @@ class Owners extends React.Component {
                     onClickMenuItem={this.onClickMenuItem}
                     menu={menuAdmin}
                     menuSelected={findMenu('path', this.props.history.location.pathname)(menuAdmin).key}
-                    onClickLogout={this.onClickLogout}
+                    onClickLogout={this.props.onClickLogout}
                 >
                     <Switch>
+                        <Route exact path="/owners/storers" component={UserTable} />
+                        <Route exact path="/owners/storer/add" component={AddUser} />
+                        <Route exact path="/owners/storer/:store_id" component={UserDetail} />
                     </Switch>
                 </DashContainer>
             </div>
@@ -75,4 +73,4 @@ class Owners extends React.Component {
     }
 }
 
-export default Owners;
+export default withDashboardHOC(Owners);

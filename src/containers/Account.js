@@ -6,7 +6,8 @@ import { _url } from "config/utils";
 import {
     authLogin,
     authRegister,
-    editProfle
+    editProfle,
+    authLogout
 } from "actions/auth";
 
 
@@ -27,6 +28,7 @@ class Account extends React.Component {
     handleLogin = data => this.props.dispatch(authLogin(data));
     handleRegister = data => this.props.dispatch(authRegister(data));
     handleEditProfile = data => this.props.dispatch(editProfle(data));
+    handleLogout = () => this.props.dispatch(authLogout())
 
     render() {
         return (
@@ -39,6 +41,7 @@ class Account extends React.Component {
                     loginSuccess={() => {
                         this.props.history.push("/");
                     }}
+                    onLogout={this.handleLogout}
                 />
             </div>
         )
