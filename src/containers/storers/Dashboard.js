@@ -35,5 +35,5 @@ class Dashboard extends React.Component {
 }
 
 export default connect((state) => ({
-    overview: state.overviews.admin
+    overview: state.overviews.storer
 }))(Dashboard)

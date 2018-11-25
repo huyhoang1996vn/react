@@ -19,6 +19,7 @@ import {
     ProductDetail,
     AddProduct
 } from "containers/storers/products";
+import Dashboard from "./Dashboard";
 
 
 
@@ -90,6 +91,7 @@ class Storers extends React.Component {
                     onClickLogout={this.props.onClickLogout}
                 >
                     <Switch>
+                        <Route exact path="/storers" component={Dashboard} />
                         <Route exact path="/storers/orders" component={OrdersTable} />
                         <Route exact path="/storers/order/:order_id" component={OrderDetail} />
                         <Route exact path="/storers/products" component={ProductsTable} />
