@@ -104,7 +104,7 @@ class AboutUs extends React.Component {
                                 <div className="wpb_wrapper">
                                     <div className="klbiconbox">
                                         <div className="mt-4 mb-4"><i className="text-success mdi mdi mdi-truck-fast mdi-48px" /></div>
-                                        <h5 className="mb-3 text-secondary">Free &amp; Next Day Delivery</h5>
+                                        <h5 className="mb-3 text-secondary">Free Delivery</h5>
                                     </div>
                                 </div>
                             </div>
