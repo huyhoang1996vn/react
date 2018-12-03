@@ -28,14 +28,21 @@ class MyOrders extends React.Component {
         !props.isLogged && props.history.push("/my-account");
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (JSON.stringify(nextProps.orders) != JSON.stringify(this.props.orders)) {
+            this.chooseOrder(STATUSES_ORDER.status_order[this.state.step], nextProps)
+        }
+    }
+
     componentDidMount() {
         this.props.dispatch(getOrders());
         this.chooseOrder(STATUSES_ORDER.status_order[this.state.step])
     }
 
-    chooseOrder = status => {
+    chooseOrder = (status, props) => {
+        let _props = props ? props : this.props;
         let step = STATUSES_ORDER.status_order.indexOf(status);
-        let ordersOnStep = this.props.orders.filter(ordersStatus(status))
+        let ordersOnStep = _props.orders.filter(ordersStatus(status))
         this.setState({
             step,
             ordersOnStep
@@ -43,6 +50,7 @@ class MyOrders extends React.Component {
     }
 
     onClickSteper = (status) => () => {
+        console.log(status);
         this.chooseOrder(status);
     }
 
@@ -85,7 +93,7 @@ class MyOrders extends React.Component {
                                                     <div key={product.id}>
                                                         <div className="row">
                                                             <div className="col-md-2">
-                                                                <img style={{ width: "100%" }} src={product.picture.length > 0 ? product.picture[0].image : _staticUrl("/groci/wp-content/uploads/2018/08/1-1.jpg")} alt=""/>
+                                                                <img style={{ width: "100%" }} src={product.picture.length > 0 ? product.picture[0].image : _staticUrl("/groci/wp-content/uploads/2018/08/1-1.jpg")} alt="" />
                                                             </div>
                                                             <div className="col-md-10">
                                                                 <h3>{product.name}</h3>
@@ -94,7 +102,7 @@ class MyOrders extends React.Component {
                                                             </div>
                                                         </div>
                                                         <Divider />
-                                                    </div>        
+                                                    </div>
                                                 ))
                                             }
                                             <h1 className="text-right">{formatVnd(order.money)}</h1>
@@ -102,7 +110,7 @@ class MyOrders extends React.Component {
                                     ))
                                 }
                                 {
-                                     this.state.ordersOnStep.length == 0 && <p>No order with this status</p>
+                                    this.state.ordersOnStep.length == 0 && <p>No order with this status</p>
                                 }
                             </div>
                         </div>

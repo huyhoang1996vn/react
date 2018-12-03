@@ -30,13 +30,39 @@ function NotFound() {
 class ClientApp extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            actived_header: "home"
+        }
+
+        this.setActiveHeader(props.location.pathname)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setActiveHeader(nextProps.location.pathname)
+    }
+
+    setActiveHeader = (pathname) => {
+        let active = "home";
+        if (pathname == "/about-us") {
+            active = "about-us";
+        }
+        if (pathname == "/my-orders") {
+            active = "my-orders";
+        }
+        if (pathname.indexOf("category") >= 0) {
+            active = "category"
+        }
+        this.setState({
+            actived_header: active
+        })
     }
 
     render() {
         return (
             <div className="Client-App">
-                <Header />
+                <Header 
+                    actived={this.state.actived_header}
+                />
                 <Switch>
                     <Route exact path="/my-account" component={Account} />
                     <Route exact path="/product/:product_id" component={ProudctDetail} />
