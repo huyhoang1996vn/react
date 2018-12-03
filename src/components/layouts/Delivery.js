@@ -17,8 +17,7 @@ class Delivery extends React.Component {
                             <div className="vc_column-inner  klb_xs_vc_custom_1534495490041">
                                 <div className="wpb_wrapper">
                                     <div className="feature-box"><i className="mdi mdi mdi-truck-fast" />
-                                        <h6>Free &amp; Next Day Delivery</h6>
-                                        <p>Lorem ipsum dolor sit amet, cons...</p>
+                                        <h6>Free Delivery</h6>
                                     </div>
                                 </div>
                             </div>
@@ -29,7 +28,6 @@ class Delivery extends React.Component {
                                 <div className="wpb_wrapper">
                                     <div className="feature-box"><i className="mdi mdi mdi-basket" />
                                         <h6>100% Satisfaction Guarantee</h6>
-                                        <p>Rorem Ipsum Dolor sit amet, cons...</p>
                                     </div>
                                 </div>
                             </div>
@@ -38,8 +36,7 @@ class Delivery extends React.Component {
                             <div className="vc_column-inner  ">
                                 <div className="wpb_wrapper">
                                     <div className="feature-box"><i className="mdi mdi mdi-tag-heart" />
-                                        <h6>Great Daily Deals Discount</h6>
-                                        <p>Lorem ipsum dolor sit amet, cons...</p>
+                                        <h6>Prestige </h6>
                                     </div>
                                 </div>
                             </div>

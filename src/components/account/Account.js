@@ -251,13 +251,15 @@ class Account extends React.Component {
 												<form className="woocommerce-form woocommerce-form-register register" onSubmit={this.onSubmitFormRegister}>
 													<p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label htmlFor="reg_email">Email address&nbsp;<span className="required">*</span></label>
-														<input ref={this.form_data.register.email} type="email" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="email" id="reg_email"
-															autoComplete="off" minLength="10" maxLength="50" required="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="please enter email in correct format" />
+
+														<input ref={this.form_data.register.email} type="email" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="email" id="reg_email" 
+															autoComplete="off" minLength="10" maxLength="50" required="true" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$" title="Invalid email"/>
 													</p>
 													<p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label htmlFor="reg_email">Password&nbsp;<span className="required">*</span></label>
-														<input ref={this.form_data.register.password} type="password" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="password" id="reg_password"
-															autoComplete="new-password" minLength="6" required="true" pattern="[^' ']+" title="Password only include letters, digits and @/./+/-/_" />
+														<input ref={this.form_data.register.password} type="password" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="password" id="reg_password" 
+															autoComplete="new-password" minLength="6" maxLength="50" required="true" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{6,50}$" title="Password only include letters, digits and @/./+/-/_. Must include 6 character or longer. At least 1 upper character, 1 lower character." />
+
 													</p>
 													<p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label htmlFor="reg_email">Confirm&nbsp;<span className="required">*</span></label>

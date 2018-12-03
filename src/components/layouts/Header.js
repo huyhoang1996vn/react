@@ -76,9 +76,6 @@ class Header extends React.Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-6">
-                                <a href="/shop" className="mb-0 text-white">
-                                    20% cashback for all users | Code: <strong><span className="text-light">OGOFERS13 <span className="mdi mdi-tag-faces" /></span>
-                                    </strong> </a>
                             </div>
                             <div className="col-md-6 text-right top-right-menu">
                                 {
@@ -150,8 +147,8 @@ class Header extends React.Component {
                                 <li className="nav-item menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home active"><a className="nav-link" href="/">Home</a></li>
                                 <li className="nav-item menu-item menu-item-type-post_type menu-item-object-page"><a className="nav-link" href="/about-us">About
                   Us</a></li>
-                                <li className="nav-item menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a className="nav-link" href="/product-category/fruits-vegetables/">Headache
-                  &amp; Stomatche</a></li>
+                                {/* <li className="nav-item menu-item menu-item-type-taxonomy menu-item-object-product_cat"><a className="nav-link" href="/product-category/fruits-vegetables/">Headache
+                  &amp; Stomatche</a></li> */}
                                 <li className="nav-item dropdown menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children"><a className="nav-link dropdown-toggle" href="/shop/">Shop</a>
                                     <ul className="dropdown-menu">
                                         <li className="nav-item menu-item menu-item-type-post_type menu-item-object-page"><a className="nav-link dropdown-item" href="/shop/"><i className="mdi mdi-chevron-right" aria-hidden="true" /> Products Grid</a></li>
@@ -176,8 +173,8 @@ class Header extends React.Component {
                                         }
                                     </ul>
                                 </li>
-                                <li className="nav-item menu-item menu-item-type-post_type menu-item-object-page"><a className="nav-link" href="/faq/">FAQ</a></li>
-                                <li className="nav-item menu-item menu-item-type-post_type menu-item-object-page"><a className="nav-link" href="/contact-us/">Contact</a></li>
+                                <li className="nav-item menu-item menu-item-type-post_type menu-item-object-page"><a className="nav-link" href="#">FAQ</a></li>
+                                <li className="nav-item menu-item menu-item-type-post_type menu-item-object-page"><a className="nav-link" href="#">Contact</a></li>
                             </ul>
                         </div>
                     </div>
