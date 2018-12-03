@@ -27,14 +27,14 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+        if (props.userAuth && props.userAuth.role && props.userAuth.role !== 'customer') {
+            window.location.href = "/login"
+        }
     }
-
-    // static getDerivedStateFromProps(props) {
-    //     return {};
-    // }
 
     componentDidMount() {
         document.getElementById("btn-run-slider").click();
+        
     }
 
     render() {
@@ -56,6 +56,7 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        userAuth: state.session.userAuth.data,
         products: state.products
     }
 }
