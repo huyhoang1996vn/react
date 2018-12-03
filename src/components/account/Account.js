@@ -72,18 +72,8 @@ class Account extends React.Component {
 				email: this.valForm("login", "email"),
 				password: this.valForm("login", "password")
 			});
-			const coundown = (i = 2) => {
-				if (i === 0 ) {
-				  return this.props.loginSuccess();
-				} else {
-				  message.success("Go to home in " + i + "s");
-				  setTimeout(() => {
-					coundown(i - 1)
-				  }, 1000);
-				}
-			  }
-			  coundown();
-			
+			this.props.loginSuccess();
+
 		} catch (er) {
 			this.handleError("login", "Email or password invalid!")
 		}
@@ -145,8 +135,10 @@ class Account extends React.Component {
 			alert("Register successful!");
 		} catch (er) {
 			let error = "Can not register with your info!";
-			if (er.response.data) {
+			if (er.response && er.response.data) {
 				error = Object.values(er.response.data)[0];
+			} else {
+				error = er.message
 			}
 			this.handleError("register", error)
 		}
@@ -228,13 +220,13 @@ class Account extends React.Component {
 												<form name="formLogin" className="woocommerce-form woocommerce-form-login login" onSubmit={this.onSubmitFormLogin}>
 													<p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label htmlFor="username">Email address<span className="required">*</span></label>
-														<input ref={this.form_data.login.email} type="email" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="email" id="email" 
-															autoComplete="off" minLength="10" maxLength="50" required="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="please enter email in correct format"/>
+														<input ref={this.form_data.login.email} type="email" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="email" id="email"
+															autoComplete="off" minLength="10" maxLength="50" required="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="please enter email in correct format" />
 													</p>
 
 													<p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label htmlFor="password">Password<span className="required">*</span></label>
-														<input ref={this.form_data.login.password} className="woocommerce-Input woocommerce-Input--text input-text form-control" type="password" name="password" id="password" 
+														<input ref={this.form_data.login.password} className="woocommerce-Input woocommerce-Input--text input-text form-control" type="password" name="password" id="password"
 															autoComplete="new-password" minLength="6" required="true" pattern="[^' ']+" title="Password only include letters, digits and @/./+/-/_" />
 													</p>
 
@@ -259,6 +251,7 @@ class Account extends React.Component {
 												<form className="woocommerce-form woocommerce-form-register register" onSubmit={this.onSubmitFormRegister}>
 													<p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label htmlFor="reg_email">Email address&nbsp;<span className="required">*</span></label>
+
 														<input ref={this.form_data.register.email} type="email" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="email" id="reg_email" 
 															autoComplete="off" minLength="10" maxLength="50" required="true" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,4}$" title="Invalid email"/>
 													</p>
@@ -266,6 +259,7 @@ class Account extends React.Component {
 														<label htmlFor="reg_email">Password&nbsp;<span className="required">*</span></label>
 														<input ref={this.form_data.register.password} type="password" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="password" id="reg_password" 
 															autoComplete="new-password" minLength="6" maxLength="50" required="true" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{6,50}$" title="Password only include letters, digits and @/./+/-/_. Must include 6 character or longer. At least 1 upper character, 1 lower character." />
+
 													</p>
 													<p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label htmlFor="reg_email">Confirm&nbsp;<span className="required">*</span></label>

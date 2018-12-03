@@ -4,10 +4,6 @@ import React from "react";
 class AccountInfo extends React.Component {
     constructor(props) {
         super(props);
-        
-        if (props.data.role !== "customer") {
-            this.props.onLogout();
-        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -59,7 +55,7 @@ class AccountInfo extends React.Component {
                             <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                 <label htmlFor="reg_edit_email">Password&nbsp;<span className="required">*</span></label>
                                 <input ref={this.props.form_data.editPass.password} type="password" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="password" id="reg_edit_password" 
-                                    autoComplete="new-password" minLength="6" required="true" pattern="[^' ']+" title="Password only include letters, digits and @/./+/-/_" />
+                                    autoComplete="new-password" minLength="6" required pattern="[^' ']+" title="Password only include letters, digits and @/./+/-/_" />
                             </p>
                             <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                                 <label htmlFor="reg_edit_email">Confirm&nbsp;<span className="required">*</span></label>
