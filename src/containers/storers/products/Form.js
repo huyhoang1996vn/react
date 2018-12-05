@@ -19,6 +19,7 @@ const formType = {
     expire_date: "datePicker",
     created: "text_disable",
     price: "text",
+    count_in_stock: "text",
     tax: "text",
 }
 

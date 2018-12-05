@@ -53,6 +53,11 @@ class ProductsTable extends React.Component {
             dataIndex: 'price',
             sorter: (a, b) => parseFloat(a.price) - parseFloat(b.price),
         }, {
+            title: 'In stock',
+            key: 'count_in_stock',
+            dataIndex: 'count_in_stock',
+            sorter: (a, b) => parseFloat(a.count_in_stock) - parseFloat(b.count_in_stock),
+        }, {
             title: 'Tax',
             key: 'tax',
             dataIndex: 'tax',

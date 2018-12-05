@@ -11,7 +11,7 @@ export const DEL_PRODUCT = getActionType(prefix)("DEL_PRODUCT");
 
 
 export const getProducts = () => dispatch => {
-    return request().get("/product/").then(res => {
+    return request().get("/product/store/").then(res => {
         if (res.data.length >= 0) {
             dispatch({
                 type: GET_PRODUCTS,
@@ -22,7 +22,7 @@ export const getProducts = () => dispatch => {
 }
 
 export const getProduct = (product_id) => dispatch => {
-    return request().get(`/product/${product_id}/`).then(res => {
+    return request().get(`/product/store/${product_id}/`).then(res => {
         dispatch({
             type: GET_PRODUCT,
             product: res.data
@@ -33,7 +33,7 @@ export const getProduct = (product_id) => dispatch => {
 export const updateProduct = (product_id, form_data) => dispatch => {
     return request({
         "Content-Type": 'multipart/form-data'
-    }).put(`/product/${product_id}/`, form_data).then(res => {
+    }).put(`/product/store/${product_id}/`, form_data).then(res => {
         dispatch({
             type: GET_PRODUCT,
             product: res.data
@@ -44,11 +44,11 @@ export const updateProduct = (product_id, form_data) => dispatch => {
 export const addProduct = (form_data) => dispatch => {
     return request({
         "Content-Type": 'multipart/form-data'
-    }).post(`/product/`, form_data)
+    }).post(`/product/store/`, form_data)
 }
 
 export const delProduct = (product_id) => dispatch => {
-    return request().delete(`/product/${product_id}/`).then(res => {
+    return request().delete(`/product/store/${product_id}/`).then(res => {
         dispatch({
             type: DEL_PRODUCT,
             product_id
