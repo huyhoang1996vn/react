@@ -34,12 +34,23 @@ const getUrlImage = product => {
   return urlImage;
 }
 
+const getImagesUrl = image => {
+  let urlImage = _staticUrl("/groci/wp-content/uploads/2018/08/2-1.jpg");
+  if (!~image.indexOf("http")) {
+    urlImage = _apiUrl(image);
+  } else {
+    urlImage = image;
+  }
+  return urlImage
+}
+
 
 class ProudctDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      num_add_to_cart: 1
+      num_add_to_cart: 1,
+      curImageShowing: null
     }
 
     this.getProduct(props.match.params.product_id);
@@ -85,16 +96,41 @@ class ProudctDetail extends React.Component {
     })
   }
 
+  onSelectImage = imageUrl => () => {
+    this.setState({
+      curImageShowing: imageUrl
+    })
+  }
+
   render() {
     const { product, relatedProducts } = this.props.detailProduct;
     let urlImage = getUrlImage(product);
+    let listImages = product.picture || [];
     return (
       <div className="ProudctDetail">
         <section className="shop-single section-padding pt-3">
           <div className="container">
             <div className="row">
               <div className="col-md-6">
-                <img src={urlImage} alt="" />
+                <div style={{ height: "300px" }}>
+                  <img style={{ height: "100%" }} src={this.state.curImageShowing || urlImage} alt="" />
+                </div>
+                <br />
+                <br />
+                <div style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  height: "150px",
+                  justifyContent: "space-between"
+                }}>
+                  {
+                    listImages.map(pic => {
+                      return (
+                        <div onClick={this.onSelectImage(getImagesUrl(pic.image))}><img src={getImagesUrl(pic.image)} style={{ cursor: "pointer", height: "100%" }} /></div>
+                      )
+                    })
+                  }
+                </div>
               </div>
               <div className="col-md-6">
                 <div className="shop-detail-right klb-product-right">
@@ -121,9 +157,9 @@ class ProudctDetail extends React.Component {
                     <span className="posted_in">
                       Category:
                       {
-                        product.category.map(id => {
+                        product.category && product.category.map(id => {
                           return (
-                            <a href="/groci/product-category/fruits-vegetables/" rel="tag">
+                            <a href="#" rel="tag">
                               {
                                 this.props.categories.find(ct => ct.id == id).name
                               }
