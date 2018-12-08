@@ -7,7 +7,7 @@ import { _url } from "config/utils";
 import { Link, withRouter } from "react-router-dom";
 import request from "api/request";
 
-import { vndToUsd } from "../constants/func.utils";
+import { getDataObject } from "../constants/func.utils";
 
 // actions 
 import {
@@ -27,7 +27,8 @@ class Checkout extends React.Component {
         PAYERID: null,
         currency: null,
         money: null,
-      }
+      },
+      productsUnStock: [],
     }
 
     if (props.location.search) {
@@ -102,7 +103,7 @@ class Checkout extends React.Component {
         await this.props.dispatch(orderProducts(bill, this.state.paypal));
         this.coundown();
       } catch (er) {
-        message.error("Cant create order");
+        this.handleErrors(er);
       }
     }
   }
@@ -118,15 +119,26 @@ class Checkout extends React.Component {
           }
         })
         .catch(er => {
-          message.error(er.message || "Can not submit form with paypal");
+          this.handleErrors(er);
         })
     } else {
       message.error("Please fill all form");
     }
   }
 
+  handleErrors = er => {
+    let productsUnStock = getDataObject(er, "response.data.fields");
+    if (productsUnStock) {
+      message.error("1 số sản phẩm có thể không đủ số lượng, vui lòng kiểm tra lại");
+      this.setState({
+        productsUnStock
+      })
+    }
+  }
+
   render() {
     const { cart } = this.props;
+    const { productsUnStock } = this.state;
     const totalCartAmount = totalCart(cart);
     return (
       <div className="Checkout">
@@ -204,14 +216,17 @@ class Checkout extends React.Component {
                         </tr>
                       </thead>
                       <tbody>{
-                        cart.items.map((cartItem, index) => (
-                          <tr key={index} className="cart_item">
-                            <td className="product-name">
-                              <Link to={`/product/${cartItem.product.id}`}>{cartItem.product.name}</Link>&nbsp; <strong className="product-quantity">x{cartItem.quantity}</strong>													</td>
-                            <td className="product-total">
-                              <span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{cartItem.product.price * cartItem.quantity}</span>						</td>
-                          </tr>
-                        ))
+                        cart.items.map((cartItem, index) => {
+                          let isProductUnStock = ~productsUnStock.indexOf(cartItem.product.id);
+                          return (
+                            <tr key={index} className="cart_item">
+                              <td className="product-name">
+                                <Link style={{ color: `${isProductUnStock ? 'red' : 'green'}` }} to={`/product/${cartItem.product.id}`}>{cartItem.product.name}</Link>&nbsp; <strong className="product-quantity">x{cartItem.quantity}</strong> <strong style={{ color: "red" }}>{isProductUnStock ? "Hàng không đủ số lượng" : ""}</strong></td>
+                              <td className="product-total">
+                                <span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{cartItem.product.price * cartItem.quantity}</span>						</td>
+                            </tr>
+                          )
+                        })
                       }
                       </tbody>
                       <tfoot>
