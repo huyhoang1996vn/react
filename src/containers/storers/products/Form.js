@@ -4,6 +4,7 @@ import _ from "lodash";
 import uuid from "uuid";
 
 import moment from 'moment';
+import TextArea from "antd/lib/input/TextArea";
 const dateFormat = 'DD/MM/YYYY';
 
 
@@ -20,6 +21,7 @@ const formType = {
     created: "text_disable",
     price: "text",
     count_in_stock: "text",
+    detail : "text_area",
     tax: "text",
 }
 
@@ -151,6 +153,7 @@ class FormOrder extends React.Component {
 
     getFormField = (type, { key, data }) => {
         switch (type) {
+            case "text_area": return <TextArea rows="4" />
             case "text": return <Input />
             case "text_disable": return <Input disabled />
             case "datePicker": return <DatePicker />
