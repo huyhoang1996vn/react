@@ -1,7 +1,9 @@
 import React from "react";
 import { message } from "antd";
+import TextArea from "antd/lib/input/TextArea";
 
 import { Link } from "react-router-dom";
+
 
 import { connect } from "react-redux";
 
@@ -110,7 +112,9 @@ class ProudctDetail extends React.Component {
                   </form>
                   <div className="woocommerce-product-details__short-description short-description">
                     <h5>Quick Overview</h5>
-                    <p>{product.detail}</p>
+                    <TextArea rows={5}>
+                      {product.detail}
+                    </TextArea>
 
                   </div>
                   <div className="product_meta">
