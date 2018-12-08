@@ -96,14 +96,12 @@ class Header extends React.Component {
           </div>
         </div>
 
-
-
         <nav className="navbar navbar-light navbar-expand-lg bg-dark bg-faded osahan-menu klb-middle">
           <div className="container">
             <div className="row">
               <div className="col-xs-6 col-md-3 klb-clear order-xs-first">
                 <Link className="navbar-brand" to="/" title="Groci – Organic Food and Grocery Theme">
-                  <img src={_staticUrl("/groci/wp-content/uploads/2018/08/logo-1.png")} alt="Groci – Organic Food and Grocery Theme" />
+                  <img style={{ height: "100%" }} src={_staticUrl("/assets/images/logo.png")} alt="Groci – Organic Food and Grocery Theme" />
                 </Link>
               </div>
               <div className="col-xs-12 col-md-6">
