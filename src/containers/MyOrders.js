@@ -55,6 +55,7 @@ class MyOrders extends React.Component {
     }
 
     render() {
+        console.log(this.state.ordersOnStep)
         return (
             <div className="MyOrders">
                 <section className="section-padding bg-dark inner-header klb-breadcrumb">
@@ -88,6 +89,7 @@ class MyOrders extends React.Component {
                                             extra={<b>Payment: <Tag color={STATUS_COLOR[order.status_payment]} >{order.status_payment}</Tag></b>}
                                             style={{ marginBottom: "15px" }}
                                         >
+                                        <p> {order.created} </p>
                                             {
                                                 order.products.map(product => (
                                                     <div key={product.id}>
