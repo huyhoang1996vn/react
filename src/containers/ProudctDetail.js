@@ -148,7 +148,7 @@ class ProudctDetail extends React.Component {
                   </form>
                   <div className="woocommerce-product-details__short-description short-description">
                     <h5>Quick Overview</h5>
-                    <TextArea rows={5}>
+                    <TextArea rows={5} readOnly>
                       {product.detail}
                     </TextArea>
 
