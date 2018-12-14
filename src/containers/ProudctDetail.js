@@ -13,10 +13,15 @@ import { formatVnd } from "constants/func.utils";
 // acitons
 import {
   getProductById,
-  getProductsByCategory
+  getProductsByCategory,
+  postFeedbackProduct,
+  getFeedbackProduct
 } from "actions/products";
 
+// components
 import { withCartProductHOC } from "components/HOC";
+import { FeedBack } from "components/product";
+
 
 const getUrlImage = product => {
   let urlImage = _staticUrl("/groci/wp-content/uploads/2018/08/2-1.jpg");
@@ -65,9 +70,9 @@ class ProudctDetail extends React.Component {
     })
   }
 
-
   getProduct = (id) => {
     this.props.dispatch(getProductById(id));
+    this.props.dispatch(getFeedbackProduct(id));
   }
 
   onAddToCart = product => e => {
@@ -102,8 +107,18 @@ class ProudctDetail extends React.Component {
     })
   }
 
+  handleSubmitFormFeedBack = data => {
+    const body = {
+      product: this.props.detailProduct.product.id,
+      store: this.props.detailProduct.product.stores.id,
+      detail: data.comment,
+      star: data.rate,
+    }
+    this.props.dispatch(postFeedbackProduct(body))
+  }
+
   render() {
-    const { product, relatedProducts } = this.props.detailProduct;
+    const { product, relatedProducts, feedbacks } = this.props.detailProduct;
     let urlImage = getUrlImage(product);
     let listImages = product.picture || [];
     return (
@@ -148,10 +163,7 @@ class ProudctDetail extends React.Component {
                   </form>
                   <div className="woocommerce-product-details__short-description short-description">
                     <h5>Quick Overview</h5>
-                    <TextArea rows={5} readOnly>
-                      {product.detail}
-                    </TextArea>
-
+                    <TextArea rows={5} value={product.detail} readOnly />
                   </div>
                   <div className="product_meta">
                     <span className="posted_in">
@@ -168,7 +180,7 @@ class ProudctDetail extends React.Component {
                         })
                       }
                     </span>
-                    <br/>
+                    <br />
                     <span className="posted_in">
                       Cửa hàng:
                       <a href="#" rel="tag">
@@ -194,6 +206,15 @@ class ProudctDetail extends React.Component {
                   </div>
                 </div>
               </div>
+
+              <div className="col-md-12">
+
+                <section className="related products klb-product-tab">
+                  <h2>Feed back</h2>
+                  <FeedBack feedbacks={feedbacks} onSubmitFeedBack={this.handleSubmitFormFeedBack} />
+                </section>
+              </div>
+
               <div className="col-md-12">
 
                 <section className="related products klb-product-tab">

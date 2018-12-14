@@ -79,3 +79,24 @@ export const searchProductsByName = keyword => dispatch => {
         */
     })
 }
+
+export const POST_FEED_BACK_PRODUCT = getActionType("POST_FEED_BACK_PRODUCT");
+export const postFeedbackProduct = data => dispatch => {
+    return request().post(`/feedback/`, data).then(res => {
+        dispatch({
+            type: POST_FEED_BACK_PRODUCT,
+            feedback: res.data
+        })
+    })
+}
+
+export const GET_FEED_BACK_PRODUCT = getActionType("GET_FEED_BACK_PRODUCT");
+export const getFeedbackProduct = (product_id) => dispatch => {
+    return request().get(`/feedback/?product=${product_id}`).then(res => {
+        dispatch({
+            type: GET_FEED_BACK_PRODUCT,
+            feedbacks: res.data || []
+        })
+    })
+}
+
