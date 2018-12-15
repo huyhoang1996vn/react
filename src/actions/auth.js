@@ -66,3 +66,11 @@ export const editProfle = (data) => dispatch => {
         })
     })
 }
+
+export const changePassword = (data) => dispatch => {
+    return request({
+        // "X-CSRFToken": "DZYMwEskKyMdu0LyJ7EqTAuWyndLN0PRL3t6uwa8LpkpDBqEE1kPCM8LfX3bvrcx",
+        // "xsrfHeaderName": "X-CSRFToken",
+        // "xsrfCookieName": "XSRF-TOKEN"
+    }).post("/change/pasword/", data)
+}

@@ -4,10 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import AdminApp from "containers/admin/App";
 import Owners from "containers/owners/App";
 import Storers from "containers/storers/App";
-
-
-import request from "api/request";
-
+import Profile from "containers/Profile";
 
 // Components
 import { AuthRoute } from "components";
@@ -18,7 +15,7 @@ import {
 
 import {
     ClientApp,
-    SystemLogin
+    SystemLogin,
 } from "./index";
 
 // Midleware
@@ -60,6 +57,7 @@ class App extends Component {
                         component={Storers}
                     />
 
+                    <Route path="/profile" component={Profile} />
                     <Route path="/login" component={SystemLogin} />
                     <Route path="/not-found" component={NotFound} />
 
