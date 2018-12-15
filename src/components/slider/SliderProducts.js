@@ -67,8 +67,8 @@ class SliderProducts extends React.Component {
                                 <div className="wpb_wrapper">
                                     <section className="product-items-slider section-padding">
                                         <div className="section-header">
-                                            <h5 className="heading-design-h5">Top Today <span className="badge badge-primary" style={{ backgroundColor: '#007bff' }}>Free Delivery</span>
-                                            <a className="float-right text-secondary" href="#" title="View All" target=" _blank">View All</a></h5>
+                                            <h5 className="heading-design-h5">{this.props.titleSlider || "Products"}
+                                            <a className="float-right text-secondary" href="/" title="View All">View All</a></h5>
                                         </div>
                                         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
                                             {listProducts}

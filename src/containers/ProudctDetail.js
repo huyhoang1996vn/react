@@ -183,11 +183,14 @@ class ProudctDetail extends React.Component {
                     <br />
                     <span className="posted_in">
                       Cửa hàng:
-                      <a href="#" rel="tag">
-                        {
-                          product.stores.name + " | " + product.stores.phone
-                        }
-                      </a>
+                      {
+                        product.stores ? <a href="#" rel="tag">
+                          {
+                            product.stores.name + " | " + product.stores.phone
+                          }
+                        </a> : <a href="#" rel="tag">No storer</a>
+                      }
+
                     </span>
                   </div>
                   <h6 className="mb-3 mt-4">Why shop from Groci?</h6>

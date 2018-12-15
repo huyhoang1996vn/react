@@ -49,7 +49,7 @@ export const getDetail = (id) => (dispatch) => {
 export const updateDetail = (id, data = {}) => (dispatch) => {
     return request().put("/userbase/" + id + "/", data)
         .then(res => {
-            if(res.data.id) {
+            if (res.data.id) {
                 dispatch({
                     type: GET_DETAIL,
                     data: res.data
@@ -61,11 +61,9 @@ export const updateDetail = (id, data = {}) => (dispatch) => {
 export const deleteOne = (id) => (dispatch) => {
     return request().delete("/userbase/" + id + "/")
         .then(res => {
-            if(res.data.id) {
-                dispatch({
-                    type: DELETE,
-                    user_id: id
-                })
-            }
+            dispatch({
+                type: DELETE,
+                user_id: id
+            })
         })
 }

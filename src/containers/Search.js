@@ -50,10 +50,16 @@ class Search extends React.Component {
         this.props.dispatch(searchProductsByName(keyword)); 
     }
 
+    getTitleForSlider = () => {
+        if (this.props.products.searchedProducts.length > 0) return `Kết quả tìm kiếm với từ khóa: ${this.props.match.params.keyword}`;
+        return `Không tìm thấy kết quả với từ khóa: ${this.props.match.params.keyword}`
+    }
+
     render() {
         return (
             <div className="Search">
                 <SliderProducts 
+                    titleSlider={this.getTitleForSlider()}
                     products={this.props.products.searchedProducts}
                 />
                 <Delivery />
