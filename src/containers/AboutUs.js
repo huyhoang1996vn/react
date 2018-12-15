@@ -1,5 +1,5 @@
 import React from "react";
-import { _url } from "config/utils";
+import { _url, _staticUrl } from "config/utils";
 
 // components
 import { GoogleMapPosition } from "components/google-maps"
@@ -35,7 +35,7 @@ class AboutUs extends React.Component {
                                 <div className="wpb_wrapper">
                                     <div className="wpb_single_image wpb_content_element vc_align_left">
                                         <figure className="wpb_wrapper vc_figure">
-                                            <div className="vc_single_image-wrapper   vc_box_border_grey"><img width={600} height={732} src="/groci/wp-content/uploads/2018/08/about.jpg" className="vc_single_image-img attachment-full" alt srcSet="/groci/wp-content/uploads/2018/08/about.jpg 600w, /groci/wp-content/uploads/2018/08/about-246x300.jpg 246w" sizes="(max-width: 600px) 100vw, 600px" /></div>
+                                            <div className="vc_single_image-wrapper   vc_box_border_grey"><img width={600} height={732} src={_staticUrl("/groci/wp-content/uploads/2018/08/about.jpg")} className="vc_single_image-img attachment-full" alt srcSet="/groci/wp-content/uploads/2018/08/about.jpg 600w, /groci/wp-content/uploads/2018/08/about-246x300.jpg 246w" sizes="(max-width: 600px) 100vw, 600px" /></div>
                                         </figure>
                                     </div>
                                 </div>
