@@ -6,7 +6,8 @@ import { GROUP_USERS } from "constants/index";
 
 // actions 
 import {
-  get as getUserBase
+  get as getUserBase,
+  deleteOne
 } from "actions/admin/users";
 
 class Users extends React.Component {
@@ -65,8 +66,8 @@ class Users extends React.Component {
             <a onClick={this.onClickAction("detail")(record)} href="javascript:;">View</a>
             <Divider type="vertical" />
             <a onClick={this.onClickAction("detail")(record)} href="javascript:;">Edit</a>
-            {/* <Divider type="vertical" /> */}
-            {/* <a onClick={this.onClickAction("activation")(record)} href="javascript:;">Disable</a> */}
+            <Divider type="vertical" />
+            <a onClick={this.onClickAction("delete")(record)} href="javascript:;">Delete</a>
           </span>
         ),
       }
@@ -92,6 +93,9 @@ class Users extends React.Component {
       }
       case "activation": {
         return;
+      }
+      case "delete": {
+        return this.props.dispatch(deleteOne(record.id));
       }
       default: return;
     }

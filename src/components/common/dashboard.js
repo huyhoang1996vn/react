@@ -72,7 +72,7 @@ Dashboard.propTypes = {
 }
 
 Dashboard.defaultProps = {
-    title: "Admin",
+    title: "",
     logo: "/assets/images/logo.png",
     menu: [],
     onClickMenuItem () {},

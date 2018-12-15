@@ -7,6 +7,7 @@ const prefix = "action.admin.users";
 
 export const GET = getActionType(prefix)("GET");
 export const GET_DETAIL = getActionType(prefix)("GET_DETAIL");
+export const DELETE = getActionType(prefix)("DELETE");
 
 
 export const get = () => (dispatch) => {
@@ -52,6 +53,18 @@ export const updateDetail = (id, data = {}) => (dispatch) => {
                 dispatch({
                     type: GET_DETAIL,
                     data: res.data
+                })
+            }
+        })
+}
+
+export const deleteOne = (id) => (dispatch) => {
+    return request().delete("/userbase/" + id + "/")
+        .then(res => {
+            if(res.data.id) {
+                dispatch({
+                    type: DELETE,
+                    user_id: id
                 })
             }
         })

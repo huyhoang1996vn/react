@@ -1,6 +1,7 @@
 import {
     GET,
-    GET_DETAIL
+    GET_DETAIL,
+    DELETE
 } from "actions/admin/users";
 
 const defaultState = {
@@ -20,6 +21,13 @@ export default function(state = defaultState, action) {
             return {
                 ...state,
                 detail: action.data
+            }
+        }
+
+        case DELETE: {
+            return {
+                ...state,
+                all: state.all.filter(user => user.id != action.user_id)
             }
         }
 
