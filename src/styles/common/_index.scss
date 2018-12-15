@@ -107,7 +107,11 @@ input, button {
       }
 }
 
-
-  
-  
-  
+.SearchInput {
+  display: flex;
+  justify-content: flex-end;
+  input {
+    width: 300px;
+  }
+  margin: 15px 0;
+}

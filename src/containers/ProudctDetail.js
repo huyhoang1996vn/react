@@ -1,7 +1,9 @@
 import React from "react";
 import { message } from "antd";
+import TextArea from "antd/lib/input/TextArea";
 
 import { Link } from "react-router-dom";
+
 
 import { connect } from "react-redux";
 
@@ -11,10 +13,15 @@ import { formatVnd } from "constants/func.utils";
 // acitons
 import {
   getProductById,
-  getProductsByCategory
+  getProductsByCategory,
+  postFeedbackProduct,
+  getFeedbackProduct
 } from "actions/products";
 
+// components
 import { withCartProductHOC } from "components/HOC";
+import { FeedBack } from "components/product";
+
 
 const getUrlImage = product => {
   let urlImage = _staticUrl("/groci/wp-content/uploads/2018/08/2-1.jpg");
@@ -32,12 +39,23 @@ const getUrlImage = product => {
   return urlImage;
 }
 
+const getImagesUrl = image => {
+  let urlImage = _staticUrl("/groci/wp-content/uploads/2018/08/2-1.jpg");
+  if (!~image.indexOf("http")) {
+    urlImage = _apiUrl(image);
+  } else {
+    urlImage = image;
+  }
+  return urlImage
+}
+
 
 class ProudctDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      num_add_to_cart: 1
+      num_add_to_cart: 1,
+      curImageShowing: null
     }
 
     this.getProduct(props.match.params.product_id);
@@ -52,9 +70,9 @@ class ProudctDetail extends React.Component {
     })
   }
 
-
   getProduct = (id) => {
     this.props.dispatch(getProductById(id));
+    this.props.dispatch(getFeedbackProduct(id));
   }
 
   onAddToCart = product => e => {
@@ -83,16 +101,51 @@ class ProudctDetail extends React.Component {
     })
   }
 
+  onSelectImage = imageUrl => () => {
+    this.setState({
+      curImageShowing: imageUrl
+    })
+  }
+
+  handleSubmitFormFeedBack = data => {
+    const body = {
+      product: this.props.detailProduct.product.id,
+      store: this.props.detailProduct.product.stores.id,
+      detail: data.comment,
+      star: data.rate,
+    }
+    this.props.dispatch(postFeedbackProduct(body))
+  }
+
   render() {
-    const { product, relatedProducts } = this.props.detailProduct;
+    const { product, relatedProducts, feedbacks } = this.props.detailProduct;
     let urlImage = getUrlImage(product);
+    let listImages = product.picture || [];
     return (
       <div className="ProudctDetail">
         <section className="shop-single section-padding pt-3">
           <div className="container">
             <div className="row">
               <div className="col-md-6">
-                <img src={urlImage} alt="" />
+                <div style={{ height: "300px" }}>
+                  <img style={{ height: "100%" }} src={this.state.curImageShowing || urlImage} alt="" />
+                </div>
+                <br />
+                <br />
+                <div style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  height: "150px",
+                  justifyContent: "space-between"
+                }}>
+                  {
+                    listImages.map(pic => {
+                      return (
+                        <div onClick={this.onSelectImage(getImagesUrl(pic.image))}><img src={getImagesUrl(pic.image)} style={{ cursor: "pointer", height: "100%" }} /></div>
+                      )
+                    })
+                  }
+                </div>
               </div>
               <div className="col-md-6">
                 <div className="shop-detail-right klb-product-right">
@@ -110,16 +163,15 @@ class ProudctDetail extends React.Component {
                   </form>
                   <div className="woocommerce-product-details__short-description short-description">
                     <h5>Quick Overview</h5>
-                    <p>{product.detail}</p>
-
+                    <TextArea rows={5} value={product.detail} readOnly />
                   </div>
                   <div className="product_meta">
                     <span className="posted_in">
                       Category:
                       {
-                        product.category.map(id => {
+                        product.category && product.category.map(id => {
                           return (
-                            <a href="/groci/product-category/fruits-vegetables/" rel="tag">
+                            <a href="#" rel="tag">
                               {
                                 this.props.categories.find(ct => ct.id == id).name
                               }
@@ -127,6 +179,18 @@ class ProudctDetail extends React.Component {
                           )
                         })
                       }
+                    </span>
+                    <br />
+                    <span className="posted_in">
+                      Cửa hàng:
+                      {
+                        product.stores ? <Link to={`/search/storer=${product.stores.id}`}>
+                          {
+                            product.stores.name + " | " + product.stores.phone
+                          }
+                        </Link> : <a href="#" rel="tag">No storer</a>
+                      }
+
                     </span>
                   </div>
                   <h6 className="mb-3 mt-4">Why shop from Groci?</h6>
@@ -145,6 +209,15 @@ class ProudctDetail extends React.Component {
                   </div>
                 </div>
               </div>
+
+              <div className="col-md-12">
+
+                <section className="related products klb-product-tab">
+                  <h2>Feed back</h2>
+                  <FeedBack feedbacks={feedbacks} onSubmitFeedBack={this.handleSubmitFormFeedBack} />
+                </section>
+              </div>
+
               <div className="col-md-12">
 
                 <section className="related products klb-product-tab">

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { message } from "antd";
 import qs from "qs";
 
-import { _url } from "config/utils";
+import { _url, _staticUrl } from "config/utils";
 import { Link, withRouter } from "react-router-dom";
 import request from "api/request";
 
@@ -258,7 +258,7 @@ class Checkout extends React.Component {
                           </div>
                         </div>
                         <button type="submit" className="btn btn-secondary button alt" name="woocommerce_checkout_place_order" id="place_order" value="Place order" data-value="Place order">Place order</button>
-                        <input type="hidden" id="woocommerce-process-checkout-nonce" name="woocommerce-process-checkout-nonce" defaultValue="345c7e7346" /><input type="hidden" name="_wp_http_referer" defaultValue="/groci/?wc-ajax=update_order_review" />	</div>
+                        <input type="hidden" id="woocommerce-process-checkout-nonce" name="woocommerce-process-checkout-nonce" defaultValue="345c7e7346" /><input type="hidden" name="_wp_http_referer" defaultValue={_staticUrl("/groci/?wc-ajax=update_order_review")} />	</div>
                     </div>
                   </div>
                 </div>

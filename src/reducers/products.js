@@ -3,7 +3,10 @@ import {
     GET_CATEGORIES,
     GET_PRODUCTS_BY_CATEGORY,
     GET_PRODUCT_BY_ID,
-    SEARCH_PRODUCTS_BY_NAME
+    SEARCH_PRODUCTS_BY_NAME,
+    POST_FEED_BACK_PRODUCT,
+    GET_FEED_BACK_PRODUCT,
+    GET_PRODUCTS_BY_STORER
 } from "actions/products";
 
 
@@ -12,11 +15,12 @@ const defaultState = {
     detailProduct: {
         product: {},
         relatedProducts: [],
+        feedbacks: [],
     },
     categoryProducts: {
         category: {},
         products: [],
-    },  
+    },
     categories: [],
     searchedProducts: [],
 }
@@ -43,14 +47,18 @@ export default function (state = defaultState, action) {
                 ...state,
                 categoryProducts: {
                     category: [],
-                    products: action.data, 
+                    products: action.data,
                 }
             }
         }
-        case GET_PRODUCT_BY_ID : {
+        case GET_PRODUCT_BY_ID: {
             return {
                 ...state,
-                detailProduct: action.data
+                detailProduct: {
+                    ...state.detailProduct,
+                    ...action.data,
+                    feedbacks: state.detailProduct.feedbacks || [],
+                }
             }
         }
         case SEARCH_PRODUCTS_BY_NAME: {
@@ -59,6 +67,32 @@ export default function (state = defaultState, action) {
                 searchedProducts: action.data
             }
         }
+        case GET_PRODUCTS_BY_STORER: {
+            return {
+                ...state,
+                searchedProducts: action.data
+            }
+        }
+        case POST_FEED_BACK_PRODUCT: {
+            return {
+                ...state,
+                detailProduct: {
+                    ...state.detailProduct,
+                    feedbacks: [{ ...action.feedback }, ...state.detailProduct.feedbacks]
+                }
+            }
+        }
+
+        case GET_FEED_BACK_PRODUCT: {
+            return {
+                ...state,
+                detailProduct: {
+                    ...state.detailProduct,
+                    feedbacks: action.feedbacks.reverse(),
+                }
+            }
+        }
+
         default: return state;
     }
 }

@@ -7,6 +7,9 @@ import {
   get as getUserBase
 } from "actions/owners/storers";
 
+import { SearchInput } from "components/common"
+
+
 class Users extends React.Component {
   constructor(props) {
     super(props);
@@ -103,6 +106,13 @@ class Users extends React.Component {
         <br />
         <br />
         <br />
+        <SearchInput
+          setState={this.setState.bind(this)}
+          meta={{
+            all: this.props.allUsers,
+            key: 'allUsers'
+          }}
+        />
         <Table
           columns={this.columns}
           dataSource={this.state.allUsers}

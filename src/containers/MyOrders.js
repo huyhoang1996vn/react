@@ -55,6 +55,7 @@ class MyOrders extends React.Component {
     }
 
     render() {
+        console.log(this.state.ordersOnStep)
         return (
             <div className="MyOrders">
                 <section className="section-padding bg-dark inner-header klb-breadcrumb">
@@ -88,6 +89,7 @@ class MyOrders extends React.Component {
                                             extra={<b>Payment: <Tag color={STATUS_COLOR[order.status_payment]} >{order.status_payment}</Tag></b>}
                                             style={{ marginBottom: "15px" }}
                                         >
+                                        <p> {order.created} </p>
                                             {
                                                 order.products.map(product => (
                                                     <div key={product.id}>
@@ -96,8 +98,8 @@ class MyOrders extends React.Component {
                                                                 <img style={{ width: "100%" }} src={product.picture.length > 0 ? product.picture[0].image : _staticUrl("/groci/wp-content/uploads/2018/08/1-1.jpg")} alt="" />
                                                             </div>
                                                             <div className="col-md-10">
-                                                                <h3>{product.name}</h3>
-                                                                <p>{product.detail}</p>
+                                                                <h3>{product.name} <strong style={{ color: "green" }}>x{parseInt(order.money / product.price)}</strong></h3>
+                                                                {/* <p>{product.detail}</p> */}
                                                                 <h4>{formatVnd(product.price)}</h4>
                                                             </div>
                                                         </div>

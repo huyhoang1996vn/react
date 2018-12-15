@@ -3,6 +3,8 @@ import { Layout, Menu, Icon } from 'antd';
 import { _staticUrl } from "config/utils";
 import PropTypes from "prop-types"
 
+import { Link } from "react-router-dom"
+
 const { Header, Sider, Content } = Layout;
 
 class Dashboard extends React.Component {
@@ -26,12 +28,14 @@ class Dashboard extends React.Component {
                         collapsed={this.state.collapsed}
                     >
                         <div className="logo">
-                            <img src={_staticUrl(this.props.logo)} alt="" />
-                            {
-                                !this.state.collapsed && <span>{this.props.title}</span>
-                            }
+                            <Link to="/profile">
+                                <img src={_staticUrl(this.props.logo)} alt="" />
+                                {
+                                    // !this.state.collapsed && <span>{this.props.title}</span>
+                                }
+                            </Link>
                         </div>
-                        <Menu onClick={this.props.onClickMenuItem} theme="dark" mode="inline" defaultSelectedKeys={[ this.props.menuSelected ]}>
+                        <Menu onClick={this.props.onClickMenuItem} theme="dark" mode="inline" defaultSelectedKeys={[this.props.menuSelected]}>
                             {
                                 this.props.menu.filter(item => !item.hidden).map(item => (
                                     <Menu.Item key={item.key}>
@@ -55,7 +59,7 @@ class Dashboard extends React.Component {
                             {
                                 this.props.children
                             }
-                    </Content>
+                        </Content>
                     </Layout>
                 </Layout>
             </div>
@@ -72,10 +76,11 @@ Dashboard.propTypes = {
 }
 
 Dashboard.defaultProps = {
-    title: "Admin",
+    path: "",
+    title: "",
     logo: "/assets/images/logo.png",
     menu: [],
-    onClickMenuItem () {},
+    onClickMenuItem() { },
     menuSelected: "",
 }
 

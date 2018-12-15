@@ -1,7 +1,8 @@
 import React from "react";
+import { _url, _staticUrl } from "config/utils";
 
-import { _url } from "config/utils";
-
+// components
+import { GoogleMapPosition } from "components/google-maps"
 
 class AboutUs extends React.Component {
     constructor(props) {
@@ -24,7 +25,8 @@ class AboutUs extends React.Component {
                         </div>
                     </div>
                 </section>
-
+                <br />
+                <br />
 
                 <div className="container">
                     <div style={{ backgroundColor: "white" }} data-vc-full-width="true" data-vc-full-width-init="false" className="vc_row wpb_row vc_row-fluid vc_custom_1533712885081 vc_row-has-fill vc_row-o-content-middle vc_row-flex">
@@ -33,7 +35,7 @@ class AboutUs extends React.Component {
                                 <div className="wpb_wrapper">
                                     <div className="wpb_single_image wpb_content_element vc_align_left">
                                         <figure className="wpb_wrapper vc_figure">
-                                            <div className="vc_single_image-wrapper   vc_box_border_grey"><img width={600} height={732} src="/groci/wp-content/uploads/2018/08/about.jpg" className="vc_single_image-img attachment-full" alt srcSet="/groci/wp-content/uploads/2018/08/about.jpg 600w, /groci/wp-content/uploads/2018/08/about-246x300.jpg 246w" sizes="(max-width: 600px) 100vw, 600px" /></div>
+                                            <div className="vc_single_image-wrapper   vc_box_border_grey"><img width={600} height={732} src={_staticUrl("/groci/wp-content/uploads/2018/08/about.jpg")} className="vc_single_image-img attachment-full" alt srcSet="/groci/wp-content/uploads/2018/08/about.jpg 600w, /groci/wp-content/uploads/2018/08/about-246x300.jpg 246w" sizes="(max-width: 600px) 100vw, 600px" /></div>
                                         </figure>
                                     </div>
                                 </div>
@@ -47,7 +49,7 @@ class AboutUs extends React.Component {
                                     <h5 style={{ textAlign: 'left' }} className="vc_custom_heading">Our Vision</h5>
                                     <p style={{ textAlign: 'left' }} className="vc_custom_heading">Our vision is delivering happiness to customers, employees and vendors.</p>
                                     <h5 style={{ textAlign: 'left' }} className="vc_custom_heading vc_custom_1533755583875">Our Goal</h5>
-                                    <p style={{ textAlign: 'left' }} className="vc_custom_heading">We believe in the power of technology transformation and want to change the world better by providing the platform to connect buyers and sellers in the same community. 
+                                    <p style={{ textAlign: 'left' }} className="vc_custom_heading">We believe in the power of technology transformation and want to change the world better by providing the platform to connect buyers and sellers in the same community.
                                     We continuously improve our platform to bring an enjoyable shopping experience to all our users.</p>
                                 </div>
                             </div>
@@ -59,7 +61,7 @@ class AboutUs extends React.Component {
 
 
                 <div className="container">
-                    <div style={{ padding: "30px" }} className="vc_row wpb_row vc_row-fluid vc_custom_1533800128579">
+                    <div style={{ padding: "30px", textAlign: "center" }} className="vc_row wpb_row vc_row-fluid vc_custom_1533800128579">
                         <div className="wpb_column vc_column_container vc_col-sm-12">
                             <div className="vc_column-inner  ">
                                 <div className="wpb_wrapper">
@@ -142,6 +144,9 @@ class AboutUs extends React.Component {
                                         <h2>Our Location</h2>
                                     </div>
                                 </div>
+                            </div>
+                            <div style={{ height: "50vh" }}>
+                                <GoogleMapPosition />
                             </div>
                         </div>
                     </div>

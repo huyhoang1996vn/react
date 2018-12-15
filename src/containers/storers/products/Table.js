@@ -8,6 +8,7 @@ import {
     getProducts,
     delProduct
 } from "actions/storers/products";
+import { SearchInput } from "components/common"
 
 import {
     getCategories
@@ -72,7 +73,7 @@ class ProductsTable extends React.Component {
                     </span>
                 )
             }
-        }, 
+        },
         // {
         //     title: 'Status',
         //     dataIndex: 'status',
@@ -144,11 +145,11 @@ class ProductsTable extends React.Component {
         const menu = (
             <Menu onClick={handleMenuClick}>
                 <Menu.Item key="all" >All</Menu.Item>
-            {
-                this.props.categories.map(ct => (
-                    <Menu.Item key={ct.id}>{ct.name}</Menu.Item>
-                ))
-            }
+                {
+                    this.props.categories.map(ct => (
+                        <Menu.Item key={ct.id}>{ct.name}</Menu.Item>
+                    ))
+                }
             </Menu>
         );
 
@@ -167,12 +168,19 @@ class ProductsTable extends React.Component {
                 />
                 <div style={{ textAlign: "right" }}>
                     <Dropdown.Button trigger={['click']} overlay={menu}>
-                        {this.state.filter.category.name || "All"} 
+                        {this.state.filter.category.name || "All"}
                     </Dropdown.Button>
                 </div>
                 <br />
                 <br />
                 <br />
+                <SearchInput
+                    setState={this.setState.bind(this)}
+                    meta={{
+                        all: this.props.allProducts,
+                        key: 'allProducts'
+                    }}
+                />
                 <Table
                     columns={this.columns}
                     dataSource={this.state.allProducts}

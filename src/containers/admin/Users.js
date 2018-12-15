@@ -6,8 +6,13 @@ import { GROUP_USERS } from "constants/index";
 
 // actions 
 import {
-  get as getUserBase
+  get as getUserBase,
+  deleteOne
 } from "actions/admin/users";
+
+// components
+import { SearchInput } from "components/common"
+
 
 class Users extends React.Component {
   constructor(props) {
@@ -65,8 +70,8 @@ class Users extends React.Component {
             <a onClick={this.onClickAction("detail")(record)} href="javascript:;">View</a>
             <Divider type="vertical" />
             <a onClick={this.onClickAction("detail")(record)} href="javascript:;">Edit</a>
-            {/* <Divider type="vertical" /> */}
-            {/* <a onClick={this.onClickAction("activation")(record)} href="javascript:;">Disable</a> */}
+            <Divider type="vertical" />
+            <a onClick={this.onClickAction("delete")(record)} href="javascript:;">Delete</a>
           </span>
         ),
       }
@@ -92,6 +97,9 @@ class Users extends React.Component {
       }
       case "activation": {
         return;
+      }
+      case "delete": {
+        return this.props.dispatch(deleteOne(record.id));
       }
       default: return;
     }
@@ -129,6 +137,13 @@ class Users extends React.Component {
         <br />
         <br />
         <br />
+        <SearchInput
+          setState={this.setState.bind(this)}
+          meta={{
+            all: this.props.allUsers,
+            key: 'allUsers'
+          }}
+        />
         <Table
           columns={this.columns}
           dataSource={this.state.allUsers}
