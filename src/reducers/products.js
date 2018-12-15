@@ -5,7 +5,8 @@ import {
     GET_PRODUCT_BY_ID,
     SEARCH_PRODUCTS_BY_NAME,
     POST_FEED_BACK_PRODUCT,
-    GET_FEED_BACK_PRODUCT
+    GET_FEED_BACK_PRODUCT,
+    GET_PRODUCTS_BY_STORER
 } from "actions/products";
 
 
@@ -66,12 +67,18 @@ export default function (state = defaultState, action) {
                 searchedProducts: action.data
             }
         }
+        case GET_PRODUCTS_BY_STORER: {
+            return {
+                ...state,
+                searchedProducts: action.data
+            }
+        }
         case POST_FEED_BACK_PRODUCT: {
             return {
                 ...state,
                 detailProduct: {
                     ...state.detailProduct,
-                    feedbacks: [{...action.feedback}, ...state.detailProduct.feedbacks]
+                    feedbacks: [{ ...action.feedback }, ...state.detailProduct.feedbacks]
                 }
             }
         }

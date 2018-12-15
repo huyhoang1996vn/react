@@ -184,11 +184,11 @@ class ProudctDetail extends React.Component {
                     <span className="posted_in">
                       Cửa hàng:
                       {
-                        product.stores ? <a href="#" rel="tag">
+                        product.stores ? <Link to={`/search/storer=${product.stores.id}`}>
                           {
                             product.stores.name + " | " + product.stores.phone
                           }
-                        </a> : <a href="#" rel="tag">No storer</a>
+                        </Link> : <a href="#" rel="tag">No storer</a>
                       }
 
                     </span>

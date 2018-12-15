@@ -5,7 +5,7 @@ import ReactGoogleMap from './core.map.component';
 import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps/lib';
 import MarkerClusterer from 'react-google-maps/lib/addons/MarkerClusterer';
 
-const locationLondon = {
+const locationDn = {
     lat: 16.070220,
     lng: 108.153470
 };
@@ -16,8 +16,8 @@ class MapPosition extends React.Component {
         this.state = {
             bounds: null,
             markers: [],
-            center: locationLondon,
-            position: locationLondon,
+            center: locationDn,
+            position: locationDn,
             zoom: 15,
         };
     }
@@ -25,10 +25,9 @@ class MapPosition extends React.Component {
 
     componentWillMount() {
         if (this.props.iwDefaultLocation) {
-            const { lat, lng } = this.props.iwDefaultLocation;
             this.setState(() => {
-                this.center = locationLondon;
-                this.state.position = locationLondon;
+                this.center = this.props.iwDefaultLocation;
+                this.state.position = this.props.iwDefaultLocation;
                 return this.state;
             });
         }
