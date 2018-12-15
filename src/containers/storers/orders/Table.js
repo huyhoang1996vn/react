@@ -8,12 +8,15 @@ import {
     getOrders,
     deleteOrder
 } from "actions/storers/orders";
+import { SearchInput } from "components/common"
 
 
 class OrdersTable extends React.Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            allOrders: []
+        }
         this.columns = [{
             title: 'Code',
             dataIndex: 'order_code',
@@ -59,6 +62,12 @@ class OrdersTable extends React.Component {
         }];
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            allOrders: nextProps.allOrders
+        })
+    }
+
     componentDidMount() {
         this.props.dispatch(getOrders());
     }
@@ -85,9 +94,16 @@ class OrdersTable extends React.Component {
                 <br />
                 <br />
                 <br />
+                <SearchInput
+                    setState={this.setState.bind(this)}
+                    meta={{
+                        all: this.props.allOrders,
+                        key: 'allOrders'
+                    }}
+                />
                 <Table
                     columns={this.columns}
-                    dataSource={this.props.allOrders}
+                    dataSource={this.state.allOrders}
                 />
             </div>
         )

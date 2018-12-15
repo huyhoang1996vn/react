@@ -8,6 +8,7 @@ import {
     updateCategory,
     deleteCategory
 } from "actions/categories";
+import { SearchInput } from "components/common"
 
 
 
@@ -106,14 +107,13 @@ class Categories extends React.Component {
         props.dispatch(getCategories());
     }
 
-    static getDerivedStateFromProps(props, state) {
-        return {
-            categories: props.categories,
-        }
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            categories: nextProps.categories,
+        })
     }
 
     onClickAction = (type) => record => () => {
-        console.log(record);
         switch (type) {
             case "edit": {
                 return this.props.history.push(`/admin/categories/edit/${record.id}`);
@@ -143,6 +143,13 @@ class Categories extends React.Component {
                 <br />
                 <br />
                 <br />
+                <SearchInput
+                    setState={this.setState.bind(this)}
+                    meta={{
+                        all: this.props.categories,
+                        key: 'categories'
+                    }}
+                />
                 <Table
                     columns={this.columns}
                     dataSource={this.state.categories}
