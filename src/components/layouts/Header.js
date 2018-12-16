@@ -4,6 +4,8 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { _staticUrl } from "config/utils";
+import { formatVnd } from "constants/func.utils";
+
 
 // actions 
 import {
@@ -176,10 +178,9 @@ class Header extends React.Component {
                 <div key={index} className="cart-list-product">
                   <a onClick={this.onClickRemoveItem(cartItem)} className="float-right remove-cart" ><i className="mdi mdi-close" /></a>
                   <img className="img-fluid" src={cartItem.product.picture[0] && cartItem.product.picture[0].image || _staticUrl("/groci/wp-content/uploads/2018/08/1-1.jpg")} alt="Washed Sugar Snap Peas" />
-                  <span className="badge badge-success">20 % OFF</span>
+                  <h6><strong><span className="mdi mdi-approval text-success" /> </strong></h6>
                   <h5><Link to={`/product/${cartItem.product.id}`}>{cartItem.product.name}</Link></h5>
-                  <h6><strong><span className="mdi mdi-approval" /> </strong> - 1 kg</h6>
-                  <p className="offer-price mb-0"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>5.00</span></del> <ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{cartItem.product.price}</span></ins></p>
+                  <p className="offer-price mb-0"> <ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol"></span>{formatVnd(cartItem.product.price)}</span></ins></p>
                   <div>
                     <input onChange={this.onChangeQuantityItemCart(cartItem)} type="number" value={cartItem.quantity} />
                   </div>
@@ -189,11 +190,11 @@ class Header extends React.Component {
 
             <div className="cart-sidebar-footer">
               <div className="cart-store-details">
-                <p>Sub Total <strong className="float-right"><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{totalCartAmount}</span></strong></p>
+                <p>Sub Total <strong className="float-right"><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol"></span>{formatVnd(totalCartAmount)}</span></strong></p>
                 <p>Delivery Charges <strong className="float-right text-danger">Free!</strong></p>
               </div>
               <Link to="/checkout"><button className="btn btn-secondary btn-lg btn-block text-left" type="button">
-                <span className="float-left"><i className="mdi mdi-cart-outline" /> Proceed to Checkout </span><span className="float-right"><strong><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{totalCartAmount}</span></strong> <span className="mdi mdi-chevron-right" /></span></button></Link>
+                <span className="float-left"><i className="mdi mdi-cart-outline" /> Proceed to Checkout </span><span className="float-right"><strong><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol"></span>{formatVnd(totalCartAmount)}</span></strong> <span className="mdi mdi-chevron-right" /></span></button></Link>
             </div>
           </div>
         </div>

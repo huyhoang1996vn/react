@@ -237,7 +237,7 @@ class ProudctDetail extends React.Component {
                                 <div className="product-header"><span className="badge badge-success"></span><img className="img-fluid" src={urlImage} alt="Fresh Red Seedless" /><span className="veg text-success mdi mdi-circle" /></div>
                                 <div className="product-body">
                                   <h5>{item.name.slice(0, 20)}...</h5>
-                                  <h6><strong><span className="mdi mdi-approval text-success" /> In Stock</strong> - 1 kg</h6>
+                                  <h6><strong><span className="mdi mdi-approval text-success" /> In Stock</strong> - {item.count_in_stock}</h6>
                                 </div>
                               </Link><div className="product-footer"><a href="/groci/product/fresh-red-seedless-grapes/">
                                 <p className="offer-price mb-0"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol"></span></span></del>

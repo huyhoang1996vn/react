@@ -18,42 +18,37 @@ class Footer extends React.Component {
                                 <div className="klbfooterwidget widget_text">
                                     <div className="textwidget">
                                         <p><img className="mb-4 mt-0 alignnone size-full wp-image-127" src={_staticUrl("/groci/wp-content/uploads/2018/08/logo-footer-1.png")} width={127} height={38} /></p>
-                                        <p className="mb-0"><a className="text-dark" href="#"><i className="mdi mdi-phone" /> +61 525 240 310</a></p>
-                                        <p className="mb-0"><a className="text-dark" href="#"><i className="mdi mdi-cellphone-iphone" /> 12345 67890, 56847-98562</a></p>
-                                        <p className="mb-0"><a className="text-success" href="#"><i className="mdi mdi-email" /> yourmail@gmail.com</a></p>
-                                        <p className="mb-0"><a className="text-primary" href="#"><i className="mdi mdi-web" /> www.klbtheme.com</a></p>
+                                        <p className="mb-0"><a className="text-dark" href="#"><i className="mdi mdi-phone" /> +84 794 590 578</a></p>
+                                        <p className="mb-0"><a className="text-dark" href="#"><i className="mdi mdi-cellphone-iphone" /> 0794590578</a></p>
+                                        <p className="mb-0"><a className="text-success" href="#"><i className="mdi mdi-email" /> cnpm04_tmdt@gmail.com</a></p>
+                                        <p className="mb-0"><a className="text-primary" href="#"><i className="mdi mdi-web" /> https://jinsphan.github.io/14T3-san-tmdt</a></p>
                                     </div>
                                 </div>
                             </div>
                             <div className="col-lg-2 col-md-2">
                                 <div className="klbfooterwidget widget_nav_menu">
-                                    <h6 className="mb-4">TOP CITIES</h6>
+                                    <h6 className="mb-4">POLICIES</h6>
                                     <div className="menu-top-cities-container">
                                         <ul id="menu-top-cities" className="menu">
-                                            <li id="menu-item-181" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-181"><a href="#">New
-                          Delhi</a></li>
-                                            <li id="menu-item-198" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-198"><a href="#">Bengaluru</a></li>
-                                            <li id="menu-item-199" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-199"><a href="#">Hyderabad</a></li>
-                                            <li id="menu-item-200" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-200"><a href="#">Kolkata</a></li>
-                                            <li id="menu-item-201" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-201"><a href="#">Gurugram</a></li>
+                                            <li id="menu-item-181" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-181"><a href="#">Privacy Policy</a></li>
+                                            <li id="menu-item-198" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-198"><a href="#">Cookie Policy</a></li>
+                                            <li id="menu-item-199" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-199"><a href="#">Advertising Policy</a></li>
+                                            <li id="menu-item-200" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-200"><a href="#">Correction Policy</a></li>
+                                            <li id="menu-item-201" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-201"><a href="#">Terms of Use</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <div className="col-lg-2 col-md-2">
                                 <div className="klbfooterwidget widget_nav_menu">
-                                    <h6 className="mb-4">CATEGORIES</h6>
+                                    <h6 className="mb-4">EDITIONS</h6>
                                     <div className="menu-categories-container">
                                         <ul id="menu-categories" className="menu">
-                                            <li id="menu-item-206" className="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-206"><a href="/product-category/fruits-vegetables/">Vegetables</a></li>
-                                            <li id="menu-item-207" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-207"><a href="#">Grocery
-                          &amp; Staples</a></li>
-                                            <li id="menu-item-208" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-208"><a href="#">Breakfast
-                          &amp; Dairy</a></li>
-                                            <li id="menu-item-209" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-209"><a href="#">Soft
-                          Drinks</a></li>
-                                            <li id="menu-item-210" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-210"><a href="#">Biscuits
-                          &amp; Cookies</a></li>
+                                            <li id="menu-item-206" className="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-206"><a href="/product-category/fruits-vegetables/">Tiếng Việt</a></li>
+                                            <li id="menu-item-207" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-207"><a href="#">English</a></li>
+                                            <li id="menu-item-208" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-208"><a href="#">Deutsch</a></li>
+                                            <li id="menu-item-209" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-209"><a href="#">Español</a></li>
+                                            <li id="menu-item-210" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-210"><a href="#">Français</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -68,8 +63,6 @@ class Footer extends React.Component {
                                             <li id="menu-item-202" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-202"><a href="#">Careers</a></li>
                                             <li id="menu-item-203" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-203"><a href="#">Store
                           Location</a></li>
-                                            <li id="menu-item-204" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-204"><a href="#">Affillate
-                          Program</a></li>
                                             <li id="menu-item-205" className="menu-item menu-item-type-custom menu-item-object-custom menu-item-205"><a href="#">Copyright</a></li>
                                         </ul>
                                     </div>
