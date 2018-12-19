@@ -4,7 +4,7 @@ const formatVnd = (money) => {
 
 const vndToUsd = (money) => +money / 23255.814
 
-const getDataObject = (data, keys = "", cb) => {
+const getDataObject = (data, keys = "", cb = () => {}) => {
     let res = keys.split(".").reduce((acc, cur) => {
         if (cur !== null && acc[cur]) return acc[cur];
         else return null; 
