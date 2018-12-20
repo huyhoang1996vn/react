@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { Table, Divider, Tag, Button } from 'antd';
+import { Table, Divider, Tag, Button, Popconfirm } from 'antd';
 
 import {
     getCategories,
@@ -99,7 +99,10 @@ class Categories extends React.Component {
                         record.is_active ? "Disable" : "Enable"
                     }</a>
                     <Divider type="vertical" />
-                    <a onClick={this.onClickAction("delete")(record)} href="javascript:;">Delete</a>
+                    <Popconfirm title="Are you sure delete this record?" onConfirm={this.onClickAction("delete")(record)} okText="Yes" cancelText="No">
+                        <a href="javascript:;">Delete</a>
+                    </Popconfirm>
+                    {/* <a onClick={this.onClickAction("delete")(record)} href="javascript:;">Delete</a> */}
                 </span>
             ),
         }];

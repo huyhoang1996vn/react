@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Table, Divider, Tag, Button } from 'antd';
+import { Table, Divider, Tag, Popconfirm } from 'antd';
 
 
 // actions 
@@ -56,7 +56,10 @@ class OrdersTable extends React.Component {
                 <span>
                     <a onClick={this.onClickAction("detail")(record)} href="javascript:;">View</a>
                     <Divider type="vertical" />
-                    <a onClick={this.onClickAction("delete")(record)} href="javascript:;">Delete</a>
+                    <Popconfirm title="Are you sure delete this record?" onConfirm={this.onClickAction("delete")(record)} okText="Yes" cancelText="No">
+                        <a href="javascript:;">Delete</a>
+                    </Popconfirm>
+                    {/* <a onClick={this.onClickAction("delete")(record)} href="javascript:;">Delete</a> */}
                 </span>
             ),
         }];

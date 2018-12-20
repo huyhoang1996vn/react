@@ -22,7 +22,7 @@ const formType = {
     price: "text",
     count_in_stock: "text",
     detail : "text_area",
-    tax: "text",
+    // tax: "text",
 }
 
 const PATTERN = {

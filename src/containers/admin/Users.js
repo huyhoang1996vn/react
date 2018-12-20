@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Table, Divider, Tag, Button } from 'antd';
+import { Table, Divider, Tag, Button, Popconfirm } from 'antd';
 
 import { GROUP_USERS } from "constants/index";
 
@@ -71,7 +71,10 @@ class Users extends React.Component {
             <Divider type="vertical" />
             <a onClick={this.onClickAction("detail")(record)} href="javascript:;">Edit</a>
             <Divider type="vertical" />
-            <a onClick={this.onClickAction("delete")(record)} href="javascript:;">Delete</a>
+            <Popconfirm title="Are you sure delete this record?" onConfirm={this.onClickAction("delete")(record)} okText="Yes" cancelText="No">
+              <a href="javascript:;">Delete</a>
+            </Popconfirm>
+            {/* <a onClick={this.onClickAction("delete")(record)} href="javascript:;">Delete</a> */}
           </span>
         ),
       }

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Table, Dropdown, Menu, Divider, Tag, Button, message, Icon } from 'antd';
+import { Table, Dropdown, Menu, Divider, Tag, Button, message, Icon, Popconfirm } from 'antd';
 import moment from "moment";
 
 // actions 
@@ -59,10 +59,6 @@ class ProductsTable extends React.Component {
             dataIndex: 'count_in_stock',
             sorter: (a, b) => parseFloat(a.count_in_stock) - parseFloat(b.count_in_stock),
         }, {
-            title: 'Tax',
-            key: 'tax',
-            dataIndex: 'tax',
-        }, {
             title: 'Actived',
             dataIndex: 'is_active',
             key: 'is_active',
@@ -88,7 +84,9 @@ class ProductsTable extends React.Component {
                 <span>
                     <a onClick={this.onClickAction("detail")(record)} href="javascript:;">View</a>
                     <Divider type="vertical" />
-                    <a onClick={this.onClickAction("delete")(record)} href="javascript:;">Delete</a>
+                    <Popconfirm title="Are you sure delete this record?" onConfirm={this.onClickAction("delete")(record)} okText="Yes" cancelText="No">
+                        <a href="javascript:;">Delete</a>
+                    </Popconfirm>
                 </span>
             ),
         }];
