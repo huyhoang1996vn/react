@@ -8,6 +8,8 @@ import { Link, withRouter } from "react-router-dom";
 import request from "api/request";
 
 import { getDataObject } from "../constants/func.utils";
+import { formatVnd } from "constants/func.utils";
+
 
 // actions 
 import {
@@ -223,7 +225,7 @@ class Checkout extends React.Component {
                               <td className="product-name">
                                 <Link style={{ color: `${isProductUnStock ? 'red' : 'green'}` }} to={`/product/${cartItem.product.id}`}>{cartItem.product.name}</Link>&nbsp; <strong className="product-quantity">x{cartItem.quantity}</strong> <strong style={{ color: "red" }}>{isProductUnStock ? "Hàng không đủ số lượng" : ""}</strong></td>
                               <td className="product-total">
-                                <span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{cartItem.product.price * cartItem.quantity}</span>						</td>
+                                <span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol"></span>{formatVnd(cartItem.product.price * cartItem.quantity)}</span>						</td>
                             </tr>
                           )
                         })
@@ -232,11 +234,11 @@ class Checkout extends React.Component {
                       <tfoot>
                         <tr className="cart-subtotal">
                           <th>Subtotal</th>
-                          <td><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{totalCartAmount}</span></td>
+                          <td><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol"></span>{formatVnd(totalCartAmount)}</span></td>
                         </tr>
                         <tr className="order-total">
                           <th>Total</th>
-                          <td><strong><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{totalCartAmount}</span></strong> </td>
+                          <td><strong><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol"></span>{formatVnd(totalCartAmount)}</span></strong> </td>
                         </tr>
                       </tfoot>
                     </table>

@@ -36,7 +36,7 @@ class SliderMini extends React.Component {
                                                             <div className="category-item">
                                                                 <Link to={`/product/${item.id}/`}><img className="img-fluid" src={urlImage} />
                                                                     <h6>{item.name.slice(0, 15)}</h6>
-                                                                    <p>1 Items</p>
+                                                                    <p>new</p>
                                                                 </Link>
                                                             </div>
                                                         </div>

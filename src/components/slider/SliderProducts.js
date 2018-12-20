@@ -49,11 +49,11 @@ class SliderProducts extends React.Component {
                         <div className="product-body"><a href="/product/organic-broccoli/">
                             <h5>{item.name.slice(0, 20)}...</h5>
                         </a>
-                            <h6><strong><span className="mdi mdi-approval text-success" /> In Stock</strong> - 1 kg</h6>
+                            <h6><strong><span className="mdi mdi-approval text-success" /> In Stock</strong> - {item.count_in_stock}</h6>
                         </div>
                         <div className="product-footer">
                             <p className="offer-price mb-0"><del><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol"></span></span></del>
-                                <ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol">£</span>{formatVnd(item.price)}</span></ins></p><a onClick={this.onAddToCart(item)} className="btn btn-secondary btn-sm button product_type_simple add_to_cart_button ajax_add_to_cart"><i className="mdi mdi-cart-outline" /> Add to cart</a>
+                                <ins><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol"></span>{formatVnd(item.price)}</span></ins></p><a onClick={this.onAddToCart(item)} className="btn btn-secondary btn-sm button product_type_simple add_to_cart_button ajax_add_to_cart"><i className="mdi mdi-cart-outline" /> Add to cart</a>
                         </div>
                     </div>
                 </div>)
