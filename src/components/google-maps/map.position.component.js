@@ -28,6 +28,7 @@ class MapPosition extends React.Component {
             this.setState(() => {
                 this.center = this.props.iwDefaultLocation;
                 this.state.position = this.props.iwDefaultLocation;
+                this.state.center = this.props.iwDefaultLocation;
                 return this.state;
             });
         }
