@@ -221,7 +221,7 @@ class Account extends React.Component {
 													<p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
 														<label htmlFor="username">Email address<span className="required">*</span></label>
 														<input ref={this.form_data.login.email} type="email" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="email" id="email"
-															autoComplete="off" minLength="10" maxLength="50" required="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="please enter email in correct format" />
+															autoComplete="off" minLength="10" maxLength="50" required="true" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="please enter email in correct format" />
 													</p>
 
 													<p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
