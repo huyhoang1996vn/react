@@ -27,7 +27,8 @@ const formType = {
 
 const PATTERN = {
     // "name": [/^111$/, "Name not match"],
-    "price": [/^\d+(,\d{3})*(\.\d{1,2})?$/, "Invalid price"],
+    "price": [/^[0-9]*$/, "Invalid price"],
+    "count_in_stock": [/^[0-9]*$/, "Invalid number"],
 }
 
 const STATUS = {
