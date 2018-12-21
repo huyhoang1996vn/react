@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { _staticUrl } from "config/utils";
 import { formatVnd } from "constants/func.utils";
 
-
 // actions 
 import {
   authLogout
@@ -50,6 +49,7 @@ class Header extends React.Component {
   onClickLogout = (e) => {
     e.preventDefault();
     this.props.dispatch(authLogout());
+    this.props.loggedOut();
   }
 
   onClickRemoveItem = item => e => {
@@ -168,7 +168,7 @@ class Header extends React.Component {
         <div className="cart-sidebar">
           <div className="cart-sidebar-header">
             <h5>
-              My Cart <span className="text-success">({cart.items.length} items)</span> <a role="button" tabIndex="0" data-toggle="offcanvas" className="float-right"><i className="mdi mdi-close" />
+              My Cart <span className="text-success">({cart.items.length} items)</span> <a id="button-close-cart" role="button" tabIndex="0" data-toggle="offcanvas" className="float-right"><i className="mdi mdi-close" />
               </a>
             </h5>
           </div>
@@ -193,7 +193,7 @@ class Header extends React.Component {
                 <p>Sub Total <strong className="float-right"><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol"></span>{formatVnd(totalCartAmount)}</span></strong></p>
                 <p>Delivery Charges <strong className="float-right text-danger">Free!</strong></p>
               </div>
-              <Link to="/checkout"><button className="btn btn-secondary btn-lg btn-block text-left" type="button">
+              <Link onClick={() => { document.getElementById("button-close-cart").click(); }} to="/checkout"><button className="btn btn-secondary btn-lg btn-block text-left" type="button">
                 <span className="float-left"><i className="mdi mdi-cart-outline" /> Proceed to Checkout </span><span className="float-right"><strong><span className="woocommerce-Price-amount amount"><span className="woocommerce-Price-currencySymbol"></span>{formatVnd(totalCartAmount)}</span></strong> <span className="mdi mdi-chevron-right" /></span></button></Link>
             </div>
           </div>

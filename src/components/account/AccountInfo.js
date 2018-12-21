@@ -53,7 +53,7 @@ class AccountInfo extends React.Component {
                         <h2>Change password</h2> <span className="text-danger" >{this.props.editState.editPass.error}</span>
                         <form className="woocommerce-form woocommerce-form-register register" onSubmit={this.props.onSubmitForm("editPass")}>
                             <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                                <label htmlFor="reg_edit_email">Password&nbsp;<span className="required">*</span></label>
+                                <label htmlFor="reg_edit_email">New password&nbsp;<span className="required">*</span></label>
                                 <input ref={this.props.form_data.editPass.password} type="password" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="password" id="reg_edit_password" 
                                     autoComplete="new-password" minLength="6" required pattern="[^' ']+" title="Password only include letters, digits and @/./+/-/_" />
                             </p>
@@ -62,7 +62,7 @@ class AccountInfo extends React.Component {
                                 <input ref={this.props.form_data.editPass.confirm} type="password" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="confirm" id="reg_edit_confirm" />
                             </p>
                             <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                                <label htmlFor="reg_edit_email">Confirm&nbsp;<span className="required">*</span></label>
+                                <label htmlFor="reg_edit_email">Old password&nbsp;<span className="required">*</span></label>
                                 <input ref={this.props.form_data.editPass.oldPassword} type="password" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="confirm" id="reg_edit_confirm" />
                             </p>
 

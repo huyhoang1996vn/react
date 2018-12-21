@@ -62,6 +62,7 @@ class ClientApp extends Component {
             <div className="Client-App">
                 <Header 
                     actived={this.state.actived_header}
+                    loggedOut={() => this.props.history.push("/")}
                 />
                 <Switch>
                     <Route exact path="/my-account" component={Account} />

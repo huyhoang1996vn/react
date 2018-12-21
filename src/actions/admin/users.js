@@ -13,9 +13,10 @@ export const DELETE = getActionType(prefix)("DELETE");
 export const get = () => (dispatch) => {
     return request().get("/userbase/").then(res => {
         if (res.data.length >= 0) {
+            console.log(res);
             dispatch({
                 type: GET,
-                data: res.data
+                data: res.data.filter(user => user.groupUser != null)
             })
         }
     })
