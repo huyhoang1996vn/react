@@ -91,8 +91,13 @@ class Checkout extends React.Component {
     };
 
     if (bill.money && bill.phone && bill.first_name && bill.last_name && bill.address) {
+      if (bill.phone.match(/^\+?([0-9]{2,4})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/) == null) {
+        message.error("Phone number is not correct");
+        return null;
+      }
       return bill;
     } else {
+      message.error("Vui lòng nhập đầy đủ thông tin");
       return null;
     }
   }

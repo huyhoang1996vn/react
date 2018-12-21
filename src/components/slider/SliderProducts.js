@@ -47,7 +47,7 @@ class SliderProducts extends React.Component {
                             <span className="veg text-success mdi mdi-circle" />
                         </div>
                         <div className="product-body"><a href="/product/organic-broccoli/">
-                            <h5>{item.name.slice(0, 20)}...</h5>
+                            <h5>{item.name.slice(0, 12)}...</h5>
                         </a>
                             <h6><strong><span className="mdi mdi-approval text-success" /> In Stock</strong> - {item.count_in_stock}</h6>
                         </div>
