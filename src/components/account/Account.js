@@ -240,7 +240,7 @@ class Account extends React.Component {
 															<span>Remember me</span></label>
 													</div>
 													<p className="woocommerce-LostPassword lost_password">
-														<a href="groci/my-account/lost-password/">Lost your password?</a>
+														<a href="#/">Lost your password?</a>
 													</p>
 												</form>
 											</div>

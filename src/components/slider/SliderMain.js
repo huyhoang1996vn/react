@@ -19,9 +19,9 @@ class SliderMain extends React.Component {
                             <div className="wpb_wrapper">
                                 <section className="carousel-slider-main text-center">
                                     <div className="owl-carousel owl-carousel-slider">
-                                        <div className="item"><a href="/shop/" target=" _blank" title="slider1">
+                                        <div className="item"><a href="#/"  title="slider1">
                                         <img style={{ maxHeight: "65vh" }} className="img-fluid" src={_staticUrl("/assets/images/slider1.jpg")} alt="slide" /></a></div>
-                                        <div className="item"><a href="/product/green-seedless-grapes/" target=" _blank" title="slider2">
+                                        <div className="item"><a href="#/"  title="slider2">
                                         <img style={{ maxHeight: "65vh" }} className="img-fluid" src={_staticUrl("/assets/images/slider2.jpg")} alt="slide" /></a></div>
                                     </div>
                                 </section>

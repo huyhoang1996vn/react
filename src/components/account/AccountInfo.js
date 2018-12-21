@@ -62,7 +62,7 @@ class AccountInfo extends React.Component {
                                 <input ref={this.props.form_data.editPass.confirm} type="password" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="confirm" id="reg_edit_confirm" />
                             </p>
                             <p className="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-                                <label htmlFor="reg_edit_email">Confirm&nbsp;<span className="required">*</span></label>
+                                <label htmlFor="reg_edit_email">Old Password&nbsp;<span className="required">*</span></label>
                                 <input ref={this.props.form_data.editPass.oldPassword} type="password" className="woocommerce-Input woocommerce-Input--text input-text form-control" name="confirm" id="reg_edit_confirm" />
                             </p>
 
