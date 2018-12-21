@@ -21,7 +21,7 @@ class Footer extends React.Component {
                                         <p className="mb-0"><a className="text-dark" href="#/"><i className="mdi mdi-phone" /> +84 794 590 578</a></p>
                                         <p className="mb-0"><a className="text-dark" href="#/"><i className="mdi mdi-cellphone-iphone" /> 0794590578</a></p>
                                         <p className="mb-0"><a className="text-success" href="#/"><i className="mdi mdi-email" /> cnpm04_tmdt@gmail.com</a></p>
-                                        <p className="mb-0"><a className="text-primary" href="#/"><i className="mdi mdi-web" /> https://jinsphan.github.io/14T3-san-tmdt</a></p>
+                                        <p className="mb-0"><a className="text-primary" href="http://jinsphan.tk/"><i className="mdi mdi-web" /> http://jinsphan.tk</a></p>
                                     </div>
                                 </div>
                             </div>

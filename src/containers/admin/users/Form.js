@@ -29,7 +29,7 @@ const STATUS = {
 }
 
 const PATTERN = {
-    "email": [/^[a-z][a-z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/, "Invalid email"],
+    "email": [/^[a-zA-Z][a-zA-Z0-9_\.]{5,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}$/, "Invalid email"],
     "password": [/^(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{6,50}$/, "Must include 6 character or longer. At least 1 upper character, 1 lower character."],
 }
 
