@@ -20,7 +20,7 @@ class Footer extends React.Component {
                                         <p><img className="mb-4 mt-0 alignnone size-full wp-image-127" src={_staticUrl("/groci/wp-content/uploads/2018/08/logo-footer-1.png")} width={127} height={38} /></p>
                                         <p className="mb-0"><a className="text-dark" href="#/"><i className="mdi mdi-phone" /> +84 794 590 578</a></p>
                                         <p className="mb-0"><a className="text-dark" href="#/"><i className="mdi mdi-cellphone-iphone" /> 0794590578</a></p>
-                                        <p className="mb-0"><a className="text-success" href="#/"><i className="mdi mdi-email" /> cnpm04_tmdt@gmail.com</a></p>
+                                        <p className="mb-0"><a className="text-success" href="#/"><i className="mdi mdi-email" /> huyhoang1996ha@gmail.com</a></p>
                                         <p className="mb-0"><a className="text-primary" href="http://jinsphan.tk/"><i className="mdi mdi-web" /> http://jinsphan.tk</a></p>
                                     </div>
                                 </div>

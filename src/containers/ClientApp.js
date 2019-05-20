@@ -64,21 +64,23 @@ class ClientApp extends Component {
                     actived={this.state.actived_header}
                     loggedOut={() => this.props.history.push("/")}
                 />
-                <Switch>
-                    <Route exact path="/my-account" component={Account} />
-                    <Route exact path="/product/:product_id" component={ProudctDetail} />
-                    <Route exact path="/category/:category_id" component={CategoryProducts} />
-                    <Route exact path="/checkout" component={Checkout} />
-                    <Route exact path="/checkout-confirm" component={Checkout} />
+                <div className="background-body">
+                    <Switch>
+                        <Route exact path="/my-account" component={Account} />
+                        <Route exact path="/product/:product_id" component={ProudctDetail} />
+                        <Route exact path="/category/:category_id" component={CategoryProducts} />
+                        <Route exact path="/checkout" component={Checkout} />
+                        <Route exact path="/checkout-confirm" component={Checkout} />
 
-                    <Route exact path="/checkout-success" component={CheckoutSuccess} />
-                    <Route exact path="/my-orders" component={MyOrders} />
-                    <Route exact path="/search/:keyword" component={Search} />
-                    <Route exact path="/about-us" component={AboutUs} />
+                        <Route exact path="/checkout-success" component={CheckoutSuccess} />
+                        <Route exact path="/my-orders" component={MyOrders} />
+                        <Route exact path="/search/:keyword" component={Search} />
+                        <Route exact path="/about-us" component={AboutUs} />
 
-                    <Route exact path="/" component={Home} />
-                    <Route component={NotFound} />
-                </Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route component={NotFound} />
+                    </Switch>
+                </div>
                 <Footer />
             </div>
         );

@@ -12,19 +12,23 @@ class AboutUs extends React.Component {
     render() {
         return (
             <div className="AboutUs">
-                <section className="section-padding bg-dark inner-header klb-breadcrumb">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-12 text-center">
-                                <h1 className="mt-0 mb-3 text-white">About Us</h1>
-                                <div className="breadcrumbs">
-                                    <p className="mb-0 text-white"><a className="text-white" href="groci" title="Home" rel="bookmark">Home</a> / <span className="text-white">About
-                    Us</span></p>
+                {
+                    /*
+                    <section className="section-padding bg-dark inner-header klb-breadcrumb">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-md-12 text-center">
+                                    <h1 className="mt-0 mb-3 text-white">About Us</h1>
+                                    <div className="breadcrumbs">
+                                        <p className="mb-0 text-white"><a className="text-white" href="groci" title="Home" rel="bookmark">Home</a> / <span className="text-white">About
+                        Us</span></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                    */
+                }
                 <br />
                 <br />
 
@@ -35,7 +39,7 @@ class AboutUs extends React.Component {
                                 <div className="wpb_wrapper">
                                     <div className="wpb_single_image wpb_content_element vc_align_left">
                                         <figure className="wpb_wrapper vc_figure">
-                                            <div className="vc_single_image-wrapper   vc_box_border_grey"><img width={600} height={732} src={_staticUrl("/groci/wp-content/uploads/2018/08/about.jpg")} className="vc_single_image-img attachment-full" alt srcSet="/groci/wp-content/uploads/2018/08/about.jpg 600w, /groci/wp-content/uploads/2018/08/about-246x300.jpg 246w" sizes="(max-width: 600px) 100vw, 600px" /></div>
+                                            <div className="vc_single_image-wrapper   vc_box_border_grey"><img width={600} height={732} src={_staticUrl("/assets/images/about.jpeg")} className="vc_single_image-img attachment-full" alt srcSet="/assets/images/about.jpeg 600w, /assets/images/about.jpeg 246w" sizes="(max-width: 600px) 100vw, 600px" /></div>
                                         </figure>
                                     </div>
                                 </div>

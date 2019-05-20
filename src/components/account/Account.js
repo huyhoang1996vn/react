@@ -195,19 +195,24 @@ class Account extends React.Component {
 	render() {
 		return (
 			<div className="Account">
-				<section className="section-padding bg-dark inner-header klb-breadcrumb">
-					<div className="container">
-						<div className="row">
-							<div className="col-md-12 text-center">
-								<h1 className="mt-0 mb-3 text-white">My account</h1>
-								<div className="breadcrumbs">
-									<p className="mb-0 text-white"><a className="text-white" href="groci" title="Home" rel="bookmark">Home</a> / <span className="text-white">My
-                    account</span></p>
+				{
+					/*
+					<section className="section-padding bg-dark inner-header klb-breadcrumb">
+						<div className="container">
+							<div className="row">
+								<div className="col-md-12 text-center">
+									<h1 className="mt-0 mb-3 text-white">My account</h1>
+									<div className="breadcrumbs">
+										<p className="mb-0 text-white"><a className="text-white" href="groci" title="Home" rel="bookmark">Home</a> / <span className="text-white">My
+	                    account</span></p>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</section>
+					</section>
+					*/
+				}
+				
 				<section className="account-page section-padding">
 					<div className="container">
 						<div className="woocommerce">

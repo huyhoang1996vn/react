@@ -16,7 +16,6 @@ const defaultState = {
 }
 
 export default function(state = defaultState, {type, ...action}) {
-    console.clear();
     switch(type) {
         case AUTH_LOGIN: {
             return {

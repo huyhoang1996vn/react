@@ -75,30 +75,30 @@ class Header extends React.Component {
     const totalCartAmount = cart.items.reduce((cur, next) => cur + +next.quantity * +next.product.price, 0);
     return (
       <div className="Header">
-        <div className="navbar-top pt-2 pb-2">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6">
-              </div>
-              <div className="col-md-6 text-right top-right-menu">
-                {
-                  this.props.userAuth.token === "" ?
-                    <ul id="menu-top-right" className="nav-top-right list-inline t-md-right">
-                      <li id="menu-item-260" className="mdi mdi-lock menu-item menu-item-type-post_type menu-item-object-page menu-item-260"><Link to="/my-account/">Sign In</Link></li>
-                      <li id="menu-item-261" className="mdi mdi-account-circle menu-item menu-item-type-post_type menu-item-object-page menu-item-261"><Link to="/my-account/">Sign Up</Link></li>
-                    </ul>
-                    :
-                    <ul id="menu-top-right" className="nav-top-right list-inline t-md-right">
-                      <li id="menu-item-261" className="mdi mdi-account-circle menu-item menu-item-type-post_type menu-item-object-page menu-item-261"><Link to="/my-account/" style={{ color: "#2bd891", marginRight: "15px" }} >{this.props.userAuth.data.email}</Link> <a role="button" tabIndex="0" onClick={this.onClickLogout}>Log out</a></li>
-                    </ul>
-                }
-
+        {/*<div className="navbar-top pt-2 pb-2">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-6">
+                </div>
+                <div className="col-md-6 text-right top-right-menu">
+                  {
+                    this.props.userAuth.token === "" ?
+                      <ul id="menu-top-right" className="nav-top-right list-inline t-md-right">
+                        <li id="menu-item-260" className="mdi mdi-lock menu-item menu-item-type-post_type menu-item-object-page menu-item-260"><Link to="/my-account/">Sign In</Link></li>
+                        <li id="menu-item-261" className="mdi mdi-account-circle menu-item menu-item-type-post_type menu-item-object-page menu-item-261"><Link to="/my-account/">Sign Up</Link></li>
+                      </ul>
+                      :
+                      <ul id="menu-top-right" className="nav-top-right list-inline t-md-right">
+                        <li id="menu-item-261" className="mdi mdi-account-circle menu-item menu-item-type-post_type menu-item-object-page menu-item-261"><Link to="/my-account/" style={{ color: "#2bd891", marginRight: "15px" }} >{this.props.userAuth.data.email}</Link> <a role="button" tabIndex="0" onClick={this.onClickLogout}>Log out</a></li>
+                      </ul>
+                  }
+  
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          </div>*/}
 
-        <nav className="navbar navbar-light navbar-expand-lg bg-dark bg-faded osahan-menu klb-middle">
+        <nav className="navbar navbar-light navbar-expand-lg background-header bg-faded osahan-menu klb-middle">
           <div className="container">
             <div className="row">
               <div className="col-xs-6 col-md-3 klb-clear order-xs-first">
@@ -125,8 +125,22 @@ class Header extends React.Component {
                 <div className="my-lg-0">
                   <ul className="list-inline main-nav-right">
                     <li className="list-inline-item cart-btn">
-                      <a role="button" tabIndex="0" data-toggle="offcanvas" className="btn btn-link border-none"><i className="mdi mdi-cart" /> My Cart
-                      <small className="cart-value cart-contents">{cart.items.length}</small></a>
+                      <a role="button" tabIndex="0" data-toggle="offcanvas" className="btn btn-link border-none">
+                        <i className="mdi mdi-cart" />
+                        <small className="cart-value cart-contents">{cart.items.length}</small>
+                      </a>
+                      {
+                        this.props.userAuth.token === "" ?
+                          <ul id="menu-top-right" className="nav-top-right list-inline t-md-right">
+                            <li id="menu-item-260" className=""><Link to="/my-account/">Sign In</Link></li>
+                            <li id="menu-item-261" className=""><Link to="/my-account/">Sign Up</Link></li>
+                          </ul>
+                          :
+                          <ul id="menu-top-right" className="">
+                            <li id="menu-item-261" className=""><Link to="/my-account/" style={{ color: "#fff", marginRight: "15px" }} >{this.props.userAuth.data.email}</Link>
+                            <a role="button" tabIndex="0" onClick={this.onClickLogout}>Log out</a></li>
+                          </ul>
+                      }
                     </li>
                   </ul>
                 </div>
@@ -143,8 +157,6 @@ class Header extends React.Component {
             <div className="collapse navbar-collapse" id="navbarText">
               <ul id="menu-menu-1" className="navbar-nav mr-auto mt-2 mt-lg-0 margin-auto">
                 <li className={`${classHeaderItem} ${this.props.actived == "home" ? "active" : ""}`}><Link className="nav-link" to="/"> Home</Link></li>
-                <li className={`${classHeaderItem} ${this.props.actived == "about-us" ? "active" : ""}`}><Link className="nav-link" to="/about-us"> About Us</Link></li>
-                <li className={`${classHeaderItem} ${this.props.actived == "my-orders" ? "active" : ""}`}><Link className="nav-link" to="/my-orders"> My Orders</Link></li>
                 <li className={`nav-item dropdown menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children ${this.props.actived == "category" ? "active" : ""}`}><a className="nav-link dropdown-toggle" href="#">Categories</a>
                   <ul className="dropdown-menu">
                     {
@@ -158,6 +170,8 @@ class Header extends React.Component {
                     }
                   </ul>
                 </li>
+                <li className={`${classHeaderItem} ${this.props.actived == "about-us" ? "active" : ""}`}><Link className="nav-link" to="/about-us"> About Us</Link></li>
+                <li className={`${classHeaderItem} ${this.props.actived == "my-orders" ? "active" : ""}`}><Link className="nav-link" to="/my-orders"> My Orders</Link></li>
                 <li className="nav-item menu-item menu-item-type-post_type menu-item-object-page"><a className="nav-link" href="#">FAQ</a></li>
                 <li className="nav-item menu-item menu-item-type-post_type menu-item-object-page"><a className="nav-link" href="#">Contact</a></li>
               </ul>
