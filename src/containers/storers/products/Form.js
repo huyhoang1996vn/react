@@ -65,7 +65,7 @@ class FormOrder extends React.Component {
             if (!err) {
                 this.props.onSubmitForm({
                     ...values,
-                    expire_date: moment(values["expire_date"]).format(dateFormat),
+                    expire_date: values["expire_date"] ? moment(values["expire_date"]).format(dateFormat): '',
                     image: Object.values(this.state.product_pictures).filter(pic => pic.url === undefined).map(i => i.originFileObj),
                     id_images_delete: this.props.data.picture ? this.props.data.picture.filter(pic => {
                         return this.state.product_pictures[pic.id] === undefined
@@ -201,7 +201,7 @@ class FormOrder extends React.Component {
                             >
                                 {getFieldDecorator(key, {
                                     rules: [{
-                                        required: key !== "picture", 
+                                        required:  !["picture","expire_date"].includes(key), 
                                         message: PATTERN[key] ? PATTERN[key][1] : 'Please input this feild!',
                                         pattern: PATTERN[key] ? PATTERN[key][0] : /./
                                     }],
