@@ -20,8 +20,8 @@ const GROUP_USERS_NAME = {
 
 const GROUP_USERS = {
     1: 'customer',
-    2: 'store',
-    3: 'owner'
+    2: 'store'
+    // 3: 'owner'
 }
 
 export {
