@@ -56,8 +56,8 @@ class OrdersTable extends React.Component {
                 <span>
                     <a onClick={this.onClickAction("detail")(record)} href="javascript:;">View</a>
                     <Divider type="vertical" />
-                    <Popconfirm title="Are you sure delete this record?" onConfirm={this.onClickAction("delete")(record)} okText="Yes" cancelText="No">
-                        <a href="javascript:;">Delete</a>
+                    <Popconfirm  title="Are you sure delete this record?" onConfirm={this.onClickAction("delete")(record)} okText="Yes" cancelText="No">
+                        <a style={record.status_payment === 'completed' ? { display: 'none' }:{}} href="javascript:;">Delete</a>
                     </Popconfirm>
                     {/* <a onClick={this.onClickAction("delete")(record)} href="javascript:;">Delete</a> */}
                 </span>

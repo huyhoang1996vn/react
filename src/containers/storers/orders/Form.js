@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Button, Tag } from 'antd';
+import { Form, Input, Button, Tag, TextArea } from 'antd';
 import _ from "lodash";
 
 const FormItem = Form.Item;
@@ -7,13 +7,15 @@ const FormItem = Form.Item;
 const formType = {
     store: "text_disable",
     money: "text_disable",
-    // products: "text_disable",
+    detail_order: "textarea_disable",
     created: "text_disable",
     modified: "text_disable",
     order_code: "text_disable",
-    transaction_id: "text_disable",
-    payer_id: "text_disable",
-    // customer: "text_disable",
+    address_detail: "text_disable",
+    phone_detail: "text_disable",
+    // transaction_id: "text_disable",
+    // payer_id: "text_disable",
+    name_customer: "text_disable",
     payment_method: "text_disable",
     status_payment: "tag",
     status_order: "tag",
@@ -50,6 +52,7 @@ class FormOrder extends React.Component {
                     STATUS[key].map((status_item) => {
                         return (
                             <span key={status_item}><Tag
+                                // style={static_status === 'completed' ? { 'pointer-events': 'none' }:{}}
                                 onClick={this.props.onClickStatus({ key, status }, status_item)}
                                 color={`${status == status_item ? "green" : "blue"}`}
                             >{_.upperFirst(status_item)}</Tag>
@@ -62,7 +65,12 @@ class FormOrder extends React.Component {
     }
 
     getFormField = (type, { key, status }) => {
+        // if(type == 'tag' && key == 'status_payment' && status == 'completed'){
+        //     return <Input disabled />
+        // }
+        const { TextArea } = Input;
         switch (type) {
+            case "textarea_disable": return <TextArea rows={4} disabled />
             case "text": return <Input />
             case "text_disable": return <Input disabled />
             case "tag": return this.formatStatus({ key, status })
