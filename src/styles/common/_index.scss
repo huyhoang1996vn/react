@@ -10,7 +10,12 @@ input, button {
     outline: none;
     border: none;
 }
-
+.ant-input[disabled] {
+    color: #421616;
+    background-color: #efefef;
+    cursor: not-allowed;
+    opacity: 1;
+}
 .btn__main {
     background: $btnBg;
     border: none;

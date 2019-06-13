@@ -39,12 +39,12 @@ const adminOverviews = {
         title: 'Orders',
         number: 0,
     },
-    owner: {
-        icon: 'team',
-        color: Color.purple,
-        title: 'Owners',
-        number: 0,
-    },
+    // owner: {
+    //     icon: 'team',
+    //     color: Color.purple,
+    //     title: 'Owners',
+    //     number: 0,
+    // },
     product: {
         icon: 'message',
         color: Color.purple,
@@ -108,7 +108,7 @@ export default function (state = defaultStates, action) {
                 admin: {
                     customer: { ...adminOverviews.customer, number: customer },
                     order: { ...adminOverviews.order, number: order },
-                    owner: { ...adminOverviews.owner, number: owner },
+                    // owner: { ...adminOverviews.owner, number: owner },
                     product: { ...adminOverviews.product, number: product },
                     store: { ...adminOverviews.store, number: store },
                 }

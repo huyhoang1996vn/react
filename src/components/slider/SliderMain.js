@@ -19,14 +19,18 @@ class SliderMain extends React.Component {
                             <div className="wpb_wrapper">
                                 <section className="carousel-slider-main text-center">
                                     <div className="owl-carousel owl-carousel-slider">
-                                        <div className="item"><a href="#/"  title="slider1">
-                                        <img style={{ maxHeight: "65vh" }} className="img-fluid" src={_staticUrl("/assets/images/slide1.jpg")} alt="slide" /></a></div>
-                                        <div className="item"><a href="#/"  title="slider2">
+                                        
+                                        <div className="item"><a href="/category/2"  title="slider2">
                                         <img style={{ maxHeight: "65vh" }} className="img-fluid" src={_staticUrl("/assets/images/slide2.jpg")} alt="slide" /></a></div>
-                                        <div className="item"><a href="#/"  title="slider3">
+                                        <div className="item"><a href="/category/4"  title="slider3">
                                         <img style={{ maxHeight: "65vh" }} className="img-fluid" src={_staticUrl("/assets/images/slide3.jpg")} alt="slide" /></a></div>
-                                        <div className="item"><a href="#/"  title="slider4">
-                                        <img style={{ maxHeight: "65vh" }} className="img-fluid" src={_staticUrl("/assets/images/slide4.jpg")} alt="slide" /></a></div>
+                                        <div className="item">
+                                            <a href="/category/5"  title="slider4">
+                                                <img style={{ maxHeight: "65vh" }} className="img-fluid" src={_staticUrl("/assets/images/slide4.jpg")} alt="slide" />
+                                            </a>
+                                        </div>
+                                        <div className="item"><a href="/category/3"  title="slider1">
+                                        <img style={{ maxHeight: "65vh" }} className="img-fluid" src={_staticUrl("/assets/images/slide1.jpg")} alt="slide" /></a></div>
                                     </div>
                                 </section>
                             </div>
